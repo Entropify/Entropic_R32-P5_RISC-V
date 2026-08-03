@@ -5,7 +5,6 @@
 - [x] Section 4.6 Pipelined Datapath and Control: This section covers how to physically divide your datapath and manage control signals across the pipeline stages
 - [x] Section 4.7 Data Hazards: Forwarding versus Stalling: This section is critical for understanding data dependencies and how to resolve them by either forwarding data or stalling the pipeline
 - [x] Section 4.8 Control Hazards: This section explains how to handle branch instructions
-- [ ] Section 4.9 Exceptions: This section explains how exceptions are integrated into a processor's design.
 
 ### Digital Design & Computer Architecture:
 - [ ] Section 7.5 Pipelined Processor: This provides a high-level view of the pipelined design
