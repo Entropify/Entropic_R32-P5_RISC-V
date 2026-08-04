@@ -9,5 +9,5 @@
 ### Digital Design & Computer Architecture:
 - [x] Section 7.5 Pipelined Processor: This provides a high-level view of the pipelined design
 - [x] Section 7.5.1 Pipelined Datapath 
-- [ ] Section 7.5.2 Pipelined Control: These sections will help you visualize the hardware layout and wiring
+- [x] Section 7.5.2 Pipelined Control: These sections will help you visualize the hardware layout and wiring
 - [ ] Section 7.5.3 Hazards: This section offers another perspective on handling pipeline conflicts
