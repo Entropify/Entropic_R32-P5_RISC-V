@@ -1,0 +1,64 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Sat Jul 25 04:19:00 2026
+[*]
+[dumpfile] "/mnt/x/full_implementation/sim/tb_alu.vcd"
+[dumpfile_mtime] "Sat Jul 25 04:18:45 2026"
+[dumpfile_size] 2578132
+[savefile] "/mnt/x/full_implementation/sim/tb_alu.gtkw"
+[timestart] 99796100
+[size] 1583 888
+[pos] -1 -1
+*-16.000000 100072000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_alu.
+[sst_width] 297
+[signals_width] 182
+[sst_expanded] 1
+[sst_vpaned_height] 257
+@28
+tb_alu.tb_alu_control[3:0]
+@24
+tb_alu.tb_alu_result[31:0]
+@c00024
+tb_alu.tb_data_1[31:0]
+@28
+(0)tb_alu.tb_data_1[31:0]
+(1)tb_alu.tb_data_1[31:0]
+(2)tb_alu.tb_data_1[31:0]
+(3)tb_alu.tb_data_1[31:0]
+(4)tb_alu.tb_data_1[31:0]
+(5)tb_alu.tb_data_1[31:0]
+(6)tb_alu.tb_data_1[31:0]
+(7)tb_alu.tb_data_1[31:0]
+(8)tb_alu.tb_data_1[31:0]
+(9)tb_alu.tb_data_1[31:0]
+(10)tb_alu.tb_data_1[31:0]
+(11)tb_alu.tb_data_1[31:0]
+(12)tb_alu.tb_data_1[31:0]
+(13)tb_alu.tb_data_1[31:0]
+(14)tb_alu.tb_data_1[31:0]
+(15)tb_alu.tb_data_1[31:0]
+(16)tb_alu.tb_data_1[31:0]
+(17)tb_alu.tb_data_1[31:0]
+(18)tb_alu.tb_data_1[31:0]
+(19)tb_alu.tb_data_1[31:0]
+(20)tb_alu.tb_data_1[31:0]
+(21)tb_alu.tb_data_1[31:0]
+(22)tb_alu.tb_data_1[31:0]
+(23)tb_alu.tb_data_1[31:0]
+(24)tb_alu.tb_data_1[31:0]
+(25)tb_alu.tb_data_1[31:0]
+(26)tb_alu.tb_data_1[31:0]
+(27)tb_alu.tb_data_1[31:0]
+(28)tb_alu.tb_data_1[31:0]
+(29)tb_alu.tb_data_1[31:0]
+(30)tb_alu.tb_data_1[31:0]
+(31)tb_alu.tb_data_1[31:0]
+@1401200
+-group_end
+@24
+tb_alu.tb_data_2[31:0]
+@29
+tb_alu.tb_zero
+[pattern_trace] 1
+[pattern_trace] 0

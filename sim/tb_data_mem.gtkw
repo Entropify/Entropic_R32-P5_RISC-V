@@ -1,0 +1,31 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Wed Jul 22 07:00:52 2026
+[*]
+[dumpfile] "/mnt/x/full_implementation/sim/tb_data_mem.vcd"
+[dumpfile_mtime] "Wed Jul 22 06:59:10 2026"
+[dumpfile_size] 2023
+[savefile] "/mnt/x/full_implementation/sim/tb_data_mem.gtkw"
+[timestart] 0
+[size] 1761 942
+[pos] -1 -1
+*-14.000000 25140 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_data_mem.
+[sst_width] 297
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 276
+@28
+tb_data_mem.clk
+tb_data_mem.mem_read
+tb_data_mem.mem_write
+@22
+tb_data_mem.address[31:0]
+@23
+tb_data_mem.write_data[31:0]
+@22
+tb_data_mem.read_data[31:0]
+@28
+tb_data_mem.dut.write_mask[3:0]
+[pattern_trace] 1
+[pattern_trace] 0

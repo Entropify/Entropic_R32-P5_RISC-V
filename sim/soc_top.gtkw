@@ -1,0 +1,57 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Sun Jul 26 02:24:37 2026
+[*]
+[dumpfile] "/mnt/x/full_implementation/sim/cocotb_sim/soc_top.fst"
+[dumpfile_mtime] "Sun Jul 26 02:22:48 2026"
+[dumpfile_size] 5139
+[savefile] "/mnt/x/full_implementation/sim/soc_top.gtkw"
+[timestart] 601500
+[size] 1937 657
+[pos] -1 -1
+*-16.000000 990000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] soc_top.
+[treeopen] soc_top.cpu.
+[sst_width] 297
+[signals_width] 278
+[sst_expanded] 1
+[sst_vpaned_height] 175
+@28
+soc_top.clk
+soc_top.cpu.rst_n
+@22
+soc_top.data_address[31:0]
+soc_top.data_read[31:0]
+soc_top.cpu.write_mask[3:0]
+soc_top.data_write[31:0]
+soc_top.cpu.writeback_data[31:0]
+soc_top.instr_address[31:0]
+soc_top.instruction[31:0]
+@28
+soc_top.mem_read
+soc_top.mem_write
+soc_top.rst_n
+soc_top.cpu.zero_flag
+soc_top.cpu.branch
+soc_top.cpu.take_branch_signal
+soc_top.cpu.take_branch
+@22
+soc_top.cpu.pc_out[31:0]
+soc_top.cpu.pc_next[31:0]
+soc_top.cpu.pc_branch_target[31:0]
+soc_top.cpu.pc_plus_4[31:0]
+@28
+soc_top.cpu.alu_ctrl_out[3:0]
+@22
+soc_top.cpu.alu_result[31:0]
+soc_top.cpu.writeback_data[31:0]
+@28
+soc_top.cpu.reg_write
+soc_top.cpu.mem_write
+soc_top.cpu.mem_read
+@29
+soc_top.cpu.halt
+@28
+soc_top.cpu.halt
+[pattern_trace] 1
+[pattern_trace] 0

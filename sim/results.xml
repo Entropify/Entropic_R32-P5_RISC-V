@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1785294150" />
+    <testcase name="universal_test" classname="tb_top_soc" file="/mnt/x/full_implementation/tb/top/tb_top_soc.py" lineno="14" time="0.038445472717285156" sim_time_ns="1040.001" ratio_time="27051.325591645375" />
+  </testsuite>
+</testsuites>

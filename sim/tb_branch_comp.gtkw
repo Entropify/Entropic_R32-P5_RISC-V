@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Sat Jul 25 04:16:02 2026
+[*]
+[dumpfile] "/mnt/x/full_implementation/sim/tb_branch_comp.vcd"
+[dumpfile_mtime] "Sat Jul 25 04:12:17 2026"
+[dumpfile_size] 1798572
+[savefile] "/mnt/x/full_implementation/sim/tb_branch_comp.gtkw"
+[timestart] 99744000
+[size] 1808 973
+[pos] -1 -1
+*-16.000000 100070000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 297
+[signals_width] 126
+[sst_expanded] 1
+[sst_vpaned_height] 287
+@28
+tb_branch_comp.func_3[2:0]
+@22
+tb_branch_comp.data_1[31:0]
+tb_branch_comp.data_2[31:0]
+@29
+tb_branch_comp.take_branch
+[pattern_trace] 1
+[pattern_trace] 0

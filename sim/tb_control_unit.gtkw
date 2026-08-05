@@ -1,0 +1,36 @@
+[*]
+[*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
+[*] Wed Jul 22 06:39:23 2026
+[*]
+[dumpfile] "/mnt/x/full_implementation/sim/tb_control_unit.vcd"
+[dumpfile_mtime] "Wed Jul 22 06:37:44 2026"
+[dumpfile_size] 1530
+[savefile] "/mnt/x/full_implementation/sim/tb_control_unit.gtkw"
+[timestart] 0
+[size] 1401 709
+[pos] -1 -1
+*-15.000000 57300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_control_unit.
+[sst_width] 297
+[signals_width] 211
+[sst_expanded] 1
+[sst_vpaned_height] 196
+@22
+tb_control_unit.control_in[6:0]
+@28
+tb_control_unit.branch
+tb_control_unit.mem_read
+tb_control_unit.alu_op[1:0]
+tb_control_unit.dut.alu_src1
+@29
+tb_control_unit.dut.alu_src2
+@28
+tb_control_unit.mem_write
+tb_control_unit.dut.mem_read
+tb_control_unit.reg_write
+tb_control_unit.dut.mem_to_reg[1:0]
+tb_control_unit.dut.pc_src[1:0]
+tb_control_unit.dut.pc_src[1:0]
+tb_control_unit.dut.halt
+[pattern_trace] 1
+[pattern_trace] 0
