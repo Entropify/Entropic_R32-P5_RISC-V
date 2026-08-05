@@ -52,7 +52,7 @@
 
     input wire [2:0] func3_in,
     input wire func7_in,
-    
+
     output reg [2:0] func3_out,
     output reg func7_out
  );
@@ -123,3 +123,4 @@
 
 
  endmodule
+ 
