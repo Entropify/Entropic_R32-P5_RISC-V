@@ -11,12 +11,12 @@
     input wire clk,
     input wire rst_n,
 
-    input wire [31:0] filtered_data_in,
+    input wire [31:0] filtered_data_in, //loadfilter's output, also now a candidate
 
     input wire [31:0] alu_result_in,
 
     input wire [31:0] pc_plus_four_in,
-    input wire [31:0] imm_gen_out_in,
+    input wire [31:0] imm_gen_out_in,   //these 3 are candidate ppl
     input wire [1:0] mem_to_reg_in,
 
     input wire [4:0] rd_addr_in,

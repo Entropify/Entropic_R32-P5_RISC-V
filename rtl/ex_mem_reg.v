@@ -11,17 +11,17 @@ module ex_mem_reg(
     input wire clk,
     input wire rst_n,
 
-    input wire [31:0] alu_result_in,
-    input wire [31:0] read_data2_in,
+    input wire [31:0] alu_result_in,    //data mem address or mux candidate
+    input wire [31:0] read_data2_in, //im gon forget but this is for storemask
     input wire [4:0] rd_addr_in,
-    input wire [2:0] func3_in,
+    input wire [2:0] func3_in, //alu_control consumed back in ex, but storemask and loadfilter both need again
     input wire mem_read_in,
     input wire mem_write_in,
     input wire [1:0] mem_to_reg_in,
     input wire reg_write_in,
     input wire halt_in,
     input wire [31:0] pc_plus_four_in,
-    input wire [31:0] imm_gen_out_in,
+    input wire [31:0] imm_gen_out_in,   //these 2 are wb mux candidates (pls vote for them)
 
 
     output reg [31:0] alu_result_out,
