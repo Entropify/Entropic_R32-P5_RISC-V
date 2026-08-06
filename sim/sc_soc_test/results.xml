@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1785999286" />
+    <testcase name="sc_soc_test" classname="tb_top_soc" file="/mnt/x/Entropic_R32-P5_RISC-V/tb/top/tb_top_soc.py" lineno="15" time="0.09676980972290039" sim_time_ns="10040.001" ratio_time="103751.37688861295">
+      <failure message="Test failed with RANDOM_SEED=1785999286" />
+    </testcase>
+  </testsuite>
+</testsuites>

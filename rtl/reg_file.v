@@ -19,8 +19,15 @@
 
  reg [31:0] internal_reg [0:31];
 
- assign rs1_data = (rs1_address == 0) ? 32'h0000_0000 : internal_reg[rs1_address];
- assign rs2_data = (rs2_address == 0) ? 32'h0000_0000 : internal_reg[rs2_address];
+ //write first read second
+
+assign rs1_data = (rs1_address == 0) ? 32'h0000_0000 :
+                   (reg_write && rd_address == rs1_address) ? write_data :
+                   internal_reg[rs1_address];
+
+assign rs2_data = (rs2_address == 0) ? 32'h0000_0000 :
+                   (reg_write && rd_address == rs2_address) ? write_data :
+                   internal_reg[rs2_address];
 
  integer i;
 

@@ -13,7 +13,7 @@ from cocotb.triggers import Timer
 
 
 @cocotb.test()
-async def sc_soc_test(dut):
+async def phase_1(dut):
     
 
     clock = Clock(dut.clk, 10, units="ns")
@@ -35,9 +35,10 @@ async def sc_soc_test(dut):
     dut._log.info("CPU on. Waiting for assembly to reach successful branch")
 
     current_pc = 0
-    prev_pc = -1
+   # prev_pc = -1
     cycles = 0
     
+    history = []
 
 
     while cycles < 1000:
@@ -48,17 +49,12 @@ async def sc_soc_test(dut):
             current_pc = dut.cpu.cpu_pc.pc_out.value.integer
             #current_instr = dut.cpu.instruction.value.integer
 
-            if (dut.halt) == 1:
+            history.append(current_pc)
 
-                for i in range(5):
-                    await RisingEdge(dut.clk)
-                    current_pc = dut.cpu.cpu_pc.pc_out.value.integer
-                    prev_pc = current_pc
-        
-                if prev_pc == current_pc:
-                    break
+            if len(history) > 6 and history[-1] == history[-4] and history[-2] == history[-5] and history[-3] == history[-6]:
+                break
                 
-            prev_pc = current_pc
+            # prev_pc = current_pc
 
         except ValueError:
             pass
@@ -153,7 +149,7 @@ async def sc_soc_test(dut):
     dut._log.info("|\033[1m\033[34m                            Epic Error Codes Meaning Table Above                        \033[0m\033[0m|")
     dut._log.info("------------------------------------------------------------------------------------------")
 
-    dut._log.info("To view waveform use \033[34mgtkwave ../cocotb_sim_sc_soc/soc_top.fst ../soc_top_sc.gtkw\033[0m")
+    dut._log.info("To view waveform use \033[34mgtkwave ../cocotb_sim_phase_1/soc_top.fst ../phase1.gtkw\033[0m")
 
     assert return_code == 1, f'\033[31mTEST FAILED >:(\033[0m: assembly code returned error code: {return_code}'
 
