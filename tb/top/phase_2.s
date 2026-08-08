@@ -1276,8 +1276,14 @@ phase_2_0NOP:
 
 pass_phase_2_0NOP:
 
+    NOP
+    NOP
+
     add x5, x1, x2
     add x5, x1, x3
+
+
+
     beq x5, x4, pass_forward_hierarchy
 
     NOP
@@ -1309,6 +1315,8 @@ pass_forward_hierarchy:
 
 
 lw_then_sw_no_NOP:
+
+    
     
     lw x5, 8(x0)       #this gets 3 from ram
     sw x5, 32(x0)
