@@ -93,9 +93,9 @@
 
   wire [4:0] rs1_addr_d = if_id_instruction[19:15];
   wire [4:0] rs2_addr_d = if_id_instruction[24:20];
-  wire [4:0] rd_addr_d  = if_id_instruction[11:7];
-  wire [2:0] func3_d    = if_id_instruction[14:12];
-  wire       func7_d    = if_id_instruction[30];
+  wire [4:0] rd_addr_d = if_id_instruction[11:7];
+  wire [2:0] func3_d = if_id_instruction[14:12];
+  wire func7_d = if_id_instruction[30];
 
   wire [31:0] read_data1_d, read_data2_d;
 
@@ -190,6 +190,76 @@
   wire [31:0] alu_result;
   wire zero_flag;
 
+  wire [1:0] forward_src1, forward_src2;
+
+  reg [31:0] alu_actual_in1, alu_actual_in2;
+
+  reg [31:0] forwarded_read_data1_no_alu;
+  reg [31:0] forwarded_read_data2_no_alu; //for write mask AND BRANCH COMP AHHHH
+
+
+
+  forwarding_unit cpu_forwarding_unit(
+    .id_ex_rs1_addr(id_ex_rs1_addr),
+    .id_ex_rs2_addr(id_ex_rs2_addr),
+
+    .ex_mem_rd_addr(ex_mem_rd_addr),
+    .ex_mem_reg_write(ex_mem_reg_write),
+
+    .mem_wb_rd_addr(mem_wb_rd_addr),
+    .mem_wb_reg_write(mem_wb_reg_write),
+
+    .forward_src1(forward_src1),
+    .forward_src2(forward_src2)
+  );
+
+  always @(*) begin
+
+
+      case(forward_src1)
+
+      2'd2: forwarded_read_data1_no_alu = ex_mem_alu_result;
+      2'd1: forwarded_read_data1_no_alu = writeback_data;
+      2'd0: forwarded_read_data1_no_alu = id_ex_read_data1;
+      default: forwarded_read_data1_no_alu = id_ex_read_data1;
+
+      endcase
+
+    end
+
+  always @(*) begin
+
+      if (id_ex_alu_src1 == 1'b1) alu_actual_in1 = id_ex_pc;
+
+      else alu_actual_in1 = forwarded_read_data1_no_alu;
+
+    end
+
+  always @(*) begin
+
+
+      case(forward_src2)
+
+      2'd2: forwarded_read_data2_no_alu = ex_mem_alu_result;
+      2'd1: forwarded_read_data2_no_alu = writeback_data;
+      2'd0: forwarded_read_data2_no_alu = id_ex_read_data2;
+      default: forwarded_read_data2_no_alu = id_ex_read_data2;
+
+      endcase
+
+    end
+
+  always @(*) begin
+
+      if (id_ex_alu_src2 == 1'b1) alu_actual_in2 = id_ex_imm_gen_out;
+
+      else alu_actual_in2 = forwarded_read_data2_no_alu;
+
+    end
+
+    
+
+
   alu_control cpu_alu_ctrl (
     .alu_op(id_ex_alu_op),
     .func7(id_ex_func7),
@@ -198,8 +268,8 @@
   );
 
   alu cpu_alu (
-    .data_1((id_ex_alu_src1) ? id_ex_pc : id_ex_read_data1),
-    .data_2((id_ex_alu_src2) ? id_ex_imm_gen_out : id_ex_read_data2),
+    .data_1(alu_actual_in1),
+    .data_2(alu_actual_in2),
     .alu_control(alu_ctrl_out),
     .alu_result(alu_result),
     .zero(zero_flag)
@@ -208,18 +278,20 @@
   wire take_branch_signal;
 
   branch_comp cpu_branch_comp (
-    .data_1(id_ex_read_data1),
-    .data_2(id_ex_read_data2),
+    .data_1(forwarded_read_data1_no_alu),
+    .data_2(forwarded_read_data2_no_alu),
     .func_3(id_ex_func3),
     .take_branch(take_branch_signal)
   );
 
+
+
   wire take_branch = id_ex_branch && take_branch_signal;
   wire [31:0] pc_branch_target = id_ex_pc + id_ex_imm_gen_out;
 
-  // resolved in EX now — this feeds all the way back to the pc mux in IF
+  // resolved in ex for now (will be optimized to ID), this feeds all the way back to the pc mux in IF
   assign pc_next = (take_branch || id_ex_pc_src == 2'b01) ? pc_branch_target :
-                    (id_ex_pc_src == 2'b10) ? {alu_result[31:1], 1'b0} : pc_plus_4;
+  (id_ex_pc_src == 2'b10) ? {alu_result[31:1], 1'b0} : pc_plus_4;
 
 
 // EX/MEM
@@ -237,7 +309,7 @@
     .rst_n(rst_n),
 
     .alu_result_in(alu_result),
-    .read_data2_in(id_ex_read_data2),
+    .read_data2_in(forwarded_read_data2_no_alu),
     .rd_addr_in(id_ex_rd_addr),
     .func3_in(id_ex_func3),
     .mem_read_in(id_ex_mem_read),
