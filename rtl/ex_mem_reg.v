@@ -22,6 +22,7 @@ module ex_mem_reg(
     input wire halt_in,
     input wire [31:0] pc_plus_four_in,
     input wire [31:0] imm_gen_out_in,   //these 2 are wb mux candidates (pls vote for them)
+    input wire [4:0] rs2_addr_in,
 
 
     output reg [31:0] alu_result_out,
@@ -34,7 +35,8 @@ module ex_mem_reg(
     output reg reg_write_out,
     output reg halt_out,
     output reg [31:0] pc_plus_four_out,
-    output reg [31:0] imm_gen_out_out
+    output reg [31:0] imm_gen_out_out,
+    output reg [4:0] rs2_addr_out
 
 );
 
@@ -53,6 +55,7 @@ module ex_mem_reg(
         halt_out <= 1'b0;
         pc_plus_four_out <= 32'h0000_0000;
         imm_gen_out_out <= 32'h0000_0000;
+        rs2_addr_out <= 5'b0;
 
 
     end
@@ -71,6 +74,7 @@ module ex_mem_reg(
         halt_out <= halt_in;
         pc_plus_four_out <= pc_plus_four_in;
         imm_gen_out_out <= imm_gen_out_in;
+        rs2_addr_out <= rs2_addr_in;
 
 
     end

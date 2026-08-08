@@ -152,12 +152,17 @@ async def phase_2(dut):
     dut._log.info("------------------------------------------------------------------------------------------")
     dut._log.info("|Error code: 39 = failed forwarding exception for x0                                     |")
     dut._log.info("------------------------------------------------------------------------------------------")
+    dut._log.info("|Error code: 40 = failed MEM stage forwarding (lw then sw, same reg)                     |")
+    dut._log.info("------------------------------------------------------------------------------------------")
     dut._log.info("|\033[1m\033[34m                            Epic Error Codes Meaning Table Above                        \033[0m\033[0m|")
     dut._log.info("------------------------------------------------------------------------------------------")
 
     dut._log.info("To view waveform use \033[34mgtkwave ../cocotb_sim_phase_2/soc_top.fst ../phase2.gtkw\033[0m")
 
-    assert return_code == 1, f'\033[31mTEST FAILED >:(\033[0m: assembly code returned error code: {return_code}'
+
+    assert return_code == 1, f'\033[31mTEST FAILED >:(\033[0m: assembly code returned error code: \033[31m{return_code}\033[0m'
+
+    
 
     dut._log.info("If no error code please ignore but appreciate the above table (it took forever to type and format)")
 

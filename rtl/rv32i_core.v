@@ -303,6 +303,7 @@
   wire [2:0] ex_mem_func3;
   wire ex_mem_mem_read, ex_mem_mem_write, ex_mem_reg_write, ex_mem_halt;
   wire [1:0] ex_mem_mem_to_reg;
+  wire [4:0] ex_mem_rs2_addr;
 
   ex_mem_reg cpu_ex_mem (
     .clk(clk),
@@ -319,6 +320,7 @@
     .halt_in(id_ex_halt),
     .pc_plus_four_in(id_ex_pc_plus_4),
     .imm_gen_out_in(id_ex_imm_gen_out),
+    .rs2_addr_in(id_ex_rs2_addr),
 
     .alu_result_out(ex_mem_alu_result),
     .read_data2_out(ex_mem_read_data2),
@@ -330,7 +332,8 @@
     .reg_write_out(ex_mem_reg_write),
     .halt_out(ex_mem_halt),
     .pc_plus_four_out(ex_mem_pc_plus_4),
-    .imm_gen_out_out(ex_mem_imm_gen_out)
+    .imm_gen_out_out(ex_mem_imm_gen_out),
+    .rs2_addr_out(ex_mem_rs2_addr)
   );
 
 
@@ -339,9 +342,18 @@
 
   wire [31:0] filtered_data;
 
+  wire mem_forward_sel;
+
   assign data_address = ex_mem_alu_result;
   assign mem_read = ex_mem_mem_read;
   assign mem_write = ex_mem_mem_write;
+
+  mem_forwarding_unit cpu_mem_forwarding_unit(
+    .ex_mem_rs2_addr(ex_mem_rs2_addr),
+    .mem_wb_rd_addr(mem_wb_rd_addr),
+    .mem_wb_reg_write(mem_wb_reg_write),
+    .sel(mem_forward_sel)
+  );
 
   load_filter cpu_load_filter(
     .func3(ex_mem_func3),
@@ -353,7 +365,7 @@
   store_mask cpu_store_mask(
     .func3(ex_mem_func3),
     .byte_offset(ex_mem_alu_result[1:0]),
-    .rs2_data(ex_mem_read_data2),
+    .rs2_data(mem_forward_sel ? writeback_data : ex_mem_read_data2),
     .write_mask(write_mask),
     .store_data(data_write)
   );

@@ -3,6 +3,21 @@
 
 # this skibidi assembly test is padded with NOP for phase 1 test so no hazards for now!
 
+# these r for simulator only
+
+# addi x1, x0, 1
+
+# addi x2, x0, 2
+
+# addi x3, x0, 3
+
+#sw x1, 0(x0)
+
+#sw x2, 4(x0)
+
+# sw x3, 8(x0)
+
+
 
 .macro NOP
     addi x0, x0, 0    # nop for padding
@@ -12,6 +27,7 @@
 .global _start
 
 _start:
+
 
     lw x1, 0(x0)    # x1 = 1
 
@@ -1246,6 +1262,9 @@ phase_2_0NOP:
 
     beq x11, x4, pass_phase_2_0NOP
 
+    NOP
+    NOP
+
     addi x10, x0, 37
     
     NOP
@@ -1260,6 +1279,9 @@ pass_phase_2_0NOP:
     add x5, x1, x2
     add x5, x1, x3
     beq x5, x4, pass_forward_hierarchy
+
+    NOP
+    NOP
 
     addi x10, x0, 38
     
@@ -1285,6 +1307,24 @@ pass_forward_hierarchy:
     add x0, x1, x2
     beq x0, x3, exception_x0_failed
 
+
+lw_then_sw_no_NOP:
+    
+    lw x5, 8(x0)       #this gets 3 from ram
+    sw x5, 32(x0)
+    lw x9, 32(x0)
+
+    NOP
+    NOP
+    
+    beq x9, x3, all_pass
+
+    NOP
+    NOP
+
+    addi x10, x0, 40
+
+    beq x0, x0, halt
 
 
 

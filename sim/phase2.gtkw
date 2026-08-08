@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
-[*] Thu Aug  6 07:32:33 2026
+[*] Sat Aug  8 04:09:44 2026
 [*]
-[dumpfile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/cocotb_sim_phase_1/soc_top.fst"
-[dumpfile_mtime] "Thu Aug  6 06:56:07 2026"
-[dumpfile_size] 4751
-[savefile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/phase1.gtkw"
-[timestart] 60300
-[size] 1937 1014
+[dumpfile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/cocotb_sim_phase_2/soc_top.fst"
+[dumpfile_mtime] "Sat Aug  8 03:53:06 2026"
+[dumpfile_size] 18882
+[savefile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/phase2.gtkw"
+[timestart] 3760100
+[size] 2002 1026
 [pos] -1 -1
-*-15.000000 134800 134800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.000000 3895700 3895700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] soc_top.
 [treeopen] soc_top.cpu.
 [sst_width] 297
 [signals_width] 278
 [sst_expanded] 1
-[sst_vpaned_height] 541
+[sst_vpaned_height] 549
 @28
 soc_top.clk
 soc_top.cpu.rst_n
@@ -60,7 +60,15 @@ soc_top.cpu.mem_wb_reg_write
 soc_top.cpu.mem_wb_alu_result[31:0]
 soc_top.cpu.rs1_addr_d[4:0]
 soc_top.cpu.read_data1_d[31:0]
-@23
 soc_top.cpu.cpu_reg_file.rd_address[4:0]
+soc_top.cpu.ex_mem_rs2_addr[4:0]
+soc_top.cpu.mem_wb_rd_addr[4:0]
+@28
+soc_top.cpu.mem_wb_reg_write
+soc_top.cpu.mem_forward_sel
+@22
+soc_top.cpu.data_write[31:0]
+@28
+soc_top.cpu.mem_write
 [pattern_trace] 1
 [pattern_trace] 0
