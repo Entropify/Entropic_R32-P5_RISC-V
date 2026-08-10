@@ -25,6 +25,8 @@
   );
 
 
+  wire stall;
+
 // IF stage
 
 
@@ -39,7 +41,8 @@
     .clk(clk),
     .rst_n(rst_n),
     .pc_in(pc_next),
-    .pc_out(pc_out)
+    .pc_out(pc_out),
+    .freeze(stall)
   );
 
 
@@ -60,7 +63,9 @@
 
     .instruction_out(if_id_instruction),
     .pc_out(if_id_pc),
-    .pc_plus_four_out(if_id_pc_plus_4)
+    .pc_plus_four_out(if_id_pc_plus_4),
+
+    .freeze(stall)
   );
 
 
@@ -180,6 +185,8 @@
     .func7_in(func7_d),
     .func3_out(id_ex_func3),
     .func7_out(id_ex_func7)
+
+    .bubble(stall)
   );
 
 
@@ -196,6 +203,14 @@
 
   reg [31:0] forwarded_read_data1_no_alu;
   reg [31:0] forwarded_read_data2_no_alu; //for write mask AND BRANCH COMP AHHHH
+
+  hazard_unit cpu_hazard_unit(
+    .id_ex_mem_read(id_ex_mem_read),
+    .id_ex_rd_addr(id_ex_rd_addr),
+    .rs1_addr_d(rs1_addr_d),
+    .rs2_addr_d(rs2_addr_d),
+    .stall(stall)
+  );
 
 
 

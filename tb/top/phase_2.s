@@ -1272,6 +1272,9 @@ phase_2_0NOP:
 
     beq x0, x0, halt
 
+    NOP
+    NOP
+
 
 
 pass_phase_2_0NOP:
@@ -1296,6 +1299,9 @@ pass_phase_2_0NOP:
 
     beq x0, x0, halt
 
+    NOP
+    NOP
+
 exception_x0_failed:
 
     NOP
@@ -1308,10 +1314,19 @@ exception_x0_failed:
 
     beq x0, x0, halt
 
+    NOP
+    NOP
+
 pass_forward_hierarchy:
+
+    NOP
+    NOP
 
     add x0, x1, x2
     beq x0, x3, exception_x0_failed
+
+    NOP
+    NOP
 
 
 lw_then_sw_no_NOP:

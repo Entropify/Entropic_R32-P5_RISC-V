@@ -10,6 +10,8 @@
     input wire clk,
     input wire rst_n,
 
+    input wire freeze,
+
     input wire [31:0] instruction_in,
     input wire [31:0] pc_in,
     input wire [31:0] pc_plus_four_in,
@@ -30,7 +32,7 @@
 
     end
 
-    else begin
+    else if (!freeze) begin
 
         pc_out <= pc_in;
         instruction_out <= instruction_in;

@@ -8,6 +8,7 @@
  module pc (
     input wire clk,
     input wire rst_n,
+    input wire freeze,
     input wire [31:0] pc_in,
     output reg [31:0] pc_out
  );
@@ -18,7 +19,7 @@
         pc_out <= 32'h0000_0000;
     end
 
-    else begin
+    else if (!freeze) begin
         pc_out <= pc_in;
     end
     
