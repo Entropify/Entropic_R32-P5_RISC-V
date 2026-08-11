@@ -184,7 +184,7 @@
     .func3_in(func3_d),
     .func7_in(func7_d),
     .func3_out(id_ex_func3),
-    .func7_out(id_ex_func7)
+    .func7_out(id_ex_func7),
 
     .bubble(stall)
   );
