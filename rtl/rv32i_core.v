@@ -56,6 +56,7 @@
   if_id_reg cpu_if_id (
     .clk(clk),
     .rst_n(rst_n),
+    .flush(flush),
 
     .instruction_in(instruction),
     .pc_in(pc_out),
@@ -140,6 +141,7 @@
   id_ex_reg cpu_id_ex (
     .clk(clk),
     .rst_n(rst_n),
+    .flush(flush),
 
     .read_data1_in(read_data1_d),
     .read_data2_in(read_data2_d),
@@ -308,9 +310,12 @@
   assign pc_next = (take_branch || id_ex_pc_src == 2'b01) ? pc_branch_target :
   (id_ex_pc_src == 2'b10) ? {alu_result[31:1], 1'b0} : pc_plus_4;
 
+  wire flush = take_branch || (id_ex_pc_src == 2'b01) || (id_ex_pc_src == 2'b10);
+
 
 // EX/MEM
 
+  
 
   wire [31:0] ex_mem_alu_result, ex_mem_read_data2;
   wire [31:0] ex_mem_pc_plus_4, ex_mem_imm_gen_out;

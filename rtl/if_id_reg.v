@@ -10,6 +10,8 @@
     input wire clk,
     input wire rst_n,
 
+    input wire flush,
+
     input wire freeze,
 
     input wire [31:0] instruction_in,
@@ -24,7 +26,7 @@
 
  always @(posedge clk or negedge rst_n) begin
 
-    if (!rst_n) begin
+    if (!rst_n || flush) begin
 
         instruction_out <= 32'h0000_0000;
         pc_out <= 32'h0000_0000;

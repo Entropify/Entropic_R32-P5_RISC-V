@@ -10,6 +10,7 @@
     input wire clk,
     input wire rst_n,
     input wire bubble,
+    input wire flush,
 
     input wire [31:0] read_data1_in,
     input wire [31:0] read_data2_in,
@@ -61,7 +62,7 @@
 
  always @(posedge clk or negedge rst_n) begin
 
-    if (!rst_n || bubble) begin
+    if (!rst_n || bubble || flush) begin
 
         read_data1_out <= 32'h0000_0000;
         read_data2_out <= 32'h0000_0000;
