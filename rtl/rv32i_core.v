@@ -125,6 +125,80 @@
     .rs2_data(read_data2_d)
   );
 
+  wire [1:0] id_src1, id_src2;
+
+  id_forwarding_unit cpu_id_forwarding_unit(
+    .rs1_addr_d(rs1_addr_d),
+    .rs2_addr_d(rs2_addr_d),
+
+    .id_ex_rd_addr(id_ex_rd_addr),
+    .id_ex_reg_write(id_ex_reg_write),
+
+    .ex_mem_rd_addr(ex_mem_rd_addr),
+    .ex_mem_reg_write(ex_mem_reg_write),
+
+    .forward_src1(id_src1),
+    .forward_src2(id_src2)
+ );
+
+
+
+
+
+  wire take_branch_signal;
+
+  reg [31:0] branch_comp_1, branch_comp_2;
+
+  
+
+  always @(*) begin
+
+
+      case(id_src1)
+
+      2'd2: branch_comp_1 = alu_result;
+      2'd1: branch_comp_1 = ex_mem_alu_result;
+      2'd0: branch_comp_1 = read_data1_d;
+      default: branch_comp_1 = read_data1_d;
+
+      endcase
+
+  end
+
+  always @(*) begin
+
+
+      case(id_src2)
+
+      2'd2: branch_comp_2 = alu_result;
+      2'd1: branch_comp_2 = ex_mem_alu_result;
+      2'd0: branch_comp_2 = read_data2_d;
+      default: branch_comp_2 = read_data2_d;
+
+      endcase
+
+  end
+
+  branch_comp cpu_branch_comp (
+    .data_1(branch_comp_1),
+    .data_2(branch_comp_2),
+    .func_3(func3_d),
+    .take_branch(take_branch_signal)
+  );
+
+
+
+  wire take_branch = branch_d && take_branch_signal;
+  wire [31:0] pc_branch_target = if_id_pc + imm_gen_out_d;
+
+  wire [31:0] jalr_target_full = read_data1_d + imm_gen_out_d;
+
+  // resolved in id now so penalty cycle is only 1, this feeds all the way back to the pc mux in if
+  assign pc_next = (take_branch || pc_src_d == 2'b01) ? pc_branch_target :
+  (pc_src_d == 2'b10) ? {jalr_target_full[31:1], 1'b0} : pc_plus_4;
+
+  wire flush = !stall && (take_branch || pc_src_d == 2'b01 || pc_src_d == 2'b10) || (pc_next != pc_plus_4);
+
 
 // ID/EX
 
@@ -141,7 +215,6 @@
   id_ex_reg cpu_id_ex (
     .clk(clk),
     .rst_n(rst_n),
-    .flush(flush),
 
     .read_data1_in(read_data1_d),
     .read_data2_in(read_data2_d),
@@ -211,6 +284,9 @@
     .id_ex_rd_addr(id_ex_rd_addr),
     .rs1_addr_d(rs1_addr_d),
     .rs2_addr_d(rs2_addr_d),
+    .ex_mem_mem_read(ex_mem_mem_read),
+    .ex_mem_rd_addr(ex_mem_rd_addr),
+    .branch_d(branch_d),
     .stall(stall)
   );
 
@@ -292,25 +368,7 @@
     .zero(zero_flag)
   );
 
-  wire take_branch_signal;
 
-  branch_comp cpu_branch_comp (
-    .data_1(forwarded_read_data1_no_alu),
-    .data_2(forwarded_read_data2_no_alu),
-    .func_3(id_ex_func3),
-    .take_branch(take_branch_signal)
-  );
-
-
-
-  wire take_branch = id_ex_branch && take_branch_signal;
-  wire [31:0] pc_branch_target = id_ex_pc + id_ex_imm_gen_out;
-
-  // resolved in ex for now (will be optimized to ID), this feeds all the way back to the pc mux in IF
-  assign pc_next = (take_branch || id_ex_pc_src == 2'b01) ? pc_branch_target :
-  (id_ex_pc_src == 2'b10) ? {alu_result[31:1], 1'b0} : pc_plus_4;
-
-  wire flush = take_branch || (id_ex_pc_src == 2'b01) || (id_ex_pc_src == 2'b10);
 
 
 // EX/MEM
