@@ -1,6 +1,3 @@
 # Ignore all assembly files for language statistics
 *.s linguist-documentation=false linguist-vendored
 *.S linguist-documentation=false linguist-vendored
-
-# If all your assembly tests are in a specific folder, ignore that folder too
-tb/top/** linguist-documentation=false linguist-vendored
