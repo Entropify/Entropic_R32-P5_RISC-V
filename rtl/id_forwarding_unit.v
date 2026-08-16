@@ -18,7 +18,8 @@
     input wire [4:0] ex_mem_rd_addr,
     input wire ex_mem_reg_write,
 
-    output reg [1:0] forward_src1, // 0 is no forward, 2 is forward from id/ex (priority since ts is newer data), 1 is forward from ex/mem
+    output reg [1:0] forward_src1, // 0 is no forward, 2 is forward from ex (alu result before latched, 
+                                    //priority since ts is newer data), 1 is forward from ex/mem
     output reg [1:0] forward_src2
  );
 
@@ -43,8 +44,5 @@
     else forward_src2 = 0;
 
     end
-
-
-
 
  endmodule

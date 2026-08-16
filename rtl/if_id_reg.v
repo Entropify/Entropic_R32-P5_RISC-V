@@ -17,10 +17,14 @@
     input wire [31:0] instruction_in,
     input wire [31:0] pc_in,
     input wire [31:0] pc_plus_four_in,
+    input wire predicted_taken_in,
+    input wire [31:0] predicted_target_in,
 
     output reg [31:0] instruction_out,
     output reg [31:0] pc_out,
-    output reg [31:0] pc_plus_four_out
+    output reg [31:0] pc_plus_four_out,
+    output reg predicted_taken_out,
+    output reg [31:0] predicted_target_out
  );
 
 
@@ -31,6 +35,8 @@
         instruction_out <= 32'h0000_0000;
         pc_out <= 32'h0000_0000;
         pc_plus_four_out <= 32'h0000_0000;
+        predicted_taken_out <= 1'b0;
+        predicted_target_out <= 32'h0000_0000;
 
     end
 
@@ -39,6 +45,8 @@
         pc_out <= pc_in;
         instruction_out <= instruction_in;
         pc_plus_four_out <= pc_plus_four_in;
+        predicted_taken_out <= predicted_taken_in;
+        predicted_target_out  <= predicted_target_in;
 
     end
     

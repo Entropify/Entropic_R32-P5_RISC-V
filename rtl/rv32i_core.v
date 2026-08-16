@@ -45,6 +45,24 @@
     .freeze(stall)
   );
 
+wire predict_taken;
+wire [31:0] predict_target;
+
+
+  branch_predictor cpu_branch_predictor(
+    .clk(clk),
+    .rst_n(rst_n),
+
+    .fetch_pc(pc_out),
+    .predict_taken(predict_taken),
+    .predict_target(predict_target),
+
+    .update_en((branch_d || pc_src_d == 2'b01 || pc_src_d == 2'b10)),
+    .update_pc(if_id_pc),
+    .update_taken(real_taken),
+    .update_target(real_target)
+  );
+
 
 // IF/ID
 
@@ -52,6 +70,9 @@
   wire [31:0] if_id_instruction;
   wire [31:0] if_id_pc;
   wire [31:0] if_id_pc_plus_4;
+
+  wire if_id_predicted_taken;
+  wire [31:0] if_id_predicted_target;
 
   if_id_reg cpu_if_id (
     .clk(clk),
@@ -61,16 +82,22 @@
     .instruction_in(instruction),
     .pc_in(pc_out),
     .pc_plus_four_in(pc_plus_4),
+    .predicted_taken_in(predict_taken),
+    .predicted_target_in(predict_target),
 
     .instruction_out(if_id_instruction),
     .pc_out(if_id_pc),
     .pc_plus_four_out(if_id_pc_plus_4),
+    .predicted_taken_out(if_id_predicted_taken),
+    .predicted_target_out(if_id_predicted_target),
 
     .freeze(stall)
   );
 
 
 // ID stage
+
+
 
 
   wire branch_d, mem_read_d, mem_write_d, alu_src1_d, alu_src2_d, reg_write_d, halt_d;
@@ -186,19 +213,31 @@
     .take_branch(take_branch_signal)
   );
 
-
+ wire [31:0] real_target = (pc_src_d == 2'b10) ? {jalr_target_full[31:1], 1'b0} : pc_branch_target;
+ wire real_taken = take_branch || (pc_src_d == 2'b10) || (pc_src_d == 2'b01);
+ 
+  wire mispredicted = (if_id_predicted_taken != real_taken) ||
+                     (if_id_predicted_taken && real_taken && (if_id_predicted_target != real_target));
 
   wire take_branch = branch_d && take_branch_signal;
   wire [31:0] pc_branch_target = if_id_pc + imm_gen_out_d;
 
-  wire [31:0] jalr_target_full = read_data1_d + imm_gen_out_d;
+  wire [31:0] jalr_target_full = branch_comp_1 + imm_gen_out_d; //uses same forwarding branch comp uses
 
   // resolved in id now so penalty cycle is only 1, this feeds all the way back to the pc mux in if
-  assign pc_next = (take_branch || pc_src_d == 2'b01) ? pc_branch_target :
-  (pc_src_d == 2'b10) ? {jalr_target_full[31:1], 1'b0} : pc_plus_4;
+ /* assign pc_next = (take_branch || pc_src_d == 2'b01) ? pc_branch_target :
+  (pc_src_d == 2'b10) ? {jalr_target_full[31:1], 1'b0} : 
+  (predict_taken) ? predict_target : pc_plus_4;
+  */
 
-  wire flush = !stall && (take_branch || pc_src_d == 2'b01 || pc_src_d == 2'b10) || (pc_next != pc_plus_4);
+  assign pc_next = mispredicted
+    ? (real_taken ? real_target : if_id_pc_plus_4)
+    : (predict_taken ? predict_target : pc_plus_4);
 
+
+//wire flush = !stall && (take_branch || pc_src_d == 2'b01 || pc_src_d == 2'b10 || pc_next != pc_plus_4);
+ 
+    wire flush = !stall && mispredicted;
 
 // ID/EX
 

@@ -15,7 +15,7 @@
     output reg alu_src1, //future jerry remember that 0 = rs1, 1 = pc
     output reg alu_src2, //0 = rs2, 1 = immgen out
     output reg reg_write,
-    output reg [1:0] pc_src, //remember 00 normal pc+4, 01 pc+imm, 10 alu result for jalr
+    output reg [1:0] pc_src, //remember 00 normal pc+4, 01 pc+imm (jal only, not beq), 10 reg + offset for jalr
     output reg halt
  );
 
