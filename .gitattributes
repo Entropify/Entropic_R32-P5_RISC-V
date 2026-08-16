@@ -1,3 +1,5 @@
 # Ignore all assembly files for language statistics
-*.s linguist-documentation=false linguist-vendored
-*.S linguist-documentation=false linguist-vendored
+# *.s linguist-documentation=false linguist-vendored
+# *.S linguist-documentation=false linguist-vendored
+
+*.s linguist-language=Verilog
