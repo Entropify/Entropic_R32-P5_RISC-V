@@ -375,14 +375,10 @@ pass_lui:
     sub  x28, x27, x26
     addi x29, x0, 4
 
-    beq x28, x29, pass_auipc
+    beq x28, x29, all_pass
     addi x10, x0, 36
     beq x0, x0, halt
 
-
-pass_auipc:
-    ebreak
-    ecall
 
 
 
@@ -397,6 +393,7 @@ all_pass:
 
 halt:
     # infinite loop for python my boo to detect
+    ecall
     beq x0, x0, halt
     
 

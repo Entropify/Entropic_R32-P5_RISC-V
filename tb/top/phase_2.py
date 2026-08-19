@@ -63,7 +63,7 @@ async def phase_2(dut):
 
     # preventing program from stalling forever if soc is broken (big sad)
     if cycles >= 1000:
-        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop. dut._log.info. To view waveform use: gtkwave sim_build/soc_top.fst soc_top.gtkw")
+        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop.")
 
 
 

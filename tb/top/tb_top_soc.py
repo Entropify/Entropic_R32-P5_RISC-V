@@ -40,7 +40,7 @@ async def sc_soc_test(dut):
     
 
 
-    while cycles < 1000:
+    while cycles < 2000:
 
         await RisingEdge(dut.clk)
         
@@ -49,14 +49,7 @@ async def sc_soc_test(dut):
             #current_instr = dut.cpu.instruction.value.integer
 
             if (dut.halt) == 1:
-
-                for i in range(5):
-                    await RisingEdge(dut.clk)
-                    current_pc = dut.cpu.cpu_pc.pc_out.value.integer
-                    prev_pc = current_pc
-        
-                if prev_pc == current_pc:
-                    break
+                break
                 
             prev_pc = current_pc
 
@@ -66,8 +59,8 @@ async def sc_soc_test(dut):
         cycles += 1
 
     # preventing program from stalling forever if soc is broken (big sad)
-    if cycles >= 1000:
-        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop. dut._log.info. To view waveform use: gtkwave sim_build/soc_top.fst soc_top.gtkw")
+    if cycles >= 2000:
+        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop.")
 
 
 

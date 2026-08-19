@@ -1242,15 +1242,6 @@ pass_auipc:
     NOP
     NOP
 
-    ebreak
-    
-    NOP
-    NOP
-
-    ecall
-    
-    NOP
-    NOP
 
 phase_2_0NOP:
 

@@ -42,7 +42,7 @@
     .rst_n(rst_n),
     .pc_in(pc_next),
     .pc_out(pc_out),
-    .freeze(stall)
+    .freeze(stall || halted || halt_d)
   );
 
 wire predict_taken;
@@ -77,7 +77,7 @@ wire [31:0] predict_target;
   if_id_reg cpu_if_id (
     .clk(clk),
     .rst_n(rst_n),
-    .flush(flush),
+    .flush(flush || halt_d || halted),
 
     .instruction_in(instruction),
     .pc_in(pc_out),
@@ -91,7 +91,7 @@ wire [31:0] predict_target;
     .predicted_taken_out(if_id_predicted_taken),
     .predicted_target_out(if_id_predicted_target),
 
-    .freeze(stall)
+    .freeze(stall || halted || halt_d)
   );
 
 
@@ -116,6 +116,16 @@ wire [31:0] predict_target;
     .pc_src(pc_src_d),
     .halt(halt_d)
   );
+
+  wire halted;
+
+  halt_latch cpu_halt_latch(
+    .clk(clk),
+    .rst_n(rst_n),
+    .halt_d(halt_d),
+    .halted(halted)
+  );
+
 
   wire [31:0] imm_gen_out_d;
 
@@ -183,8 +193,8 @@ wire [31:0] predict_target;
 
       case(id_src1)
 
-      2'd2: branch_comp_1 = alu_result;
-      2'd1: branch_comp_1 = ex_mem_alu_result;
+      2'd2: branch_comp_1 = ex_actual_result;
+      2'd1: branch_comp_1 = ex_mem_actual_result;
       2'd0: branch_comp_1 = read_data1_d;
       default: branch_comp_1 = read_data1_d;
 
@@ -197,8 +207,8 @@ wire [31:0] predict_target;
 
       case(id_src2)
 
-      2'd2: branch_comp_2 = alu_result;
-      2'd1: branch_comp_2 = ex_mem_alu_result;
+      2'd2: branch_comp_2 = ex_actual_result;
+      2'd1: branch_comp_2 = ex_mem_actual_result;
       2'd0: branch_comp_2 = read_data2_d;
       default: branch_comp_2 = read_data2_d;
 
@@ -300,7 +310,7 @@ wire [31:0] predict_target;
     .func3_out(id_ex_func3),
     .func7_out(id_ex_func7),
 
-    .bubble(stall)
+    .bubble(stall || halted)
   );
 
 
@@ -345,12 +355,16 @@ wire [31:0] predict_target;
     .forward_src2(forward_src2)
   );
 
+  wire [31:0] ex_actual_result = (id_ex_mem_to_reg == 2'b10) ? id_ex_pc_plus_4 :
+                                (id_ex_mem_to_reg == 2'b11) ? id_ex_imm_gen_out :
+                                alu_result;
+
   always @(*) begin
 
 
       case(forward_src1)
 
-      2'd2: forwarded_read_data1_no_alu = ex_mem_alu_result;
+      2'd2: forwarded_read_data1_no_alu = ex_mem_actual_result;
       2'd1: forwarded_read_data1_no_alu = writeback_data;
       2'd0: forwarded_read_data1_no_alu = id_ex_read_data1;
       default: forwarded_read_data1_no_alu = id_ex_read_data1;
@@ -372,7 +386,7 @@ wire [31:0] predict_target;
 
       case(forward_src2)
 
-      2'd2: forwarded_read_data2_no_alu = ex_mem_alu_result;
+      2'd2: forwarded_read_data2_no_alu = ex_mem_actual_result;
       2'd1: forwarded_read_data2_no_alu = writeback_data;
       2'd0: forwarded_read_data2_no_alu = id_ex_read_data2;
       default: forwarded_read_data2_no_alu = id_ex_read_data2;
@@ -472,6 +486,11 @@ wire [31:0] predict_target;
     .sel(mem_forward_sel)
   );
 
+  wire [31:0] ex_mem_actual_result = (ex_mem_mem_to_reg == 2'b10) ? ex_mem_pc_plus_4 :
+                                    (ex_mem_mem_to_reg == 2'b11) ? ex_mem_imm_gen_out :
+                                    (ex_mem_mem_to_reg == 2'b01) ? filtered_data :
+                                    ex_mem_alu_result;
+
   load_filter cpu_load_filter(
     .func3(ex_mem_func3),
     .ram_data(data_read),
@@ -522,11 +541,22 @@ wire [31:0] predict_target;
 
 // WB stage
 
+  wire fully_halted;
+
+  halt_latch cpu_fully_halted_latch(
+      .clk(clk),
+      .rst_n(rst_n),
+      .halt_d(mem_wb_halt),
+      .halted(fully_halted)
+  );
+
+  assign halt = fully_halted;
+
 
   assign writeback_data = (mem_wb_mem_to_reg == 2'b01) ? mem_wb_filtered_data :
                           (mem_wb_mem_to_reg == 2'b10) ? mem_wb_pc_plus_4 :
                           (mem_wb_mem_to_reg == 2'b11) ? mem_wb_imm_gen_out : mem_wb_alu_result;
 
-  assign halt = mem_wb_halt;
+  assign halt = fully_halted;
 
   endmodule

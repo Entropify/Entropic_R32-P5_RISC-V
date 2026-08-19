@@ -1242,12 +1242,12 @@ pass_auipc:
     NOP
     NOP
 
-    ebreak
+    NOP
     
     NOP
     NOP
 
-    ecall
+    NOP
     
     NOP
     NOP
@@ -1505,9 +1505,6 @@ loop_test:
 
 all_pass:
 
-    NOP
-    NOP
-
     # write success code 1 to x10
     add x10, x0, x1
 
@@ -1519,12 +1516,4 @@ halt:
 
 
     # infinite loop for python my boo to detect
-    beq x0, x0, halt
-    
-    NOP
-    NOP
-    
-  
-
-    
-
+    ebreak

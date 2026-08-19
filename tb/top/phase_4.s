@@ -1242,12 +1242,12 @@ pass_auipc:
     NOP
     NOP
 
-    ebreak
+    NOP
     
     NOP
     NOP
 
-    ecall
+    NOP
     
     NOP
     NOP

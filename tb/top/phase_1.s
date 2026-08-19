@@ -1231,15 +1231,6 @@ pass_auipc:
     NOP
     NOP
 
-    ebreak
-    
-    NOP
-    NOP
-
-    ecall
-    
-    NOP
-    NOP
 
 
 

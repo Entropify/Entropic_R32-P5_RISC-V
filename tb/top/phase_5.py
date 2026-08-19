@@ -54,12 +54,15 @@ async def phase_5(dut):
     while cycles < 1000:
 
         await RisingEdge(dut.clk)
+
+        if (dut.halt.value) == 1:
+            break
         
         try:
             current_pc = dut.cpu.cpu_pc.pc_out.value.integer
             current_instr = dut.cpu.instruction.value.integer
 
-            history.append(current_pc)
+            #history.append(current_pc)
 
             '''
             if current_instr == 0xFE079EE3:
@@ -75,6 +78,9 @@ async def phase_5(dut):
             if current_pc == exit_marker_pc:
                 exit_marker_cycle = cycles
 
+            
+
+            '''
             if len(history) > 3 and history[-1] == history[-2] and history[-1] == history[-3] and history[-1] == history[-4]:
                 match_streak += 1
             else:
@@ -82,6 +88,10 @@ async def phase_5(dut):
 
             if match_streak > 10:
                 break
+            '''
+                
+
+            
 
                 
             #prev_pc = current_pc
@@ -93,7 +103,7 @@ async def phase_5(dut):
 
     # preventing program from stalling forever if soc is broken (big sad)
     if cycles >= 1000:
-        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop. dut._log.info. To view waveform use: gtkwave sim_build/soc_top.fst soc_top.gtkw")
+        dut._log.error("Simulation timed out. CPU never hit the expected infinite loop.")
 
 
 
