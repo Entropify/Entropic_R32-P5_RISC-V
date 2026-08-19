@@ -2,4 +2,4 @@
 # *.s linguist-documentation=false linguist-vendored
 # *.S linguist-documentation=false linguist-vendored
 
-*.s linguist-language=Verilog
+#*.s linguist-language=Verilog
