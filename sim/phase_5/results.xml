@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1787120902" />
-    <testcase name="phase_5" classname="phase_5" file="/mnt/x/Entropic_R32-P5_RISC-V/tb/top/phase_5.py" lineno="15" time="0.09647870063781738" sim_time_ns="6240.001" ratio_time="64677.498336395154" />
+    <property name="random_seed" value="1787125658" />
+    <testcase name="phase_5" classname="phase_5" file="/mnt/x/Entropic_R32-P5_RISC-V/tb/top/phase_5.py" lineno="15" time="0.08336949348449707" sim_time_ns="6240.001" ratio_time="74847.53402226626" />
   </testsuite>
 </testsuites>

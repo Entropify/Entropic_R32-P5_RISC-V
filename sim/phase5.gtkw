@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.126 (w)1999-2026 BSI
-[*] Wed Aug 19 06:18:07 2026
+[*] Wed Aug 19 07:24:16 2026
 [*]
-[dumpfile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/cocotb_sim_phase_5/soc_top.fst"
-[dumpfile_mtime] "Wed Aug 19 06:13:21 2026"
-[dumpfile_size] 27903
+[dumpfile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/cocotb_hello_world/soc_top.fst"
+[dumpfile_mtime] "Wed Aug 19 07:14:44 2026"
+[dumpfile_size] 6025
 [savefile] "/mnt/x/Entropic_R32-P5_RISC-V/sim/phase5.gtkw"
-[timestart] 6076700
+[timestart] 0
 [size] 2002 1026
 [pos] -1 -1
-*-15.000000 6140000 3895700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-15.600000 81900 3895700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] soc_top.
 [sst_width] 297
 [signals_width] 278
