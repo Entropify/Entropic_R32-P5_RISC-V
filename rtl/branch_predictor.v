@@ -35,16 +35,8 @@
  always @(*) begin
     
     if (valid[fetch_index] == 1 && tag[fetch_index] == fetch_tag) begin
-        
-        if (counter[fetch_index] == 2'b00 || counter[fetch_index] == 2'b01) begin
-            predict_taken = 1'b0;
-            predict_target = 32'b0;
-        end
-
-        else if (counter[fetch_index] == 2'b10 || counter[fetch_index] == 2'b11) begin
-            predict_taken = 1'b1;
-            predict_target = target[fetch_index];
-        end
+        predict_taken = counter[fetch_index][1];
+        predict_target = counter[fetch_index][1] ? target[fetch_index] : 32'b0;
     end
 
     else begin
