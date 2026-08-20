@@ -10,7 +10,7 @@ VERILOG_SOURCES += $(PWD)/../../rtl/*.v
 TOPLEVEL = soc_top
 
 # python test file (without the .py extension)
-MODULE = loop1
+MODULE = loop2
 
 # tell Cocotb where to find python file since it's not in the sim/ folder
 export PYTHONPATH := $(PWD)/../../tb/top:$(PYTHONPATH)
@@ -18,15 +18,15 @@ export PYTHONPATH := $(PWD)/../../tb/top:$(PYTHONPATH)
 # Force Icarus to dump the waveform file for GTKWave
 export WAVES = 1
 
-SIM_BUILD = $(PWD)/../cocotb_loop1
+SIM_BUILD = $(PWD)/../cocotb_loop2
 
 # Software Compilation Target
 top_tb:
 	# read the source from tb/top/, but spit the binaries into tb/programs/
-	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -nostdlib -nostartfiles -O0 -c loop1.c -o loop1.o
+	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -nostdlib -nostartfiles -O2 -c loop2.c -o loop2.o
 	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -nostdlib -nostartfiles -c crt0.s -o crt0.o
-	riscv64-unknown-elf-ld -m elf32lriscv -T link.ld crt0.o loop1.o -o loop1.elf
-	riscv64-unknown-elf-objcopy -O verilog --verilog-data-width=4 loop1.elf ../../tb/programs/tb_program.hex
+	riscv64-unknown-elf-ld -m elf32lriscv -T link.ld crt0.o loop2.o -o loop2.elf
+	riscv64-unknown-elf-objcopy -O verilog --verilog-data-width=4 loop2.elf ../../tb/programs/tb_program.hex
 
 sim: top_tb
 

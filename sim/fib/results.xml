@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787198486" />
+    <testcase name="fibonacci_test" classname="fib" file="/mnt/x/Entropic_R32-P5_RISC-V/tb/top/fib.py" lineno="8" time="4.012363910675049" sim_time_ns="277535.001" ratio_time="69169.94748696832" />
+  </testsuite>
+</testsuites>

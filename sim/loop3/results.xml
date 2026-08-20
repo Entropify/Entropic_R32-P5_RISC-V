@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1787193366" />
+    <testcase name="loop3_test" classname="loop3" file="/mnt/x/Entropic_R32-P5_RISC-V/tb/top/loop3.py" lineno="8" time="267.95005536079407" sim_time_ns="18596035.001" ratio_time="69401.12393692356" />
+  </testsuite>
+</testsuites>

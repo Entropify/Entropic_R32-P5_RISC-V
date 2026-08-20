@@ -6,7 +6,7 @@ from cocotb.triggers import Timer
 
 
 @cocotb.test()
-async def loop1_test(dut):
+async def loop2_test(dut):
 
     clock = Clock(dut.clk, 10, units="ns")
     cocotb.start_soon(clock.start())
@@ -15,7 +15,7 @@ async def loop1_test(dut):
     await ClockCycles(dut.clk, 5)
     dut.rst_n.value = 1
 
-    dut._log.info("CPU on. Running loop1...")
+    dut._log.info("CPU on. Running loop2...")
 
     cycles = 0
     stall_cycles = 0
@@ -47,7 +47,7 @@ async def loop1_test(dut):
 
     return_code = dut.cpu.cpu_reg_file.internal_reg[10].value.integer
     dut._log.info(f"x10 = {return_code} after {cycles} cycles")
-    assert return_code == 10000, f"Expected x10 == 10000, got {return_code}"
+    assert return_code == 0, f"Expected x10 == 0, got {return_code}"
 
     retired_instructions = cycles - stall_cycles - flush_cycles
     cpi = cycles / retired_instructions if retired_instructions > 0 else float('inf')
@@ -60,4 +60,4 @@ async def loop1_test(dut):
     dut._log.info(f"Branch predictions: {total_predictions}, correct: {correct_predictions}")
     dut._log.info(f"Prediction accuracy: {accuracy:.2f}%")
 
-    dut._log.info("SUCCESS loop1 ran correctly on the CPU!")
+    dut._log.info("SUCCESS - loop2 ran correctly on the CPU!")
