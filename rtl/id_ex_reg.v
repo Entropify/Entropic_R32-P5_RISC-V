@@ -61,7 +61,36 @@
 
  always @(posedge clk or negedge rst_n) begin
 
-    if (!rst_n || bubble) begin
+    if (!rst_n) begin
+
+        read_data1_out <= 32'h0000_0000;
+        read_data2_out <= 32'h0000_0000;
+        imm_gen_out_out <= 32'h0000_0000;
+
+        pc_out_out <= 32'h0000_0000;
+        pc_plus_four_out <= 32'h0000_0000;
+
+        rs1_addr_out <= 5'd0;
+        rs2_addr_out <= 5'd0;
+        rd_addr_out <= 5'd0;
+
+        branch_out <= 1'b0;
+        mem_read_out <= 1'b0;
+        mem_to_reg_out <= 2'b00;
+        alu_op_out <= 2'b00;
+        mem_write_out <= 1'b0;
+        alu_src1_out <= 1'b0;
+        alu_src2_out <= 1'b0;
+        reg_write_out <= 1'b0;
+        pc_src_out <= 2'b00;
+        halt_out <= 1'b0;
+
+        func3_out <= 3'd0;
+        func7_out <= 1'b0;
+
+    end
+
+    else if (bubble) begin
 
         read_data1_out <= 32'h0000_0000;
         read_data2_out <= 32'h0000_0000;
@@ -124,4 +153,3 @@
 
 
  endmodule
- 

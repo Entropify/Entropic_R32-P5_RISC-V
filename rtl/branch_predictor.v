@@ -35,8 +35,8 @@
  always @(*) begin
 
     if (valid[fetch_index] == 1 && tag_flat[fetch_index*24 +: 24] == fetch_tag) begin
-        predict_taken = counter_flat[fetch_index*2 +: 2][1];
-        predict_target = counter_flat[fetch_index*2 +: 2][1] ? target_flat[fetch_index*32 +: 32] : 32'b0;
+        predict_taken = counter_flat[fetch_index*2 +: 2] >= 2'b10;
+        predict_target = (counter_flat[fetch_index*2 +: 2] >= 2'b10) ? target_flat[fetch_index*32 +: 32] : 32'b0;
     end
 
     else begin
@@ -44,7 +44,7 @@
         predict_target = 32'b0;
     end
 
- end
+end
 
  reg [1:0] next_counter;
 
@@ -68,12 +68,9 @@
 
  end
 
-integer i;
-
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        for (i = 0; i <= 63; i = i + 1)
-            valid[i] <= 1'b0;
+        valid <= 64'b0;
     end
     else if (update_en) begin
         valid[update_index] <= 1'b1;
@@ -82,8 +79,7 @@ end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        for (i = 0; i <= 63; i = i + 1)
-            tag_flat[i*24 +: 24] <= 24'b0;
+        tag_flat <= 1536'b0;
     end
     else if (update_en) begin
         tag_flat[update_index*24 +: 24] <= update_tag;
@@ -92,8 +88,7 @@ end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        for (i = 0; i <= 63; i = i + 1)
-            target_flat[i*32 +: 32] <= 32'b0;
+        target_flat <= 2048'b0;
     end
     else if (update_en) begin
         target_flat[update_index*32 +: 32] <= update_target;
@@ -102,8 +97,7 @@ end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        for (i = 0; i <= 63; i = i + 1)
-            counter_flat[i*2 +: 2] <= 2'b00;
+        counter_flat <= 128'b0;
     end
     else if (update_en) begin
         counter_flat[update_index*2 +: 2] <= next_counter;

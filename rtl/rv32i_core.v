@@ -81,13 +81,13 @@ wire [31:0] predict_target;
 
     .instruction_in(instruction),
     .pc_in(pc_out),
-    .pc_plus_four_in(pc_plus_4),
+    .if_id_pc_plus_four_in(pc_plus_4),
     .predicted_taken_in(predict_taken),
     .predicted_target_in(predict_target),
 
     .instruction_out(if_id_instruction),
     .pc_out(if_id_pc),
-    .pc_plus_four_out(if_id_pc_plus_4),
+    .if_id_pc_plus_four_out(if_id_pc_plus_4),
     .predicted_taken_out(if_id_predicted_taken),
     .predicted_target_out(if_id_predicted_target),
 
