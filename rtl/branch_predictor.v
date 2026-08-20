@@ -65,37 +65,50 @@
     else begin
         next_counter = update_taken ? 2'b10 : 2'b01;
     end
-    
+
  end
 
- integer i;
+integer i;
 
- always @(posedge clk or negedge rst_n) begin
-
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-       
-        for (i = 0; i <= 63; i = i + 1) begin
+        for (i = 0; i <= 63; i = i + 1)
             valid[i] <= 1'b0;
-            tag[i] <= 24'b0;
-            target[i] <= 32'b0;
-            counter [i] <= 2'b0;
-        end
-
     end
-
     else if (update_en) begin
-        
         valid[update_index] <= 1'b1;
-        tag[update_index] <= update_tag;
-        target[update_index] <= update_target;
-        counter[update_index] <= next_counter;   // single write, was a nested if/else block before
-
     end
+end
 
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        for (i = 0; i <= 63; i = i + 1)
+            tag[i] <= 24'b0;
+    end
+    else if (update_en) begin
+        tag[update_index] <= update_tag;
+    end
+end
 
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        for (i = 0; i <= 63; i = i + 1)
+            target[i] <= 32'b0;
+    end
+    else if (update_en) begin
+        target[update_index] <= update_target;
+    end
+end
 
-
- end
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        for (i = 0; i <= 63; i = i + 1)
+            counter[i] <= 2'b00;
+    end
+    else if (update_en) begin
+        counter[update_index] <= next_counter;
+    end
+end
 
 
 endmodule
