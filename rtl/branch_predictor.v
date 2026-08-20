@@ -46,6 +46,28 @@
     
  end
 
+  reg [1:0] next_counter;
+
+ always @(*) begin
+
+    if (tag[update_index] == update_tag && valid[update_index] == 1'b1) begin
+
+        if (update_taken && counter[update_index] < 2'b11)
+            next_counter = counter[update_index] + 1;
+
+        else if (!update_taken && counter[update_index] > 2'b00)
+            next_counter = counter[update_index] - 1;
+
+        else
+            next_counter = counter[update_index];
+    end
+
+    else begin
+        next_counter = update_taken ? 2'b10 : 2'b01;
+    end
+    
+ end
+
  integer i;
 
  always @(posedge clk or negedge rst_n) begin
@@ -66,27 +88,7 @@
         valid[update_index] <= 1'b1;
         tag[update_index] <= update_tag;
         target[update_index] <= update_target;
-
-        if (tag[update_index] == update_tag && valid[update_index] == 1'b1) begin
-
-            if (update_taken && counter[update_index] < 2'b11) begin  //update the 2 bit very tuff fsm
-                counter[update_index] <= counter[update_index] + 1;
-            end
-
-            else if (!update_taken && counter[update_index] > 2'b00) begin
-                counter[update_index] <= counter[update_index] - 1;
-            end
-        end
-
-        else begin //(tag[update_index] != update_tag || valid[update_index] == 1'b0)
-            if (update_taken) begin
-                counter[update_index] <= 2'b10;
-            end
-            else begin
-                counter[update_index] <= 2'b01;
-            end
-        end
-
+        counter[update_index] <= next_counter;   // single write, was a nested if/else block before
 
     end
 
