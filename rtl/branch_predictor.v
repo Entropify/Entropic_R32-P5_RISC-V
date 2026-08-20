@@ -26,40 +26,40 @@
  wire [5:0] update_index = update_pc[7:2];
  wire [23:0] update_tag = update_pc[31:8];
 
- reg valid [0:63];
- reg [23:0] tag [0:63]; // 24 bit tag, 32 - 2 (always byte aligned) - 6 (index bit, 2^6 = 64)
- reg [31:0] target [0:63];
- reg [1:0] counter [0:63];
+ reg [63:0] valid;        // 1 bit x 64 entries
+ reg [24*64-1:0] tag_flat;    // 24 bits x 64 entries (24 bit tag, 32 - 2 (always byte aligned) - 6 (index bit, 2^6 = 64))
+ reg [32*64-1:0] target_flat;     // 32 bits x 64 entries
+ reg [2*64-1:0] counter_flat;   // 2 bits x 64 entries
 
 
  always @(*) begin
-    
-    if (valid[fetch_index] == 1 && tag[fetch_index] == fetch_tag) begin
-        predict_taken = counter[fetch_index][1];
-        predict_target = counter[fetch_index][1] ? target[fetch_index] : 32'b0;
+
+    if (valid[fetch_index] == 1 && tag_flat[fetch_index*24 +: 24] == fetch_tag) begin
+        predict_taken = counter_flat[fetch_index*2 +: 2][1];
+        predict_target = counter_flat[fetch_index*2 +: 2][1] ? target_flat[fetch_index*32 +: 32] : 32'b0;
     end
 
     else begin
         predict_taken = 1'b0;
         predict_target = 32'b0;
     end
-    
+
  end
 
-  reg [1:0] next_counter;
+ reg [1:0] next_counter;
 
  always @(*) begin
 
-    if (tag[update_index] == update_tag && valid[update_index] == 1'b1) begin
+    if (tag_flat[update_index*24 +: 24] == update_tag && valid[update_index] == 1'b1) begin
 
-        if (update_taken && counter[update_index] < 2'b11)
-            next_counter = counter[update_index] + 1;
+        if (update_taken && counter_flat[update_index*2 +: 2] < 2'b11)
+            next_counter = counter_flat[update_index*2 +: 2] + 1;
 
-        else if (!update_taken && counter[update_index] > 2'b00)
-            next_counter = counter[update_index] - 1;
+        else if (!update_taken && counter_flat[update_index*2 +: 2] > 2'b00)
+            next_counter = counter_flat[update_index*2 +: 2] - 1;
 
         else
-            next_counter = counter[update_index];
+            next_counter = counter_flat[update_index*2 +: 2];
     end
 
     else begin
@@ -83,30 +83,30 @@ end
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         for (i = 0; i <= 63; i = i + 1)
-            tag[i] <= 24'b0;
+            tag_flat[i*24 +: 24] <= 24'b0;
     end
     else if (update_en) begin
-        tag[update_index] <= update_tag;
+        tag_flat[update_index*24 +: 24] <= update_tag;
     end
 end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         for (i = 0; i <= 63; i = i + 1)
-            target[i] <= 32'b0;
+            target_flat[i*32 +: 32] <= 32'b0;
     end
     else if (update_en) begin
-        target[update_index] <= update_target;
+        target_flat[update_index*32 +: 32] <= update_target;
     end
 end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         for (i = 0; i <= 63; i = i + 1)
-            counter[i] <= 2'b00;
+            counter_flat[i*2 +: 2] <= 2'b00;
     end
     else if (update_en) begin
-        counter[update_index] <= next_counter;
+        counter_flat[update_index*2 +: 2] <= next_counter;
     end
 end
 
