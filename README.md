@@ -55,7 +55,7 @@ The chip features:
 - Full RV32I instruction coverage, same as the single-cycle
 - Each pipeline capability built and verified as its own phase, each with a dedicated self-checking assembly program that checks **all pipeline hazards / forwarding behavior / edge cases** and a cocotb driver, each phase built on previous phases and thus everything is **regression tested** every single phase
 - Five benchmark programs (loop-heavy, alternating-branch, divisibility-check, periodic-branch, and recursive Fibonacci) measured for CPI and branch-prediction accuracy at two optimization levels
-- A working **C toolchain**: RISC-V GCC → hand-written `crt0.s` startup → custom linker script → `objcopy` → simulated on the real CPU, running actual compiled programs (loops, recursion) rather than only hand-written assembly
+- A working **C toolchain**: RISC-V GCC → `crt0.s` startup → linker script → `.o` → `.elf` → `.hex` → simulated on the real CPU, running actual compiled programs (loops, recursion) rather than only hand-written assembly
 - Synthesized and physically implemented through the full RTL-to-GDSII flow using [OpenLane2](https://github.com/efabless/openlane2) and the [SKY130 PDK](https://github.com/google/skywater-pdk), ran locally in a Docker + WSL environment
 
 ---
@@ -111,15 +111,15 @@ Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent h
 
 A few notable pipeline-specific design decisions worth calling out (in addition to everything carried over from the single-cycle core):
 
-- **Branch/jump resolution moved to ID**, cutting the control-hazard penalty from 2 cycles (EX-stage resolution) to 1 cycle. This required its own forwarding path (`id_forwarding_unit`) since ID-stage resolution introduced a brand-new hazard case: a producer still live in EX (not yet even reached `ex_mem_reg`) feeding a consumer one stage earlier than any EX-stage consumer ever could.
+- **Branch/jump resolution moved to ID**, cutting the control-hazard penalty from 2 cycles (EX-stage resolution) to 1 cycle. This required its own forwarding path (`id_forwarding_unit`) since ID-stage resolution introduced a brand-new hazard case: a producer still live in EX (not yet even reached `ex_mem_reg`) feeding a consumer one stage earlier than any EX-stage consumer ever could. This also requires the hazard unit to account for this change, as stated in the next point.
 
 - **Two-tier load-use stall detection** in `hazard_unit`: the original EX-stage-load-into-ID-stage-consumer stall (sufficient for ALU consumers) plus a second, branch-specific stall condition catching a load that's advanced to MEM while a *branch* still needs it in ID — since branch resolution in ID needs the value one pipeline stage earlier than an ALU consumer would.
 
 - **`mem_to_reg`-resolved value collapse:** instead of carrying `alu_result`, `pc_plus_4`, and `imm_gen_out` as three separate raw values through `ex_mem_reg`/`mem_wb_reg` and re-deriving "which one is the real answer" at every consumer (EX forwarding, MEM forwarding, final writeback), the `mem_to_reg`-based resolution now happens once in EX and the *resolved* value is what gets latched forward. This was a real, STA-driven optimization — see [ASIC Implementation](#ASIC-Implementation).
 
-- **Sticky, two-stage halt latch:** `halted` (from `halt_d`, fires the instant `ecall`/`ebreak` is decoded in ID — freezes fetch immediately, drains everything already in flight) and `fully_halted` (from `mem_wb_halt`, fires once the halt instruction actually retires — this is what the top-level `halt` output reflects, giving external logic/testbenches a stable, permanent signal to check).
+- **Two-stage halt latch:** `halted` (from `halt_d`, fires the instant `ecall`/`ebreak` is decoded in ID — freezes fetch immediately) and `fully_halted` (from `mem_wb_halt`, fires once the halt instruction actually retires — this is what the top-level `halt` output reflects, giving external logic/testbenches a stable, permanent signal to check).
 
-- **Separated async-reset and synchronous conditions** in every pipeline register's clocked `always` block (`if (!rst_n) ... else if (bubble) ... else if (flush) ...` rather than `if (!rst_n || bubble || flush)`) — required for clean synthesis (see [Major Debugging Findings](#Major-Debugging-Findings)).
+- **Separated async-reset and synchronous conditions** in every pipeline register's clocked `always` block (`if (!rst_n) ... else if (bubble) ... else if (flush) ...` rather than `if (!rst_n || bubble || flush)`), required for clean synthesis (see [Major Debugging Findings](#Major-Debugging-Findings)).
 
 ### Module list (`rtl/`)
 
@@ -241,21 +241,21 @@ Five C programs, compiled at both `-O0` (unoptimized) and `-O2` (production-repr
 
 A few of the more substantial bugs found and fixed during this project, worth documenting for hitting similar issues in the future:
 
-- **Forwarding assumed `alu_result` was always the final answer.** For `jal`/`jalr`/`lui`, the real writeback value is `pc_plus_4` or the raw immediate, not the ALU's output (which is meaningless for these instruction types, since their encodings reuse the `rs1`/`rs2` bit positions for other purposes). A `jal` immediately followed by `jalr` using its link register forwarded this garbage value, sending the CPU's PC to `0x0`. Fixed by building `ex_actual_result`/`ex_mem_actual_result` — `mem_to_reg`-aware resolution wires — and forwarding *those* instead of raw `alu_result` everywhere.
+- **Forwarding Unit assumed `alu_result` was always the final answer that should be forwarded.** For `jal`/`jalr`/`lui`, the real writeback value is `pc_plus_4` or the raw immediate, not the ALU's output (which is meaningless for these instruction types, since their encodings reuse the `rs1`/`rs2` bit positions for other purposes). A `jal` immediately followed by `jalr` using its link register forwarded this garbage value, sending the CPU's PC to `0x0`. Fixed by building `ex_actual_result`/`ex_mem_actual_result` — `mem_to_reg`-aware resolution wires — and forwarding *those* instead of raw `alu_result` everywhere.
 
-- **A redundant PC re-target on correctly-predicted branches.** Before `pc_next` was gated on `mispredicted`, a correctly-predicted taken branch's own resolution in ID would still unconditionally re-select its branch target a second time, causing the very next instruction fetched by the predictor's correct speculation to be *re-fetched* a second time — a genuine correctness bug (duplicate execution), not just a performance loss, caught by hand-tracing cycle-by-cycle PC values before it ever showed up as a wrong test result.
+- **A redundant PC re-target on correctly-predicted branches.** Before `pc_next` was gated on `mispredicted`, a correctly-predicted taken branch's own resolution in ID would still unconditionally re-select its branch target a second time, causing the very next instruction fetched by the predictor's correct speculation to be *re-fetched* a second time, causing potential data corruption and is not just a performance loss, caught by hand-tracing cycle-by-cycle PC values on paper before it ever showed up as a wrong testbench result.
 
-- **Single-bit-wide `reg array [0:63]` patterns are unreliable to synthesize.** `branch_predictor`'s `valid` array (1 bit per entry) crashed Yosys's memory-inference pass partway through elaboration, while the wider `tag`/`target`/`counter` arrays synthesized cleanly — Yosys's per-element-unrolling fallback path for narrow arrays proved fragile. Fixed by flattening every array into a single wide vector (`reg [63:0] valid`, `reg [24*64-1:0] tag_flat`, indexed via `+:` part-selects) rather than using genuine multi-element arrays at all.
+- **Single-bit-wide `reg array [0:63]` patterns are unreliable to synthesize.** `branch_predictor`'s `valid` array (1 bit per entry) crashed Yosys's partway through synthesis, while the wider `tag`/`target`/`counter` arrays synthesized cleanly. Yosys's per-element-unrolling fallback path for narrow arrays was unreliable. Fixed by flattening every array into a single wide vector (`reg [63:0] valid`, `reg [24*64-1:0] tag_flat`, indexed via `+:` part-selects) rather than using genuine multi-element arrays at all.
 
-- **OR-ing a synchronous signal into the same condition as an async reset breaks synthesis.** `if (!rst_n || flush)` — mixing `rst_n` (async, in the sensitivity list) with `flush`/`bubble` (ordinary synchronous signals) in one combined condition confused Yosys's `PROC_ARST` pass (`"Multiple edge sensitive events found for this signal!"`), even though Icarus simulated it correctly. Fixed by separating every pipeline register's reset logic into distinct `if (!rst_n) ... else if (bubble) ... else if (flush) ...` branches.
+- **OR-ing a synchronous signal into the same condition as an async reset breaks synthesis.** `if (!rst_n || flush)` mixes `rst_n` (async, in the sensitivity list) with `flush`/`bubble` (ordinary synchronous signals) in one combined condition confused Yosys (error message: `"Multiple edge sensitive events found for this signal!"`), even though Icarus simulated it correctly. Fixed by separating every pipeline register's reset logic into distinct `if (!rst_n) ... else if (bubble) ... else if (flush) ...` branches.
 
-- **A one-cycle race between `halt_d` and the sticky `halted` latch.** Since `halted` only updates on a clock edge, the exact cycle `ecall` is first decoded still has `halted == 0`, briefly allowing one more wrong-path fetch through before the freeze engages — resolved by including `halt_d` itself (the immediate, same-cycle signal) directly in `if_id_reg`'s/`pc`'s freeze and flush conditions, not just the one-cycle-delayed `halted`.
+- **A one-cycle race between `halt_d` and the sticky `halted` latch.** Since `halted` only updates on a clock edge, the exact cycle `ecall` is first decoded still has `halted == 0`, briefly allowing one more wrong-path fetch through before the freeze engages. I resolved this by including `halt_d` itself (the immediate, same-cycle signal) directly in `if_id_reg`'s/`pc`'s freeze and flush conditions, not just the one-cycle-delayed `halted`.
 
 ---
 
 ## ASIC Implementation
 
-Synthesized end-to-end (RTL → GDSII) using **OpenLane2** against the **SKY130** open-source PDK, run locally via WSL2 + Docker, same hands-on approach as the single-cycle core.
+Synthesized end-to-end (RTL → GDSII) using **OpenLane2** against the **SKY130** open-source PDK, run locally via WSL2 + Docker, same approach as the single-cycle core.
 
 ### Synthesis strategy selection
 
@@ -273,7 +273,11 @@ All nine available `SYNTH_STRATEGY` options were compared directly using OpenLan
 | DELAY 3 | 20,502 | 299,627.4 | -14.63 | -1,240.08 |
 | DELAY 4 | 22,932 | 307,743.9 | -15.23 | -1,363.58 |
 
-`AREA 3` was the only strategy meeting timing at all. Despite the name, it apparently uses aggressive algebraic logic-collapsing that empirically outperformed every `DELAY`-oriented strategy for this specific, control-logic-heavy design. The tradeoff, ironically, is a substantially higher gate count, which directly caused the routing congestion issues described 2 sections below.
+`AREA 3` was the only strategy meeting timing at all. Despite the name, it apparently uses aggressive algebraic logic-collapsing that empirically outperformed every `DELAY` strategy for control-logic-heavy design  (like this pipelined CPU!).
+
+I came across this whilst researching OpenLane2 config optimization results, see [research paper](https://www.preprints.org/frontend/manuscript/bb3f29f28a8f6c2645e902cb192138d6/download_pub) I found.
+
+The tradeoff, very ironically, is a substantially higher gate count, which directly caused the routing congestion issues described in [Routing congestion tradeoff](###-Routing-congestion-tradeoff).
 
 ### Results
 
