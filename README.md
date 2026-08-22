@@ -368,7 +368,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ### Known limitations
 
-- Max slew / max cap violations remain in the `ss` (slow-slow) process corner, similar in category to the single-cycle core's residual signal-integrity findings — not blocking DRC/LVS/timing signoff, but a real consideration for an actual fabricated chip.
+- Max slew / max cap violations remain in the `ss` (slow-slow) process corner, similar in category to the single-cycle core's residual signal-integrity findings. Thgis does not block DRC/LVS/timing signoff, but a real consideration for an actual fabricated chip.
 - Core utilization (~30%) is lower than the single-cycle design's 47.3%, which is the cost of choosing `AREA 3` for its timing win. Revisiting this would mean either accepting a larger die or finding a synthesis-strategy/RTL combination that gets `AREA 3`-level timing without `AREA 3`-level gate count. Or alternatively, more ASIC flow iterations for more fine tuned and optimized OpenLane2 configuration flags.
 
 ---
