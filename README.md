@@ -204,11 +204,6 @@ Error reporting system following the same error code in `x10` convention as the 
 | Phase 4 | Control-hazard flushing, branch resolution moved to ID, zero-NOP taken/not-taken/`jal`/`jalr` correctness |
 | Phase 5 | Dynamic branch predictor: warm-up/steady-state accuracy, misprediction correcting ability |
 
-### Full error reporting table showing every case tested
-<img width="818" height="1119" alt="Screenshot 2026-08-22 194811" src="https://github.com/user-attachments/assets/461b0001-a4b4-4852-b1df-9067b18488de" />
-<img width="819" height="1017" alt="Screenshot 2026-08-22 194823" src="https://github.com/user-attachments/assets/26706763-6749-4aee-b2ac-38015fb28033" />
-
-
 ---
 
 
@@ -223,6 +218,14 @@ Error reporting system following the same error code in `x10` convention as the 
 
 <img width="1070" height="997" alt="image" src="https://github.com/user-attachments/assets/e6013d0c-6124-4ade-8bf3-ae05abc3959c" />
 
+---
+
+***Full error reporting table showing every case tested:***
+<img width="818" height="1119" alt="Screenshot 2026-08-22 194811" src="https://github.com/user-attachments/assets/461b0001-a4b4-4852-b1df-9067b18488de" />
+<img width="819" height="1017" alt="Screenshot 2026-08-22 194823" src="https://github.com/user-attachments/assets/26706763-6749-4aee-b2ac-38015fb28033" />
+
+
+---
 
 
 ### Compiled C toolchain
