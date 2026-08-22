@@ -84,7 +84,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 <img width="2559" height="1439" alt="Screenshot 2026-08-22 040723" src="https://github.com/user-attachments/assets/29c498a3-99ae-48d8-b702-417a8abe04fa" />
 
 
-*Visibly, the logic cells are not using the full area of the core, I described the reason for this in a later section, [ASIC Implementation](##-ASIC-Implementation) and the Known Limitation section under that.
+*Visibly, the logic cells are not using the full area of the core, I described the reason for this in a later section, [ASIC Implementation](#ASIC-Implementation) and the Known Limitation section under that.
 
 ---
 
@@ -117,7 +117,7 @@ A few notable pipeline-specific design decisions worth calling out (in addition 
 
 - **Two-tier load-use stall detection** in `hazard_unit`: the original EX-stage-load-into-ID-stage-consumer stall (sufficient for ALU consumers) plus a second, branch-specific stall condition catching a load that's advanced to MEM while a *branch* still needs it in ID — since branch resolution in ID needs the value one pipeline stage earlier than an ALU consumer would.
 
-- **`mem_to_reg`-resolved value collapse:** instead of carrying `alu_result`, `pc_plus_4`, and `imm_gen_out` as three separate raw values through `ex_mem_reg`/`mem_wb_reg` and re-deriving "which one is the real answer" at every consumer (EX forwarding, MEM forwarding, final writeback), the `mem_to_reg`-based resolution now happens once in EX and the *resolved* value is what gets latched forward. This was a real, STA-driven optimization — see [ASIC Implementation](#ASIC-Implementation).
+- **`mem_to_reg`-resolved value collapse:** instead of carrying `alu_result`, `pc_plus_4`, and `imm_gen_out` as three separate raw values through `ex_mem_reg`/`mem_wb_reg` and re-deriving "which one is the real answer" at every consumer (EX forwarding, MEM forwarding, final writeback), the `mem_to_reg`-based resolution now happens once in EX and the *resolved* value is what gets latched forward. This was a real, STA-driven optimization, see [ASIC Implementation](#ASIC-Implementation).
 
 - **Two-stage halt latch:** `halted` (from `halt_d`, fires the instant `ecall`/`ebreak` is decoded in ID — freezes fetch immediately) and `fully_halted` (from `mem_wb_halt`, fires once the halt instruction actually retires — this is what the top-level `halt` output reflects, giving external logic/testbenches a stable, permanent signal to check).
 
