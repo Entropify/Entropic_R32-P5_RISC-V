@@ -221,7 +221,7 @@ First working program: a trivial `int main() { return 1 + 2; }`, verified using 
 
 ## Performance Benchmarks
 
-Five C programs, compiled at both `-O0` (unoptimized) and `-O2` (production-representative), each measuring CPI (cycles ÷ approximate retired instructions, using stall/flush cycle counts as the correction term) and branch-prediction accuracy directly from live RTL signals (`mispredicted`, `stall`, `flush`) during simulation:
+Five C programs, compiled at both `-O0` (unoptimized) and `-O2` (production-representative), each measuring CPI (cycles / approximate retired instructions, using stall/flush cycle counts as the correction term) and branch-prediction accuracy directly from live RTL signals (`mispredicted`, `stall`, `flush`) during simulation:
 
 | Test | Description | -O0 CPI | -O0 Accuracy | -O2 CPI | -O2 Accuracy |
 |---|---|---|---|---|---|
