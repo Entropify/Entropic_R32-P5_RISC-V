@@ -152,9 +152,9 @@ The MEM/WB-stage case (producer's writeback and consumer's read landing on the s
 
 **Data hazards (load-use):** `hazard_unit` detects a load in EX (or, for branch consumers specifically, a load that's in EX or MEM) needing its result before it's ready, and stalls the pipeline by freezing `pc`/`if_id_reg` while inserting a bubble into `id_ex_reg`. This buying exactly enough cycles for forwarding to pick up the value once it's actually available.
 
-**Control hazards:** resolved via `flush`, gated on `!stall` (during stall pc and ID/IF reg should be completely frozen) and on `mispredicted` (see below in [Branch Prediction](#Branch-Prediction)) rather than firing on every sinlge branch a CPU without dynamic branch predictor would, meaning a correctly-predicted branch causes **zero** flush.
+**Control hazards:** resolved via `flush`, gated on `!stall` (during a stall PC and ID/IF reg should be completely frozen) and on `mispredicted` (see below in [Branch Prediction](#Branch-Prediction)) rather than firing on every sinlge branch a CPU without dynamic branch predictor would, meaning a correctly-predicted branch causes **zero** flush.
 
-**x0 exclusion:** every forwarding/hazard comparator explicitly excludes `rd == x0` matches, verified with dedicated test cases confirming no spurious forwarding occurs into or out of the hardwired-zero register.
+**x0 exclusion:** every forwarding/hazard comparator explicitly excludes `rd == x0` matches, verified with dedicated test cases confirming no accidental forwarding occurs into or out of the hardwired-zero register.
 
 ---
 
