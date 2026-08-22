@@ -49,7 +49,7 @@
 
 Entropic R32-P5 takes the fully-verified single-cycle Entropic R32-SC and reworks it into a classic 5-stage pipeline (IF → ID → EX → MEM → WB), then builds out everything a real pipeline needs to stay both correct and fast: full operand forwarding, load-use hazard detection with stalling, control-hazard flushing, branch resolution moved into ID for a 1-cycle misprediction penalty, and a from-scratch dynamic branch predictor.
 
-Every leaf module from the single-cycle core (`alu.v`, `alu_control.v`, `branch_comp.v`, `control_unit.v`, `imm_gen.v`, `load_filter.v`, `store_mask.v`) carries over unmodified — the pipeline is built entirely by adding pipeline registers, forwarding/hazard logic, and a predictor around the existing, already-verified datapath pieces.
+Every submodule from the single-cycle core (`alu.v`, `alu_control.v`, `branch_comp.v`, `control_unit.v`, `imm_gen.v`, `load_filter.v`, `store_mask.v`) carries over unmodified. The pipeline is built entirely by adding pipeline registers, forwarding/hazard logic, and a predictor around the existing, already-verified datapath pieces.
 
 The chip features:
 - Full RV32I instruction coverage, unchanged from the single-cycle ISA support
@@ -61,7 +61,7 @@ The chip features:
 
 ## Architecture
 
-`soc_top` wraps the pipelined core (`rv32i_core`) together with separate instruction (ROM) and data memory (RAM) modules, same top-level shape as the single-cycle design.
+Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) together with separate instruction (ROM) and data memory (RAM) modules, same top-level shape as the single-cycle design.
 
 **Microarchitecture diagram (zoom in if needed):**
 
@@ -80,13 +80,14 @@ The chip features:
 
 ## GDS Render
 
-<img width="2557" height="1437" alt="GDS render" src="PLACEHOLDER_GDS_RENDER" />
+<img width="2559" height="1439" alt="Screenshot 2026-08-22 040723" src="https://github.com/user-attachments/assets/29c498a3-99ae-48d8-b702-417a8abe04fa" />
+
 
 ---
 
 ## Instruction Set Coverage
 
-Full RV32I base instruction set: 40/40 instructions implemented, which is identical coverage to the single-cycle core, now correctly pipelined including forwarding/hazard handling for every instruction type.
+Like my single-cycle, full RV32I base instruction set. 40/40 instructions implemented but now correctly pipelined including forwarding/hazard handling for every instruction type.
 
 | Category | Instructions |
 |---|---|
@@ -140,14 +141,14 @@ Carried over, unmodified from R32-SC: `alu.v` · `alu_control.v` · `branch_comp
 | Unit | Consumer | Candidates | Purpose |
 |---|---|---|---|
 | `forwarding_unit` | ALU operands in EX | EX/MEM, MEM/WB | Original Phase-2 forwarding; covers ordinary ALU-consuming instructions |
-| `id_forwarding_unit` | `branch_comp` / branch-target math in ID | live EX, EX/MEM | New candidate class introduced by moving branch resolution to ID — the closest possible producer for a 0-NOP gap is now *still executing in EX*, not yet latched anywhere |
-| `mem_forwarding_unit` | Store data in MEM | MEM/WB | Specifically resolves `lw` immediately followed by `sw` using the same register, without requiring a stall |
+| `id_forwarding_unit` | `branch_comp` / branch-target math in ID | live EX, EX/MEM | New candidate introduced by moving branch resolution to ID, the closest possible producer for a 0-NOP gap is now *still executing in EX*, not yet latched anywhere |
+| `mem_forwarding_unit` | Store data in MEM | MEM/WB | Specifically resolves `lw` immediately followed by `sw` using the same register, saving a stall |
 
-The MEM/WB-stage case (producer's writeback and consumer's read landing on the same cycle) is handled for free by `reg_file`'s own same-cycle write-first/read-second bypass, inherited unchanged from the single-cycle design — no dedicated forwarding candidate needed for that tier.
+The MEM/WB-stage case (producer's writeback and consumer's read landing on the same cycle) is handled for free by `reg_file`'s own same-cycle write-first/read-second internal bypass mux.
 
-**Structural hazards (load-use):** `hazard_unit` detects a load in EX (or, for branch consumers specifically, a load that's advanced to MEM) needing its result before it's ready, and stalls the pipeline by freezing `pc`/`if_id_reg` while inserting a bubble into `id_ex_reg` — buying exactly enough cycles for forwarding to pick up the value once it's genuinely available.
+**Data hazards (load-use):** `hazard_unit` detects a load in EX (or, for branch consumers specifically, a load that's in EX or MEM) needing its result before it's ready, and stalls the pipeline by freezing `pc`/`if_id_reg` while inserting a bubble into `id_ex_reg` — buying exactly enough cycles for forwarding to pick up the value once it's genuinely available.
 
-**Control hazards:** resolved via `flush`, gated on `!stall` (to avoid acting on a misprediction verdict computed from not-yet-valid, mid-stall forwarded data) and on `mispredicted` (see below) rather than firing on every taken branch — meaning a correctly-predicted branch causes **zero** flush overhead.
+**Control hazards:** resolved via `flush`, gated on `!stall` (to avoid acting on a misprediction computed from not-yet-valid, mid-stall forwarded data) and on `mispredicted` (see below in [Branch Prediction](#Branch-Prediction)) rather than firing on every taken branch, meaning a correctly-predicted branch causes **zero** flush.
 
 **x0 exclusion:** every forwarding/hazard comparator explicitly excludes `rd == x0` matches, verified with dedicated test cases confirming no spurious forwarding occurs into or out of the hardwired-zero register.
 
@@ -157,15 +158,15 @@ The MEM/WB-stage case (producer's writeback and consumer's read landing on the s
 
 A from-scratch **2-bit saturating-counter predictor backed by a 64-entry, direct-mapped Branch Target Buffer (BTB)**.
 
-**Table structure**, indexed by `fetch_pc[7:2]` (6-bit index, 64 entries), tagged by `fetch_pc[31:8]` (24-bit tag) to detect and correctly handle index aliasing between unrelated branch addresses:
+**Table structure**, indexed by `fetch_pc[7:2]` (6-bit index, 2 ^ 6 = 64 entries), tagged by `fetch_pc[31:8]` (24-bit tag, because 32 (address) - 6 (index) - 2 (bottom 2 bits omitted since instructions are byte-aligned) = 24), to detect and correctly handle index aliasing between unrelated branch addresses:
 - `valid` — has this slot ever been written
 - `tag` — confirms the entry actually belongs to this address, not an aliased collision
 - `target` — the last known branch/jump target for this address
-- `counter` — 2-bit saturating counter; top bit determines the taken/not-taken prediction
+- `counter` — 2-bit saturating bias counter; top bit determines the taken/not-taken prediction
 
 **Update policy:** on a genuine tag match, the counter increments/decrements toward the observed outcome (saturating at `00`/`11`); on a fresh occupant (miss or aliased eviction), the counter resets to a weak bias matching that first real observation, rather than inheriting a previous occupant's unrelated history.
 
-**Misprediction detection & flush:** `mispredicted` compares the prediction carried through `if_id_reg` (`if_id_predicted_taken`/`target`) against the freshly-resolved ground truth in ID (`real_taken`/`real_target`) — covering direction mispredicts, target mispredicts (stale BTB entries), and the compound case of both agreeing but the *target* being wrong. `pc_next` is gated on `mispredicted` (not on `take_branch` directly) specifically to avoid a real bug found during bring-up: redundantly re-targeting an already-correctly-predicted branch's own address a second time after it resolves (see [Major Debugging Findings](#Major-Debugging-Findings)).
+**Misprediction detection & flush:** `mispredicted` compares the prediction carried through `if_id_reg` (`if_id_predicted_taken`/`target`) against the freshly-resolved ground truth in ID (`real_taken`/`real_target`). This covers both direction mispredicts and target mispredicts, and the compound case of directions agreeing but the *target* being wrong. `pc_next` is gated on `mispredicted` (not on `take_branch` directly) specifically to avoid a bug I found while writing RTL: redundantly re-targeting an already-correctly-predicted branch's own address a second time after it resolves (see [Major Debugging Findings](#Major-Debugging-Findings)).
 
 **Measured accuracy:** see [Performance Benchmarks](#Performance-Benchmarks) — ranges from ~60% on a deliberately worst-case alternating branch up to ~99.97% on predictable loops.
 
