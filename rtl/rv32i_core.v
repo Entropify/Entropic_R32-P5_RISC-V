@@ -440,7 +440,7 @@ wire [31:0] predict_target;
     .clk(clk),
     .rst_n(rst_n),
 
-    .alu_result_in(alu_result),
+    .alu_result_in(ex_actual_result),
     .read_data2_in(forwarded_read_data2_no_alu),
     .rd_addr_in(id_ex_rd_addr),
     .func3_in(id_ex_func3),
@@ -486,10 +486,7 @@ wire [31:0] predict_target;
     .sel(mem_forward_sel)
   );
 
-  wire [31:0] ex_mem_actual_result = (ex_mem_mem_to_reg == 2'b10) ? ex_mem_pc_plus_4 :
-                                    (ex_mem_mem_to_reg == 2'b11) ? ex_mem_imm_gen_out :
-                                    (ex_mem_mem_to_reg == 2'b01) ? filtered_data :
-                                    ex_mem_alu_result;
+  wire [31:0] ex_mem_actual_result = (ex_mem_mem_to_reg == 2'b01) ? filtered_data : ex_mem_alu_result;
 
   load_filter cpu_load_filter(
     .func3(ex_mem_func3),
@@ -553,10 +550,7 @@ wire [31:0] predict_target;
   assign halt = fully_halted;
 
 
-  assign writeback_data = (mem_wb_mem_to_reg == 2'b01) ? mem_wb_filtered_data :
-                          (mem_wb_mem_to_reg == 2'b10) ? mem_wb_pc_plus_4 :
-                          (mem_wb_mem_to_reg == 2'b11) ? mem_wb_imm_gen_out : mem_wb_alu_result;
-
-  assign halt = fully_halted;
+  assign writeback_data = (mem_wb_mem_to_reg == 2'b01) ? mem_wb_filtered_data : mem_wb_alu_result;
 
   endmodule
+  
