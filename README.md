@@ -20,7 +20,7 @@
 - extended with **full data forwarding**, **hazard detection/stalling**, **control-hazard flushing with branch resolution in ID**, and a **dynamic 2-bit saturating-counter branch predictor with a 64-entry BTB**
 - **fully verified** through **self-written testbenches** in **SystemVerilog** and **RISC-V Assembly**, co-driven by **cocotb**, plus **compiled C programs onto the CPU** for performance testing
 - **synthesized** to a **physical ASIC layout** through **OpenLane2** on the **SkyWater 130nm** open-source PDK, achieving **50 MHz**, a ~40% clock speed improvement over the single-cycle core
-- **throughput** comes out to be about **48.03 million** instructions per second for average real-world performance, and **39.37 million** instructions per second under worst-case scenarios (calculated with clock speed and results from [Performance Benchmarks](##Performance-Benchmarks))
+- **throughput** comes out to be about **48.03 million** instructions per second for average real-world performance, and **39.37 million** instructions per second under worst-case scenarios (calculated with clock speed and results from [Performance Benchmarks](#Performance-Benchmarks))
 
 `R32-P5` = **R**V**32**I, **P**ipelined, **5** stages.
 
@@ -85,7 +85,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 <img width="2559" height="1439" alt="Screenshot 2026-08-22 040723" src="https://github.com/user-attachments/assets/29c498a3-99ae-48d8-b702-417a8abe04fa" />
 
 
-*Visibly, the logic cells are not using the full area of the core. I described the reason behind this in later sections: [ASIC Implementation](#ASIC-Implementation), the **Known Limitation** section under that, and [Routing congestion tradeoff](###Routing-congestion-tradeoff).
+*Visibly, the logic cells are not using the full area of the core. I described the reason behind this in later sections: [ASIC Implementation](#ASIC-Implementation), the **Known Limitation** section under that, and [Routing congestion tradeoff](#Routing-congestion-tradeoff).
 
 ---
 
