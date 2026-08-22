@@ -329,7 +329,7 @@ Post-route STA identified the critical path originating from `ex_mem_reg`'s `mem
 
 A second, distinct critical path was subsequently identified through `mem_wb_rd_addr`'s address-comparison fanout (feeding both `forwarding_unit`'s and `reg_file`'s independent equality checks). This could be a candidate for future optimization rather than resolved in this pass, since it's structurally necessary comparison logic rather than a redundant computation.
 
-### Final OpenLane2 configuration
+### Final OpenLane2 config.json setup
 
 ```json
 {
@@ -360,7 +360,8 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ### Disassembled GDS render:
 
-<img width="2557" height="1437" alt="Disassembled GDS render" src="PLACEHOLDER_DISASSEMBLED_GDS" />
+<img width="2559" height="1439" alt="image" src="https://github.com/user-attachments/assets/5bc95c97-2f25-42d4-88d5-5287151d284e" />
+
 
 ### Cell breakdown:
 
