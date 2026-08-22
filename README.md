@@ -111,7 +111,7 @@ A few notable pipeline-specific design decisions worth calling out (in addition 
 
 - **Branch/jump resolution moved to ID**, cutting the control-hazard penalty from 2 cycles (EX-stage resolution) to 1 cycle. This required its own forwarding path (`id_forwarding_unit`) since ID-stage resolution introduced a brand-new hazard case: a producer still live in EX (not yet even reached `ex_mem_reg`) feeding a consumer one stage earlier than any EX-stage consumer ever could.
 
-- **Two-tier load-use stall detection** in `hazard_unit`: the original EX-stage-load-into-ID-stage-consumer stall (sufficient for ALU consumers, since Phase 2 forwarding covers the rest) plus a second, branch-specific stall condition catching a load that's advanced to MEM while a *branch* still needs it in ID — since branch resolution in ID needs the value one pipeline stage earlier than an ALU consumer would.
+- **Two-tier load-use stall detection** in `hazard_unit`: the original EX-stage-load-into-ID-stage-consumer stall (sufficient for ALU consumers) plus a second, branch-specific stall condition catching a load that's advanced to MEM while a *branch* still needs it in ID — since branch resolution in ID needs the value one pipeline stage earlier than an ALU consumer would.
 
 - **`mem_to_reg`-resolved value collapse:** instead of carrying `alu_result`, `pc_plus_4`, and `imm_gen_out` as three separate raw values through `ex_mem_reg`/`mem_wb_reg` and re-deriving "which one is the real answer" at every consumer (EX forwarding, MEM forwarding, final writeback), the `mem_to_reg`-based resolution now happens once in EX and the *resolved* value is what gets latched forward. This was a real, STA-driven optimization — see [ASIC Implementation](#ASIC-Implementation).
 
@@ -183,7 +183,7 @@ R32-P5 implements **real halt**: `ecall`/`ebreak` decoded in ID immediately and 
 
 ### Module-level (SystemVerilog + Icarus Verilog + cocotb)
 
-Reused directly from the single-cycle design for every unmodified leaf module. New modules (`branch_predictor`, `hazard_unit`, `forwarding_unit`, `id_forwarding_unit`, `mem_forwarding_unit`, `halt_latch`) were verified via directed, full-branch-coverage assembly test cases integrated into the phase testbenches below, rather than standalone constrained-random testbenches — a deliberate scoping decision given each unit's functional surface (a handful of priority/comparator cases) is small enough that directed coverage is both sufficient and more informative than random sampling.
+Reused directly from the single-cycle design for every unmodified leaf module. New modules (`branch_predictor`, `hazard_unit`, `forwarding_unit`, `id_forwarding_unit`, `mem_forwarding_unit`, `halt_latch`) were verified via directed, full-branch-coverage assembly test cases integrated into the phase testbenches below, rather than standalone constrained-random testbenches. This is because each unit's functional surface (a handful of priority/comparator cases) is small enough that directed coverage is both sufficient and more informative than random sampling.
 
 ### Full-core, phase-by-phase (Python cocotb + Icarus + Makefile + self-checking RISC-V Assembly)
 
@@ -195,7 +195,7 @@ Each pipeline capability was built and verified as its own phase, each with a de
 | Phase 2 | EX-stage forwarding, MEM-stage store forwarding, x0 exclusion, priority (EX/MEM over MEM/WB) |
 | Phase 3 | Load-use hazard detection and stalling, including back-to-back and branch-consumer cases |
 | Phase 4 | Control-hazard flushing, branch resolution moved to ID, zero-NOP taken/not-taken/`jal`/`jalr` correctness |
-| Phase 5 | Dynamic branch predictor: warm-up/steady-state accuracy, aliasing safety, `jal`/`jalr` prediction behavior |
+| Phase 5 | Dynamic branch predictor: warm-up/steady-state accuracy, misprediction correcting ability |
 
 ***Example of a Phase 5 loop-warmup testbench measuring real per-iteration cycle cost (predictor cold-miss vs. steady-state):***
 
@@ -203,14 +203,14 @@ Each pipeline capability was built and verified as its own phase, each with a de
 
 ### Compiled C toolchain
 
-A minimal, from-scratch toolchain: RISC-V GCC (`-march=rv32i -mabi=ilp32 -nostdlib -nostartfiles`) compiles C source, a hand-written `crt0.s` initializes the stack pointer and calls `main()`, a custom linker script (`link.ld`) places `.text`/`.data` into the CPU's two separate physical memory spaces, and `objcopy -O verilog` produces the final `$readmemh`-format hex — the same format hand-written assembly tests have used since Phase 1.
+Toolchain: RISC-V GCC (`-march=rv32i -mabi=ilp32 -nostdlib -nostartfiles`) compiles C source, a hand-written `crt0.s` initializes the stack pointer and calls `main()`, a custom linker script (`link.ld`) places `.text`/`.data` into the CPU's two separate physical memory spaces, and `objcopy -O verilog` produces the final `$readmemh`-format hex — the same format hand-written assembly tests have used since Phase 1.
 
-First working program: a trivial `int main() { return 1 + 2; }`, verified end-to-end (`x10 == 3`) before moving to the loop-heavy benchmarks below.
+First working program: a trivial `int main() { return 1 + 2; }`, verified using cocotb (`x10 == 3`) before moving to the loop-heavy benchmarks below.
 
 ### Known limitations
 
 - Full-core differential testing against a reference ISA simulator (Spike and/or a self-written Python interpreter) is planned but not yet implemented.
-- The official [`riscv-arch-test`](https://github.com/riscv-non-isa/riscv-arch-test) compliance suite was scoped but not integrated — RISCOF requires a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros that weren't built out in this pass; individual official test files are a planned lighter-weight alternative.
+- The official [`riscv-arch-test`](https://github.com/riscv-non-isa/riscv-arch-test) compliance suite was scoped but not integrated. RISCOF requires a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros that weren't built out in this pass; individual official test files are a planned lighter-weight alternative.
 - A dedicated BTB-aliasing stress test (two colliding addresses, confirming tag-mismatch correctly falls back to a cold miss) was reasoned through and proven correct by construction (index+tag together reconstruct the full address) but not exercised with a purpose-built assembly test.
 
 ---
@@ -374,14 +374,14 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 │   ├── mem_wb_reg.v            # MEM/WB pipeline register
 │   ├── forwarding_unit.v       # EX-stage forwarding (EX/MEM, MEM/WB)
 │   ├── id_forwarding_unit.v    # ID-stage (branch_comp) forwarding (live EX, EX/MEM)
-│   ├── mem_forwarding_unit.v   # MEM-stage store-data forwarding (lw -> sw)
+│   ├── mem_forwarding_unit.v   # MEM-stage store-data forwarding (specifically for lw followed by sw)
 │   ├── hazard_unit.v           # Load-use stall detection (two-tier)
 │   ├── branch_predictor.v      # 2-bit saturating counter + 64-entry BTB
 │   ├── halt_latch.v            # Sticky halt latch (used twice: halted, fully_halted)
 │   ├── data_mem.v              # RAM module
 │   ├── instruction_mem.v       # ROM module
 │   ├── soc_top.v               # SoC routing CPU with RAM and ROM
-│   └── all other .v files      # Unmodified leaf modules from R32-SC
+│   └── all other .v files      # Unmodified modules from R32-SC
 ├── sim/
 │   ├── phase_1/ .. phase_5/    # Each pipeline capability's Makefile + build dir
 │   ├── c_hello_world/          # First compiled-C bring-up: crt0.s, link.ld, Makefile
@@ -389,8 +389,8 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 │   └── cocotb_sim_*/           # Per-phase cocotb/Icarus build + waveform dump locations
 └── tb/
     ├── modules/                # Per-module SystemVerilog testbenches (unmodified leaf modules)
-    ├── programs/                # Assembled/compiled program artifacts (.s/.c/.o/.elf/.hex)
-    └── top/                     # phase_1.py .. phase_5.py, loop*.py, fib.py cocotb drivers
+    ├── programs/               # Assembled/compiled program artifacts (.s/.c/.o/.elf/.hex)
+    └── top/                    # phase_1.py .. phase_5.py, phase_1.s .. phase_5.s, loop*.py, fib.py cocotb drivers
 ```
 
 ---
