@@ -1,5 +1,8 @@
 <img width="1702" height="630" alt="Entropic R32-P5" src="PLACEHOLDER_GDS_HERO_IMAGE" />
 
+<img width="3125" height="3125" alt="chip comparison pic 5 stage" src="https://github.com/user-attachments/assets/af05ce36-f8b5-4492-94f7-f81fa5890f86" />
+
+
 <h1 align="center">Entropic R32-P5 (RV32I 5-Stage Pipelined CPU)</h1>
 <p align="center"><i>(image above is the real GDS render of the CPU on a SKY130 ASIC)</i></p>
 
@@ -407,7 +410,8 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 **To-scale comparison across all three chips built so far (SPI/PWM peripheral, single-cycle R32-SC, and this pipelined R32-P5):**
 
-<img width="1975" height="1360" alt="chip comparison" src="PLACEHOLDER_CHIP_COMPARISON" />
+<img width="3125" height="3125" alt="chip comparison pic 5 stage" src="https://github.com/user-attachments/assets/5fb8975d-ee99-4ae4-a87e-d5a85c9b5d74" />
+
 
 ---
 
