@@ -282,7 +282,7 @@ All nine available `SYNTH_STRATEGY` options were compared directly using OpenLan
 
 I came across this whilst researching OpenLane2 config optimization results, see [research paper](https://www.preprints.org/frontend/manuscript/bb3f29f28a8f6c2645e902cb192138d6/download_pub) I found.
 
-The tradeoff, very ironically, is a substantially higher gate count, which directly caused the routing congestion issues described in [Routing congestion tradeoff](###-Routing-congestion-tradeoff).
+The tradeoff, very ironically (`AREA 3` means most aggressively minimizing logic area in OpenLane2), is a substantially higher gate count, which directly caused the routing congestion issues described in [Routing congestion tradeoff](###-Routing-congestion-tradeoff).
 
 ### Results
 
