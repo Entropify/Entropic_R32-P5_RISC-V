@@ -435,7 +435,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 **To-scale comparison across all three chips built so far (SPI/PWM peripheral, single-cycle R32-SC, and this pipelined R32-P5):**
 
-(scale estimated through comparing filler cell sizes & wire widths in Photopea)
+(scale estimated through comparing standard filler cell sizes & met4 wire widths in Photopea)
 
 <img width="3125" height="3125" alt="chip comparison pic 5 stage" src="https://github.com/user-attachments/assets/5fb8975d-ee99-4ae4-a87e-d5a85c9b5d74" />
 
