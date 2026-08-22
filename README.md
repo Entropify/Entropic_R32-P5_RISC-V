@@ -4,7 +4,7 @@
 
 
 <h1 align="center">Entropic R32-P5 (RV32I 5-Stage Pipelined CPU)</h1>
-<p align="center"><i>(image above is the real GDS render of the CPU on a SKY130 ASIC, Intel pls don't sue me for logo I'm just a fanboy)</i></p>
+<p align="center"><i>(image above is the real GDS render of the CPU on a SKY130 ASIC, Intel pls don't sue me for logo I'm just a fanboy 😢)</i></p>
 
 <div align="center">
 
