@@ -168,7 +168,7 @@ A from-scratch **2-bit saturating-counter predictor backed by a 64-entry, direct
 - `target`, the last known branch/jump target for this address
 - `counter`, 2-bit saturating bias counter; top bit determines the taken/not-taken prediction
 
-**Update policy:** on a genuine tag match, the counter increments/decrements toward the observed outcome (saturating at `00`/`11`); on a fresh occupant (miss or aliased eviction), the counter resets to a weak bias matching that first real observation, rather than inheriting a previous occupant's unrelated history.
+**Update policy:** on a genuine tag match, the counter increments/decrements toward the observed outcome (saturating at `00`/`11`); on a fresh occupant (or aliased eviction), the counter resets to a weak bias matching that first real observation, rather than inheriting a previous occupant's unrelated history.
 
 **Misprediction detection & flush:** `mispredicted` compares the prediction carried through `if_id_reg` (`if_id_predicted_taken`/`target`) against the freshly-resolved ground truth in ID (`real_taken`/`real_target`). This covers both direction mispredicts and target mispredicts, and the compound case of directions agreeing but the *target* being wrong. `pc_next` is gated on `mispredicted` (not on `take_branch` directly) specifically to avoid a bug I found while writing RTL: redundantly re-targeting an already-correctly-predicted branch's own address a second time after it resolves (see [Major Debugging Findings](#Major-Debugging-Findings)).
 
