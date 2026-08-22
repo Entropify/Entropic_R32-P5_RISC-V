@@ -228,7 +228,7 @@ Five C programs, compiled with GCC with both flag `-O0` (unoptimized) and `-O2` 
 |---|---|---|---|---|---|
 | `loop1` | Simple counting loop (best case, highly predictable) | 1.200 | 99.95% | 1.000 | 99.96% |
 | `loop2` | Alternating `if/else` every iteration (near-worst-case for a 2-bit counter) | 1.296 | 59.99% | 1.000 | 99.97% |
-| `loop3` | Divisibility check via repeated-subtraction `mod()`, inlined 3x per iteration, iterations increases as dividend increases | 1.426 | 66.22% | 1.012 | 98.28% |
+| `loop3` | Divisibility check via repeated-subtraction `mod()`, inlined 3x per iteration, called functions's interior iterations increases as dividend increases | 1.426 | 66.22% | 1.012 | 98.28% |
 | `loop4` | Period-4 branch pattern (`(i&3)!=3`) | 1.226 | 87.50% | 1.160 | 87.50% |
 | `fib(15)` | Recursive Fibonacci, stresses nested call/return stack usage | 1.227 | 67.11% | 1.032 | 76.54% |
 | **Average** | | **1.275** | **76.15%** | **1.041** | **92.45%** |
