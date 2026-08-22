@@ -15,10 +15,10 @@
 </div>
 
 
-**Entropic R32-P5** is a 5-stage pipelined **RISC-V** (RV32I) CPU, the successor to my single-cycle [Entropic R32-SC](https://github.com/), that was:
-- **designed** and **built completely from scratch** in **Verilog**, converting the original single-cycle datapath into a classic IF/ID/EX/MEM/WB pipeline
+**Entropic R32-P5** is a 5-stage pipelined **RISC-V** (RV32I) CPU, the successor to my single-cycle [Entropic R32-SC](https://github.com/Entropify/Entropic_R32-SC_RISC-V), that was:
+- **designed** and **built completely from scratch** in **Verilog**, converting the original single-cycle datapath into a 5-stage IF/ID/EX/MEM/WB pipeline
 - extended with **full data forwarding**, **hazard detection/stalling**, **control-hazard flushing with branch resolution in ID**, and a **dynamic 2-bit saturating-counter branch predictor with a 64-entry BTB**
-- **fully verified** through **self-written testbenches** in **SystemVerilog** and **RISC-V Assembly**, co-driven by **cocotb**, plus **real compiled C programs** run end-to-end through a hand-built `crt0.s` + linker-script toolchain
+- **fully verified** through **self-written testbenches** in **SystemVerilog** and **RISC-V Assembly**, co-driven by **cocotb**, plus **real compiled C programs** run `crt0.s` + linker-script toolchain
 - **synthesized** to a **physical ASIC layout** through **OpenLane2** on the **SkyWater 130nm** open-source PDK, achieving **50 MHz** — a ~40% clock speed improvement over the single-cycle core
 
 `R32-P5` = **R**V**32**I, **P**ipelined, **5** stages.
