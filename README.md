@@ -202,9 +202,20 @@ Each pipeline capability was built and verified as its own phase, each with a de
 | Phase 4 | Control-hazard flushing, branch resolution moved to ID, zero-NOP taken/not-taken/`jal`/`jalr` correctness |
 | Phase 5 | Dynamic branch predictor: warm-up/steady-state accuracy, misprediction correcting ability |
 
+---
+
+
 ***Example of a Phase 5 loop-warmup testbench measuring real per-iteration cycle cost (predictor cold-miss vs. steady-state):***
 
 <img width="2137" height="462" alt="image" src="https://github.com/user-attachments/assets/8c07be4b-ee90-46e5-9cdf-a42f88176e4d" />
+
+---
+
+
+***Example full core testbench generated waveform:***
+
+<img width="1070" height="997" alt="image" src="https://github.com/user-attachments/assets/e6013d0c-6124-4ade-8bf3-ae05abc3959c" />
+
 
 
 ### Compiled C toolchain
