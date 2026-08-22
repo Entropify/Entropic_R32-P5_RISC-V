@@ -204,7 +204,8 @@ Each pipeline capability was built and verified as its own phase, each with a de
 
 ***Example of a Phase 5 loop-warmup testbench measuring real per-iteration cycle cost (predictor cold-miss vs. steady-state):***
 
-<img width="2241" height="280" alt="Phase 5 waveform" src="PLACEHOLDER_PHASE5_WAVEFORM" />
+<img width="2137" height="462" alt="image" src="https://github.com/user-attachments/assets/8c07be4b-ee90-46e5-9cdf-a42f88176e4d" />
+
 
 ### Compiled C toolchain
 
