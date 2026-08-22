@@ -432,7 +432,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ---
 
-**Lastly, a to-scale comparison across all three of my tapeout projects built so far, cus it's fun :)**
+### Lastly, a to-scale comparison across all three of my tapeout projects built so far, cus it's fun :)
 
 (scale estimated through comparing standard filler cell sizes & met4 wire widths in Photopea)
 
