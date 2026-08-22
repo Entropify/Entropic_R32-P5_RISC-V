@@ -75,7 +75,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 - **MEM (Memory Access):** Data Memory, Load Filter, Store Mask, plus a MEM-stage forwarding unit (`mem_forwarding_unit`) specifically for the `lw`-immediately-followed-by-`sw` case
 - **WB (Writeback):** A 2-way mux selects between memory-loaded data and an already-resolved "actual result" value (see [Major Debugging Findings](#Major-Debugging-Findings) for why this collapsed from a 4-way mux)
 
-**New pipeline registers:** `if_id_reg.v`, `id_ex_reg.v`, `ex_mem_reg.v`, `mem_wb_reg.v` — each supports `freeze`/`bubble`/`flush` control inputs feeding the stall and flush logic described below.
+**New pipeline registers:** `if_id_reg.v`, `id_ex_reg.v`, `ex_mem_reg.v`, `mem_wb_reg.v`, with appropriate ones supporting the `freeze`/`bubble`/`flush` control inputs intaking the stall and flush logic described below.
 
 ---
 
