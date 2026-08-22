@@ -306,14 +306,14 @@ The tradeoff, very ironically (`AREA 3` means most aggressively minimizing logic
 
 `AREA 3`'s much higher gate count (~30k vs. ~19-23k for every other strategy) repeatedly triggered `GRT-0118` global routing congestion failures at the density settings that worked fine for other strategies. Resolving this took hours of ASIC flow runs with different combinations of config parameters and physical tradeoffs rather than a single fix:
 
-- `PL_TARGET_DENSITY` loosened to `0.35` and `FP_CORE_UTIL` to `25` — deliberately sacrificing die efficiency (down to ~29% utilization) to give the router physical room
+- `PL_TARGET_DENSITY` loosened to `0.35` and `FP_CORE_UTIL` to `25`, deliberately sacrificing die efficiency (down to ~29% utilization) to give the router physical room
 - `SYNTH_MAX_FANOUT`/`MAX_FANOUT_CONSTRAINT` widened to `16` (up from a much tighter, over-aggressive `4` tried earlier) to avoid an explosive buffer-tree cell-count increase
 - `PL_ROUTABILITY_DRIVEN` enabled, OpenROAD's placer-level congestion-aware cell inflation, targeting local hotspots directly rather than uniform density changes
 - `GRT_ADJUSTMENT` set to `0.3`, reserving explicit extra margin on routing tracks at the global-routing stage itself
 
 ### Critical path optimization
 
-Post-route STA identified the critical path originating from `ex_mem_reg`'s `mem_to_reg_out`, propagating through a 4-way value-resolution mux that was being redundantly re-computed at three separate pipeline stages (see [Major Debugging Findings](#Major-Debugging-Findings)). Resolving the value once in EX and carrying the resolved result forward — rather than re-deriving it at MEM and again at WB — collapsed two of the three redundant 4-way muxes down to 2-way, directly shortening this path.
+Post-route STA identified the critical path originating from `ex_mem_reg`'s `mem_to_reg_out`, propagating through a 4-way value-resolution mux that was being redundantly re-computed at three separate pipeline stages (see [Major Debugging Findings](#Major-Debugging-Findings)). Resolving the value once in EX and carrying the resolved result forward rather than re-deriving it at MEM and again at WB collapsed two of the three redundant 4-way muxes down to 2-way, directly shortening this path and making it no longer the critical path.
 
 A second, distinct critical path was subsequently identified through `mem_wb_rd_addr`'s address-comparison fanout (feeding both `forwarding_unit`'s and `reg_file`'s independent equality checks). This could be a candidate for future optimization rather than resolved in this pass, since it's structurally necessary comparison logic rather than a redundant computation.
 
