@@ -271,7 +271,7 @@ All nine available `SYNTH_STRATEGY` options were compared directly using OpenLan
 | DELAY 3 | 20,502 | 299,627.4 | -14.63 | -1,240.08 |
 | DELAY 4 | 22,932 | 307,743.9 | -15.23 | -1,363.58 |
 
-`AREA 3` was the only strategy meeting timing at all — despite the name, it uses aggressive algebraic logic-collapsing that empirically outperformed every `DELAY`-oriented strategy for this specific, control-logic-heavy design. The tradeoff: substantially higher gate count, which directly caused the routing congestion issues below.
+`AREA 3` was the only strategy meeting timing at all. Despite the name, it apparently uses aggressive algebraic logic-collapsing that empirically outperformed every `DELAY`-oriented strategy for this specific, control-logic-heavy design. The tradeoff, ironically, is a substantially higher gate count, which directly caused the routing congestion issues described 2 sections below.
 
 ### Results
 
@@ -296,9 +296,9 @@ All nine available `SYNTH_STRATEGY` options were compared directly using OpenLan
 `AREA 3`'s much higher gate count (~30k vs. ~19-23k for every other strategy) repeatedly triggered `GRT-0118` global routing congestion failures at the density settings that worked fine for other strategies. Resolving this took real, held tradeoffs rather than a single fix:
 
 - `PL_TARGET_DENSITY` loosened to `0.35` and `FP_CORE_UTIL` to `25` — deliberately sacrificing die efficiency (down to ~29% utilization) to give the router physical room
-- `SYNTH_MAX_FANOUT`/`MAX_FANOUT_CONSTRAINT` widened to `16` (up from a much tighter, over-aggressive `4` tried earlier) to avoid an explosive buffer-tree cell-count spiral
-- `PL_ROUTABILITY_DRIVEN` enabled — OpenROAD's placer-level congestion-aware cell inflation, targeting local hotspots directly rather than uniform density changes
-- `GRT_ADJUSTMENT` set to `0.3` — reserving explicit extra margin on routing tracks at the global-routing stage itself
+- `SYNTH_MAX_FANOUT`/`MAX_FANOUT_CONSTRAINT` widened to `16` (up from a much tighter, over-aggressive `4` tried earlier) to avoid an explosive buffer-tree cell-count increase
+- `PL_ROUTABILITY_DRIVEN` enabled, OpenROAD's placer-level congestion-aware cell inflation, targeting local hotspots directly rather than uniform density changes
+- `GRT_ADJUSTMENT` set to `0.3`, reserving explicit extra margin on routing tracks at the global-routing stage itself
 
 ### Critical path optimization
 
@@ -358,8 +358,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 ### Known limitations
 
 - Max slew / max cap violations remain in the `ss` (slow-slow) process corner, similar in category to the single-cycle core's residual signal-integrity findings — not blocking DRC/LVS/timing signoff, but a real consideration for an actual fabricated chip.
-- Antenna violations required `DIODE_INSERTION_STRATEGY: 3`, carried over unchanged from the single-cycle design.
-- Core utilization (~29%) is meaningfully lower than the single-cycle design's 47.3%, a direct, deliberate cost of choosing `AREA 3` for its timing win — revisiting this would mean either accepting a larger die or finding a synthesis-strategy/RTL combination that gets `AREA 3`-level timing without `AREA 3`-level gate count.
+- Core utilization (~30%) is lower than the single-cycle design's 47.3%, which is the cost of choosing `AREA 3` for its timing win. Revisiting this would mean either accepting a larger die or finding a synthesis-strategy/RTL combination that gets `AREA 3`-level timing without `AREA 3`-level gate count. Or alternatively, more ASIC flow iterations for more fine tuned and optimized OpenLane2 configuration flags.
 
 ---
 
