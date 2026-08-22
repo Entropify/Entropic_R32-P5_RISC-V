@@ -162,22 +162,22 @@ The MEM/WB-stage case (producer's writeback and consumer's read landing on the s
 A from-scratch **2-bit saturating-counter predictor backed by a 64-entry, direct-mapped Branch Target Buffer (BTB)**.
 
 **Table structure**, indexed by `fetch_pc[7:2]` (6-bit index, 2 ^ 6 = 64 entries), tagged by `fetch_pc[31:8]` (24-bit tag, because 32 (address) - 6 (index) - 2 (bottom 2 bits omitted since instructions are byte-aligned) = 24), to detect and correctly handle index aliasing between unrelated branch addresses:
-- `valid` — has this slot ever been written
-- `tag` — confirms the entry actually belongs to this address, not an aliased collision
-- `target` — the last known branch/jump target for this address
-- `counter` — 2-bit saturating bias counter; top bit determines the taken/not-taken prediction
+- `valid`, has this slot ever been written
+- `tag`, confirms the entry actually belongs to this address, not an aliased collision
+- `target`, the last known branch/jump target for this address
+- `counter`, 2-bit saturating bias counter; top bit determines the taken/not-taken prediction
 
 **Update policy:** on a genuine tag match, the counter increments/decrements toward the observed outcome (saturating at `00`/`11`); on a fresh occupant (miss or aliased eviction), the counter resets to a weak bias matching that first real observation, rather than inheriting a previous occupant's unrelated history.
 
 **Misprediction detection & flush:** `mispredicted` compares the prediction carried through `if_id_reg` (`if_id_predicted_taken`/`target`) against the freshly-resolved ground truth in ID (`real_taken`/`real_target`). This covers both direction mispredicts and target mispredicts, and the compound case of directions agreeing but the *target* being wrong. `pc_next` is gated on `mispredicted` (not on `take_branch` directly) specifically to avoid a bug I found while writing RTL: redundantly re-targeting an already-correctly-predicted branch's own address a second time after it resolves (see [Major Debugging Findings](#Major-Debugging-Findings)).
 
-**Measured accuracy:** see [Performance Benchmarks](#Performance-Benchmarks) — ranges from ~60% on a deliberately worst-case alternating branch up to ~99.97% on predictable loops.
+**Measured accuracy:** see [Performance Benchmarks](#Performance-Benchmarks). This ranges from ~60% on a deliberately worst-case alternating branch up to ~99.97% on predictable loops.
 
 ---
 
 ## Real Halt Implementation
 
-The single-cycle core's `halt` was purely an informational signal at WB — the core kept fetching and executing forever afterward, and every test program relied on a hand-written `beq x0,x0,halt` self-loop to stay stable.
+The single-cycle core's `halt` was purely an informational signal at WB. The core kept fetching and executing forever afterward, and every test program relied on a hand-written `beq x0,x0,halt` self-loop to stay stable.
 
 R32-P5 implements **real halt**: `ecall`/`ebreak` decoded in ID immediately and permanently freezes fetch (`halted`, sticky, latches on `halt_d`), while a second sticky latch (`fully_halted`, on `mem_wb_halt`) only asserts once the halt instruction actually retires through the full pipeline — guaranteeing every instruction scheduled *before* the halt has genuinely completed before the top-level `halt` output (driven by `fully_halted`) is trusted externally. `crt0.s` and every testbench now use `ecall` + 2 NOPs as the real, hardware-enforced end-of-program convention.
 
