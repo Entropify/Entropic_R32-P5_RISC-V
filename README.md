@@ -432,6 +432,6 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 Apache-2.0, see [LICENSE](LICENSE)
 
-Copyright (c) 2026 Zhiyuan (Jerry) Jiang: design, verification and documentation
+Copyright (c) 2026 Zhiyuan (Jerry) Jiang: frontend & backend VLSI, verification and documentation
 
 All credit for architectural and ISA specification goes to RISC-V International
