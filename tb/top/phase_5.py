@@ -231,11 +231,12 @@ async def phase_5(dut):
 
     deltas.append(exit_cost)
 
-    #dut._log.info(f"visit_cycles: {visit_cycles}")
-    #dut._log.info(f"exit_marker_cycle: {exit_marker_cycle}")
+    dut._log.info(f"visit_cycles: {visit_cycles}")
+    dut._log.info(f"exit_marker_cycle: {exit_marker_cycle}")
+    dut._log.info(f"target_cycles: {target_cycles}")
 
     dut._log.info(f"Loop branch visited \033[34m{len(visit_cycles)}\033[0m times")
-    #dut._log.info(f"Cycle deltas between visits: {deltas}")
+    dut._log.info(f"Cycle deltas between visits: {deltas}")
 
     success_rate = 100*(deltas.count(1) / len(deltas))
 
@@ -245,7 +246,7 @@ async def phase_5(dut):
     dut._log.info(f'visit cycles {len(visit_cycles)}')
     dut._log.info(f'target cycles {len(target_cycles)}')
     dut._log.info(f'deltas {len(deltas)}')
-    dut._log.info(f"target_cycles: {target_cycles}")
+    
     '''
 
     
