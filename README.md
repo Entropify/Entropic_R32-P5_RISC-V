@@ -43,6 +43,7 @@
 - [Repository Structure](#Repository-Structure)
 - [Future Plans](#Future-Plans)
 - [License](#License)
+- [Resources Used](#Resources-Used)
 
 ---
 
@@ -448,3 +449,16 @@ Apache-2.0, see [LICENSE](LICENSE)
 Copyright (c) 2026 Zhiyuan (Jerry) Jiang: frontend & backend VLSI, verification and documentation
 
 All credit for architectural and ISA specification goes to RISC-V International
+
+--
+
+## Resources Used
+
+Computer Organization and Design RISC-V Edition: The Hardware Software Interface - by David A Patterson and John L. Hennessy
+Digital Design and Computer Architecture, RISC-V Edition - by David Harris and Sarah Harris
+Automated Parameter Tuning for Timing Closure in OpenROAD/OpenLane: A Comprehensive Multi-Design Grid Search Framework on the SkyWater 130 nm PDK - by Atair Rahman Alvi
+[RISC-V Instruction Encoder / Decoder](https://luplab.gitlab.io/rvcodecjs/) - by LupLab @ University of California, Davis
+[WebRISC-V](https://webriscv.altervista.org/) - by Gianfranco Mariotti
+[Interactive RISC-V Simulator](https://riscv-simulator-five.vercel.app/) - by Haoziwan
+[1.1 RV32I Base Integer Instruction Set, Version 2.1](https://docs.riscv.org/reference/isa/v20260120/unpriv/rv32.html) - by RISC-V International
+
