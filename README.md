@@ -301,7 +301,7 @@ The tradeoff, very ironically, is a substantially higher gate count, which direc
 
 ### Routing congestion tradeoff
 
-`AREA 3`'s much higher gate count (~30k vs. ~19-23k for every other strategy) repeatedly triggered `GRT-0118` global routing congestion failures at the density settings that worked fine for other strategies. Resolving this took real, held tradeoffs rather than a single fix:
+`AREA 3`'s much higher gate count (~30k vs. ~19-23k for every other strategy) repeatedly triggered `GRT-0118` global routing congestion failures at the density settings that worked fine for other strategies. Resolving this took hours of ASIC flow runs with different combinations of config parameters and physical tradeoffs rather than a single fix:
 
 - `PL_TARGET_DENSITY` loosened to `0.35` and `FP_CORE_UTIL` to `25` — deliberately sacrificing die efficiency (down to ~29% utilization) to give the router physical room
 - `SYNTH_MAX_FANOUT`/`MAX_FANOUT_CONSTRAINT` widened to `16` (up from a much tighter, over-aggressive `4` tried earlier) to avoid an explosive buffer-tree cell-count increase
