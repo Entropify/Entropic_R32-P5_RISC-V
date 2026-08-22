@@ -150,7 +150,7 @@ Carried over, unmodified from R32-SC: `alu.v` · `alu_control.v` · `branch_comp
 
 The MEM/WB-stage case (producer's writeback and consumer's read landing on the same cycle) is handled for free by `reg_file`'s own same-cycle write-first/read-second internal bypass mux.
 
-**Data hazards (load-use):** `hazard_unit` detects a load in EX (or, for branch consumers specifically, a load that's in EX or MEM) needing its result before it's ready, and stalls the pipeline by freezing `pc`/`if_id_reg` while inserting a bubble into `id_ex_reg` — buying exactly enough cycles for forwarding to pick up the value once it's genuinely available.
+**Data hazards (load-use):** `hazard_unit` detects a load in EX (or, for branch consumers specifically, a load that's in EX or MEM) needing its result before it's ready, and stalls the pipeline by freezing `pc`/`if_id_reg` while inserting a bubble into `id_ex_reg`. This buying exactly enough cycles for forwarding to pick up the value once it's actually available.
 
 **Control hazards:** resolved via `flush`, gated on `!stall` (to avoid acting on a misprediction computed from not-yet-valid, mid-stall forwarded data) and on `mispredicted` (see below in [Branch Prediction](#Branch-Prediction)) rather than firing on every taken branch, meaning a correctly-predicted branch causes **zero** flush.
 
