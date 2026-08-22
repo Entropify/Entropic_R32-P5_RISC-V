@@ -450,7 +450,7 @@ Copyright (c) 2026 Zhiyuan (Jerry) Jiang: frontend & backend VLSI, verification 
 
 All credit for architectural and ISA specification goes to RISC-V International
 
---
+---
 
 ## Resources Used
 
