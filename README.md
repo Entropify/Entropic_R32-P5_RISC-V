@@ -84,7 +84,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 <img width="2559" height="1439" alt="Screenshot 2026-08-22 040723" src="https://github.com/user-attachments/assets/29c498a3-99ae-48d8-b702-417a8abe04fa" />
 
 
-*Visibly, the logic cells are not using the full area of the core. I described the reason for this in a later section, [ASIC Implementation](#ASIC-Implementation) and the Known Limitation section under that.
+*Visibly, the logic cells are not using the full area of the core. I described the reason for this in a later section, [ASIC Implementation](#ASIC-Implementation), the **Known Limitation** section under that, and [Routing congestion tradeoff](###Routing-congestion-tradeoff).
 
 ---
 
