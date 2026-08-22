@@ -233,9 +233,11 @@ Five C programs, compiled at both `-O0` (unoptimized) and `-O2` (production-repr
 | **Average** | | **1.275** | **76.15%** | **1.041** | **92.45%** |
 
 **Notable findings from this benchmarking pass:**
-- `-O0` numbers are closer to a *hazard-logic stress test* than realistic performance — GCC keeps every loop variable on the stack, maximizing load-use stalls; `-O2` numbers are closer to representative real-world performance.
-- `loop2`'s accuracy jump (60% → 99.97%) under `-O2` isn't the predictor "getting better" — disassembly confirmed GCC's loop unrolling restructured the alternating branch into a different, much more predictable control-flow shape entirely. A genuine, useful lesson in why optimization level changes *what's actually being measured*, not just how fast it runs.
-- A naive `int main(){ for(...) count++; return count; }` loop is fully eliminated by `-O2` (constant-folded to a direct return of the final value) unless the loop variable is marked `volatile` — the first version of `loop1` completed in 14 cycles for exactly this reason before the fix.
+- `-O0` numbers are closer to a *hazard-logic stress test* than realistic performance, GCC keeps every loop variable in RAM, maximizing load-use stalls due to unoptimized assembly code; `-O2` numbers are closer to representative real-world performance.
+- `loop2`'s accuracy jump (60% → 99.97%) under `-O2` is because of GCC's loop unrolling restructured the alternating branch into a different, much more predictable control-flow pattern for the CPU entirely after inspecting the compiled assembly code. This is something completely new to me and I was genuinely impressed by this level of compiler optimization when I found out.
+- A naive `int main(){ for(...) count++; return count; }` loop is fully eliminated by `-O2` (calculating final value directly during compile time instead of running the loop) unless the loop variable is marked `volatile`. The first version of `loop1` completed in 14 cycles for exactly this reason before the fix.
+
+Overall, these testing showed me my CPU's level of performance, but more importantly allowed me to learn more about compiler optimization, compiler toolchain, and C language itself.
 
 ---
 
