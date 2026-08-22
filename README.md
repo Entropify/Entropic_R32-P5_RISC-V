@@ -1,10 +1,10 @@
-<img width="1702" height="630" alt="Entropic R32-P5" src="PLACEHOLDER_GDS_HERO_IMAGE" />
 
-<img width="3125" height="3125" alt="chip comparison pic 5 stage" src="https://github.com/user-attachments/assets/af05ce36-f8b5-4492-94f7-f81fa5890f86" />
+<img width="1702" height="630" alt="Copy of Entropic R32-SC" src="https://github.com/user-attachments/assets/84096874-89ba-482a-8cc9-83a5b9304789" />
+
 
 
 <h1 align="center">Entropic R32-P5 (RV32I 5-Stage Pipelined CPU)</h1>
-<p align="center"><i>(image above is the real GDS render of the CPU on a SKY130 ASIC)</i></p>
+<p align="center"><i>(image above is the real GDS render of the CPU on a SKY130 ASIC, Intel pls don't sue me for logo I'm just a fanboy)</i></p>
 
 <div align="center">
 
