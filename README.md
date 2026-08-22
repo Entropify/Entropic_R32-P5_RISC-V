@@ -400,6 +400,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 - [ ] Official `riscv-arch-test` compliance suite via RISCOF, including a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros
 - [ ] Full-core differential testing against a reference ISA simulator (Spike and/or a self-written Python interpreter)
 - [ ] Resolve the `mem_wb_rd_addr` forwarding-comparator critical path identified in this pass
+- [ ] Optimize RTL to hopefully achieve 100 Mhz+ clock speed
 - [ ] Find a synthesis-strategy/RTL combination achieving `AREA 3`-level timing without its full gate-count/utilization cost
 - [ ] Dedicated BTB-aliasing stress test and local/global (tournament) branch prediction as a stretch goal
 - [ ] FPGA implementation on an AMD Xilinx Artix-7, eventually building toward a VGA-driven SoC
