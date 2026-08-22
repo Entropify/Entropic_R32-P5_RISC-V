@@ -457,7 +457,7 @@ Computer Organization and Design RISC-V Edition: The Hardware Software Interface
 
 Digital Design and Computer Architecture, RISC-V Edition - by David Harris and Sarah Harris
 
-Automated Parameter Tuning for Timing Closure in OpenROAD/OpenLane: A Comprehensive Multi-Design Grid Search Framework on the SkyWater 130 nm PDK - by Atair Rahman Alvi
+[Automated Parameter Tuning for Timing Closure in OpenROAD/OpenLane: A Comprehensive Multi-Design Grid Search Framework on the SkyWater 130 nm PDK](https://www.preprints.org/frontend/manuscript/bb3f29f28a8f6c2645e902cb192138d6/download_pub) - by Atair Rahman Alvi
 
 [RISC-V Instruction Encoder / Decoder](https://luplab.gitlab.io/rvcodecjs/) - by LupLab @ University of California, Davis
 
