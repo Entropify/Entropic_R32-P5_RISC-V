@@ -32,4 +32,4 @@ very big boy
 | XOR/XNOR | xnor2, xor2 | 66 |
 | Multiplexer | mux2 | 1,357 |
 | Buffer | buf, bufbuf, bufinv | 2,473 |
-| Total | | 27,953 |
+| **Total** | | **27,953** |
