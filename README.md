@@ -34,7 +34,7 @@
 - [Design](#Design)
 - [Pipeline Hazards & Forwarding](#Pipeline-Hazards--Forwarding)
 - [Branch Prediction](#Branch-Prediction)
-- [Real Halt Semantics](#Real-Halt-Semantics)
+- [Real Halt Implementation](#Real-Halt-Implementation)
 - [Verification](#Verification)
 - [Performance Benchmarks](#Performance-Benchmarks)
 - [Major Debugging Findings](#Major-Debugging-Findings)
@@ -86,7 +86,7 @@ The chip features:
 
 ## Instruction Set Coverage
 
-Full RV32I base instruction set: 40/40 instructions implemented — identical coverage to the single-cycle core, now correctly pipelined including forwarding/hazard handling for every instruction type.
+Full RV32I base instruction set: 40/40 instructions implemented, which is identical coverage to the single-cycle core, now correctly pipelined including forwarding/hazard handling for every instruction type.
 
 | Category | Instructions |
 |---|---|
@@ -99,7 +99,7 @@ Full RV32I base instruction set: 40/40 instructions implemented — identical co
 | Branches | `BEQ` `BNE` `BLT` `BGE` `BLTU` `BGEU` |
 | System | `FENCE` `ECALL` `EBREAK` |
 
-Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see [Real Halt Semantics](#Real-Halt-Semantics)), rather than only raising an informational signal.
+Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see [Real Halt Implementation](#Real-Halt-Implementation)), rather than only raising an informational signal.
 
 `FENCE` remains implemented as a `NOP`.
 
@@ -171,7 +171,7 @@ A from-scratch **2-bit saturating-counter predictor backed by a 64-entry, direct
 
 ---
 
-## Real Halt Semantics
+## Real Halt Implementation
 
 The single-cycle core's `halt` was purely an informational signal at WB — the core kept fetching and executing forever afterward, and every test program relied on a hand-written `beq x0,x0,halt` self-loop to stay stable.
 
