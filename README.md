@@ -280,7 +280,7 @@ All nine available `SYNTH_STRATEGY` options were compared directly using OpenLan
 
 `AREA 3` was the only strategy meeting timing at all. Despite the name, it apparently uses aggressive algebraic logic-collapsing that empirically outperformed every `DELAY` strategy for control-logic-heavy design  (like this pipelined CPU!).
 
-I came across this whilst researching OpenLane2 config optimization results, see [research paper](https://www.preprints.org/frontend/manuscript/bb3f29f28a8f6c2645e902cb192138d6/download_pub) I found.
+I came across this whilst researching OpenLane2 config optimization results, see the [research paper](https://www.preprints.org/frontend/manuscript/bb3f29f28a8f6c2645e902cb192138d6/download_pub) I found.
 
 The tradeoff, very ironically (`AREA 3` means most aggressively minimizing logic area in OpenLane2), is a substantially higher gate count, which directly caused the routing congestion issues described in **Routing congestion tradeoff** 2 sections below.
 
