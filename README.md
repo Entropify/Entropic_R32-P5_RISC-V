@@ -192,7 +192,9 @@ Reused directly from the single-cycle design for every unmodified leaf module. N
 
 ### Full-core, phase-by-phase (Python cocotb + Icarus + Makefile + self-checking RISC-V Assembly)
 
-Each pipeline capability was built and verified as its own phase, each with a dedicated self-checking assembly program and cocotb driver, following the same error-code-in-`x10` convention as the single-cycle core:
+Each pipeline capability was built and verified as its own phase, each with a dedicated self-checking assembly program and cocotb driver. Each phase was built on previous phases and thus everything before is regression tested every single phase. 
+
+Error reporting system following the same error code in `x10` convention as the single-cycle core, but now expanded.
 
 | Phase | Capability verified |
 |---|---|
@@ -201,6 +203,11 @@ Each pipeline capability was built and verified as its own phase, each with a de
 | Phase 3 | Load-use hazard detection and stalling, including back-to-back and branch-consumer cases |
 | Phase 4 | Control-hazard flushing, branch resolution moved to ID, zero-NOP taken/not-taken/`jal`/`jalr` correctness |
 | Phase 5 | Dynamic branch predictor: warm-up/steady-state accuracy, misprediction correcting ability |
+
+### Full error reporting table showing every case tested
+<img width="818" height="1119" alt="Screenshot 2026-08-22 194811" src="https://github.com/user-attachments/assets/461b0001-a4b4-4852-b1df-9067b18488de" />
+<img width="819" height="1017" alt="Screenshot 2026-08-22 194823" src="https://github.com/user-attachments/assets/26706763-6749-4aee-b2ac-38015fb28033" />
+
 
 ---
 
