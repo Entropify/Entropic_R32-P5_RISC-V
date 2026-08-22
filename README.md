@@ -19,7 +19,7 @@
 - extended with **full data forwarding**, **hazard detection/stalling**, **control-hazard flushing with branch resolution in ID**, and a **dynamic 2-bit saturating-counter branch predictor with a 64-entry BTB**
 - **fully verified** through **self-written testbenches** in **SystemVerilog** and **RISC-V Assembly**, co-driven by **cocotb**, plus **compiled C programs onto the CPU** for performance testing
 - **synthesized** to a **physical ASIC layout** through **OpenLane2** on the **SkyWater 130nm** open-source PDK, achieving **50 MHz**, a ~40% clock speed improvement over the single-cycle core
-- **throughput** comes out to be about **48.03 million** instructions per second for average real-world performance, and **39.37 million** instructions per second under worst-case scenarios (calculated with clock speed and results from [Performance Benchmarks](#Performance-Benchmarks))
+- **throughput** comes out to be about **48.03 million** instructions per second for average real-world performance, and **39.37 million** instructions per second under worst-case scenarios (calculated with clock speed from [Results](#Results) and results from [Performance Benchmarks](#Performance-Benchmarks))
 
 `R32-P5` = **R**V**32**I, **P**ipelined, **5** stages.
 
