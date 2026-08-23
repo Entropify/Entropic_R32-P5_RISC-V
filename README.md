@@ -101,7 +101,6 @@ A few notable pipeline-specific design decisions worth calling out (in addition 
 
 - **Two-stage halt latch:** `halted` (from `halt_d`, fires the instant `ecall`/`ebreak` is decoded in ID, freezing fetch immediately) and `fully_halted` (from `mem_wb_halt`, fires once the halt instruction actually travels through the entire pipeline and thus allowing any unfinished instructions to properly wrap up, this is what the top-level `halt` output reflects, giving external logic/testbenches a stable, permanent signal to check).
 
-- **Separated async-reset and synchronous conditions** in every pipeline register's clocked `always` block (`if (!rst_n) ... else if (bubble) ... else if (flush) ...` rather than `if (!rst_n || bubble || flush)`), required for clean synthesis (see [Major Debugging Findings](#Major-Debugging-Findings)).
 
 ### Module list (`rtl/`)
 
