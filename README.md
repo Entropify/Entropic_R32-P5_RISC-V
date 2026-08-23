@@ -1,6 +1,7 @@
 
 
-<img width="1702" height="630" alt="Copy of Entropic R32-SC" src="https://github.com/user-attachments/assets/beb0ebe2-dcb2-40e5-890a-0198b5526c7e" />
+<img width="1702" height="630" alt="Copy of Entropic R32-SC" src="https://github.com/user-attachments/assets/908d10a9-2141-4303-b3ea-ecb1416155d1" />
+
 
 
 <h1 align="center">Entropic R32-P5 (RV32I 5-Stage Pipelined CPU)</h1>
