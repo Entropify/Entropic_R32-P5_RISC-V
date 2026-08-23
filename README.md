@@ -73,7 +73,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 
 **Pipeline stages:**
 - **IF (Fetch):** Program Counter → Instruction Memory, with the branch predictor's read port consulted the same cycle to speculatively redirect fetch for previously-seen branches/jumps
-- **ID (Decode):** Control Unit + Immediate Generator + Register File read, **plus branch/jump resolution** (`branch_comp`, branch-target adder, and a dedicated `jalr` target adder) — moved here from EX to cut the misprediction penalty from 2 cycles to 1
+- **ID (Decode):** Control Unit + Immediate Generator + Register File read, **plus branch/jump resolution** (`branch_comp`, branch-target adder, and a dedicated `jalr` target adder), moved here from EX to cut the misprediction penalty from 2 cycles to 1
 - **EX (Execute):** ALU, fed by a dedicated EX-stage forwarding unit (`forwarding_unit`) resolving RAW hazards from EX/MEM and MEM/WB
 - **MEM (Memory Access):** Data Memory, Load Filter, Store Mask, plus a MEM-stage forwarding unit (`mem_forwarding_unit`) specifically for the `lw`-immediately-followed-by-`sw` case
 - **WB (Writeback):** A 2-way mux selects between memory-loaded data and an already-resolved "actual result" value (see [Major Debugging Findings](#Major-Debugging-Findings) for why this collapsed from a 4-way mux)
@@ -248,7 +248,7 @@ Overall, these testing showed me my CPU's level of performance, but more importa
 
 A few of the more substantial bugs I found and fixed during this project, worth documenting for hitting similar issues in the future:
 
-- **Forwarding Unit assumed `alu_result` was always the final answer that should be forwarded.** For `jal`/`jalr`/`lui`, the real writeback value is `pc_plus_4` or the raw immediate, not the ALU's output (which is meaningless for these instruction types, since their encodings reuse the `rs1`/`rs2` bit positions for other purposes). A `jal` immediately followed by `jalr` using its link register forwarded this garbage value, sending the CPU's PC to `0x0`. Fixed by building `ex_actual_result`/`ex_mem_actual_result` — `mem_to_reg`-aware resolution wires and forwarding *those* instead of raw `alu_result` everywhere.
+- **Forwarding Unit assumed `alu_result` was always the final answer that should be forwarded.** For `jal`/`jalr`/`lui`, the real writeback value is `pc_plus_4` or the raw immediate, not the ALU's output (which is meaningless for these instruction types, since their encodings reuse the `rs1`/`rs2` bit positions for other purposes). A `jal` immediately followed by `jalr` using its link register forwarded this garbage value, sending the CPU's PC to `0x0`. Fixed by building `ex_actual_result`/`ex_mem_actual_result` which are `mem_to_reg`-aware resolution wires and forwarding *those* instead of raw `alu_result` everywhere.
 
 - **A redundant PC re-target on correctly-predicted branches.** Before `pc_next` was gated on `mispredicted`, a correctly-predicted taken branch's own resolution in ID would still unconditionally re-select its branch target a second time, causing the very next instruction fetched by the predictor's correct speculation to be *re-fetched* a second time, causing potential data corruption and is not just a performance loss, caught by hand-tracing cycle-by-cycle PC values on paper before it ever showed up as a wrong testbench result.
 
