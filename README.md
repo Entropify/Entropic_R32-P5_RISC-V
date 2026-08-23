@@ -158,7 +158,7 @@ A from-scratch **2-bit saturating-counter predictor backed by a 64-entry, direct
 
 The single-cycle core's `halt` was purely an informational signal at WB. The core kept fetching and executing forever afterward, and every test program relied on a hand-written `beq x0,x0,halt` self-loop to stay stable.
 
-R32-P5 implements **real halt**: `ecall`/`ebreak` decoded in ID immediately and permanently freezes fetch (`halted`, sticky, latches on `halt_d`), while a second latch (`fully_halted`, on `mem_wb_halt`) only asserts once the halt instruction actually retires through the full pipeline. This guarantees every instruction scheduled before the halt has genuinely completed before the top-level `halt` output (driven by `fully_halted`) is trusted externally. `crt0.s` and every testbench now use `ecall` + 2 NOPs as the real, hardware-enforced end-of-program convention.
+R32-P5 implements **real halt**: `ecall`/`ebreak` decoded in ID immediately and permanently freezes fetch (`halted`, sticky, latches on `halt_d`), while a second latch (`fully_halted`, on `mem_wb_halt`) only asserts once the halt instruction actually retires through the full pipeline. This guarantees every instruction scheduled before the halt has genuinely completed before the top-level `halt` output (driven by `fully_halted`) is trusted externally. `crt0.s` and every testbench now use `ecall` / `ebreak` as the real, hardware-enforced end-of-program convention.
 
 ---
 
