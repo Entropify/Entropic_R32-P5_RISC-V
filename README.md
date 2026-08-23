@@ -266,7 +266,7 @@ Overall, these testing showed me my CPU's level of performance, but more importa
 
 ## Major Debugging Findings
 
-A few of the more substantial bugs found and fixed during this project, worth documenting for hitting similar issues in the future:
+A few of the more substantial bugs I found and fixed during this project, worth documenting for hitting similar issues in the future:
 
 - **Forwarding Unit assumed `alu_result` was always the final answer that should be forwarded.** For `jal`/`jalr`/`lui`, the real writeback value is `pc_plus_4` or the raw immediate, not the ALU's output (which is meaningless for these instruction types, since their encodings reuse the `rs1`/`rs2` bit positions for other purposes). A `jal` immediately followed by `jalr` using its link register forwarded this garbage value, sending the CPU's PC to `0x0`. Fixed by building `ex_actual_result`/`ex_mem_actual_result` — `mem_to_reg`-aware resolution wires — and forwarding *those* instead of raw `alu_result` everywhere.
 
