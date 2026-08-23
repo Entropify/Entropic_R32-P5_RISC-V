@@ -30,7 +30,6 @@
 - [Overview](#Overview)
 - [Architecture](#Architecture)
 - [GDS Render](#GDS-Render)
-- [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Design](#Design)
 - [Pipeline Hazards & Forwarding](#Pipeline-Hazards--Forwarding)
 - [Branch Prediction](#Branch-Prediction)
@@ -40,6 +39,7 @@
 - [Major Debugging Findings](#Major-Debugging-Findings)
 - [ASIC Implementation](#ASIC-Implementation)
 - [Repository Structure](#Repository-Structure)
+- [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
 - [License](#License)
 - [Resources Used](#Resources-Used)
@@ -86,27 +86,6 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 
 
 *Visibly, the logic cells are not using the full area of the core. I described the reason behind this in later sections: [ASIC Implementation](#ASIC-Implementation), the **Known Limitation** section under that, and [Routing congestion tradeoff](#Routing-congestion-tradeoff).
-
----
-
-## Instruction Set Coverage
-
-Like my single-cycle, full RV32I base instruction set. 40/40 instructions implemented but now correctly pipelined including forwarding/hazard handling for every instruction type.
-
-| Category | Instructions |
-|---|---|
-| Register-Immediate ALU | `ADDI` `SLTI` `SLTIU` `ANDI` `ORI` `XORI` `SLLI` `SRLI` `SRAI` |
-| Register-Register ALU | `ADD` `SUB` `SLL` `SLT` `SLTU` `SRL` `SRA` `XOR` `OR` `AND` |
-| Upper Immediate | `LUI` `AUIPC` |
-| Loads | `LB` `LH` `LW` `LBU` `LHU` |
-| Stores | `SB` `SH` `SW` |
-| Jumps | `JAL` `JALR` |
-| Branches | `BEQ` `BNE` `BLT` `BGE` `BLTU` `BGEU` |
-| System | `FENCE` `ECALL` `EBREAK` |
-
-Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see [Real Halt Implementation](#Real-Halt-Implementation)), rather than only raising an informational signal.
-
-`FENCE` remains implemented as a `NOP`.
 
 ---
 
@@ -428,6 +407,28 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 ```
 
 ---
+
+## Instruction Set Coverage
+
+Like my single-cycle, full RV32I base instruction set. 40/40 instructions implemented but now correctly pipelined including forwarding/hazard handling for every instruction type.
+
+| Category | Instructions |
+|---|---|
+| Register-Immediate ALU | `ADDI` `SLTI` `SLTIU` `ANDI` `ORI` `XORI` `SLLI` `SRLI` `SRAI` |
+| Register-Register ALU | `ADD` `SUB` `SLL` `SLT` `SLTU` `SRL` `SRA` `XOR` `OR` `AND` |
+| Upper Immediate | `LUI` `AUIPC` |
+| Loads | `LB` `LH` `LW` `LBU` `LHU` |
+| Stores | `SB` `SH` `SW` |
+| Jumps | `JAL` `JALR` |
+| Branches | `BEQ` `BNE` `BLT` `BGE` `BLTU` `BGEU` |
+| System | `FENCE` `ECALL` `EBREAK` |
+
+Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see [Real Halt Implementation](#Real-Halt-Implementation)), rather than only raising an informational signal.
+
+`FENCE` remains implemented as a `NOP`.
+
+---
+
 
 ## Future Plans
 
