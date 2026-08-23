@@ -214,7 +214,7 @@ First working program: a trivial `int main() { return 1 + 2; }`, verified using 
 
 ### Known limitations
 
-- Full-core differential testing against a reference ISA simulator (Spike and/or a self-written Python interpreter) is planned but not yet implemented.
+- Full-core differential testing against a reference ISA simulator (Spike or a self-written Python interpreter) is planned but not yet implemented.
 - The official [`riscv-arch-test`](https://github.com/riscv-non-isa/riscv-arch-test) compliance suite was scoped but not integrated. RISCOF requires a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros that weren't built out in this pass; individual official test files are a planned lighter-weight alternative.
 - A dedicated BTB-aliasing stress test (two colliding addresses, confirming tag-mismatch correctly falls back to a cold miss) was reasoned through and proven correct by construction (index+tag together reconstruct the full address) but not exercised with a purpose-built assembly test.
 
@@ -260,7 +260,7 @@ A few of the more substantial bugs I found and fixed during this project, worth 
 
 ## ASIC Implementation
 
-Synthesized end-to-end (RTL → GDSII) using **OpenLane2** against the **SKY130** open-source PDK, run locally via WSL2 + Docker, same approach as the single-cycle core.
+Synthesized end-to-end (RTL → GDSII) using **OpenLane2** against the **SKY130** open-source PDK, run locally via WSL + Docker, same approach as the single-cycle core.
 
 ### Synthesis strategy selection
 
@@ -432,7 +432,7 @@ Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent h
 ## Future Plans
 
 - [ ] Official `riscv-arch-test` compliance suite via RISCOF, including a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros
-- [ ] Full-core differential testing against a reference ISA simulator (Spike and/or a self-written Python interpreter)
+- [ ] Full-core differential testing against a reference ISA simulator (Spike)
 - [ ] Resolve the `mem_wb_rd_addr` forwarding-comparator critical path identified in this pass
 - [ ] Optimize RTL to hopefully achieve 100 Mhz+ clock speed
 - [ ] Find a synthesis-strategy/RTL combination achieving `AREA 3`-level timing without its full gate-count/utilization cost
