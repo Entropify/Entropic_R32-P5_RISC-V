@@ -210,7 +210,7 @@ Error reporting system following the same error code in `x10` convention as the 
 
 ### Compiled C toolchain
 
-Toolchain: RISC-V GCC (`-march=rv32i -mabi=ilp32 -nostdlib -nostartfiles`) compiles C source, a hand-written `crt0.s` initializes the stack pointer and calls `main()`, a custom linker script (`link.ld`) places `.text`/`.data` into the CPU's two separate physical memory spaces, and `objcopy -O verilog` produces the final `$readmemh`-format hex — the same format hand-written assembly tests have used since Phase 1.
+Toolchain: RISC-V GCC (`-march=rv32i -mabi=ilp32 -nostdlib -nostartfiles`) compiles C source, a hand-written `crt0.s` initializes the stack pointer and calls `main()`, a custom linker script (`link.ld`) places `.text`/`.data` into the CPU's two separate physical memory spaces, and `objcopy -O verilog` produces the final `$readmemh`-format hex. This is the exact same .hex hand-written assembly tests have used since Phase 1, overwritten with new programs.
 
 First working program: a trivial `int main() { return 1 + 2; }`, verified using cocotb (`x10 == 3`) before moving to the loop-heavy benchmarks below.
 
