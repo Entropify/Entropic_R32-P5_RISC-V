@@ -93,7 +93,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 
 ## Design
 
-A few notable pipeline-specific design decisions worth calling out (in addition to everything carried over from the single-cycle core):
+A few notable pipeline-specific design decisions (in addition to everything carried over from the single-cycle core):
 
 - **Branch/jump resolution moved to ID**, cutting the control-hazard penalty from 2 cycles (EX-stage resolution) to 1 cycle. This required its own forwarding path (`id_forwarding_unit`) since ID-stage resolution introduced a brand-new hazard case: a producer still live in EX (not yet even reached `ex_mem_reg`) feeding a consumer one stage earlier than any EX-stage consumer ever could. This also requires the hazard unit to account for this change, as stated in the next point.
 
