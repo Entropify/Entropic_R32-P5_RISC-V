@@ -216,8 +216,8 @@ First working program: a trivial `int main() { return 1 + 2; }`, verified using 
 
 ### Known limitations
 
-- Full-core differential testing against a reference ISA simulator (Spike or a self-written Python interpreter) is planned but not yet implemented.
-- The official [`riscv-arch-test`](https://github.com/riscv-non-isa/riscv-arch-test) compliance suite was scoped but not integrated. RISCOF requires a signature-dump testbench mechanism and target-specific `RVMODEL_*` macros that weren't built out in this pass; individual official test files are a planned lighter-weight alternative.
+- Full-core differential testing against a reference ISA simulator (like Spike) is planned but not yet implemented.
+- The official [`riscv-arch-test`](https://github.com/riscv-non-isa/riscv-arch-test) compliance suite is not yet integrated. RISCOF requires a signature-dump testbench mechanism and target-specific macros that weren't built out in this CPU yet; individual official test files are a planned lighter-weight alternative.
 - A dedicated BTB-aliasing stress test (two colliding addresses, confirming tag-mismatch correctly falls back to a cold miss) was reasoned through and proven correct by construction (index+tag together reconstruct the full address) but not exercised with a purpose-built assembly test.
 
 ---
