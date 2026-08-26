@@ -50,7 +50,7 @@
 
 ## Overview
 
-Entropic R32-P5 takes the fully-verified single-cycle Entropic R32-SC and reworks it into a standard 5-stage pipeline (IF → ID → EX → MEM → WB), then builds out everything a real pipeline needs to stay both correct and fast: full operand forwarding, load-use hazard detection with stalling, control-hazard flushing, branch resolution moved into ID for a 1-cycle misprediction penalty, and a from-scratch dynamic branch predictor.
+Entropic R32-P5 takes the fully-verified single-cycle Entropic R32-SC and reworks it into a standard 5-stage pipeline (IF → ID → EX → MEM → WB). It also contains everything a real pipeline needs to stay correct and efficient: full operand forwarding, load-use hazard detection with stalling, control-hazard flushing, branch resolution moved into ID for a 1-cycle misprediction penalty, and a dynamic branch predictor with a 64 entries branch target buffer.
 
 Every submodule from the single-cycle core (`alu.v`, `alu_control.v`, `branch_comp.v`, `control_unit.v`, `imm_gen.v`, `load_filter.v`, `store_mask.v`) carries over unmodified. The pipeline is built entirely by adding pipeline registers, forwarding/hazard logic, and a predictor around the existing, already-verified datapath pieces.
 
