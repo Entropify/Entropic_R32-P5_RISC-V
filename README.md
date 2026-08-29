@@ -424,7 +424,7 @@ Like my single-cycle, full RV32I base instruction set. 40/40 instructions implem
 | Branches | `BEQ` `BNE` `BLT` `BGE` `BLTU` `BGEU` |
 | System | `FENCE` `ECALL` `EBREAK` |
 
-Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see [Real Halt Implementation](#Real-Halt-Implementation)), rather than only raising an informational signal.
+Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent halt** that stops instruction fetch entirely (see in an earlier section, [Real Halt Implementation](#Real-Halt-Implementation)), rather than only raising an informational signal.
 
 `FENCE` remains implemented as a `NOP`.
 
