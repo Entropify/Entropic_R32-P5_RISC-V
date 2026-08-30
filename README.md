@@ -44,7 +44,7 @@
 - [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
 - [License](#License)
-- [Resources & Tools Used](#Resources-&-Tools-Used)
+- [Resources & Tools Used](#Resources--Tools-Used)
 
 ---
 
