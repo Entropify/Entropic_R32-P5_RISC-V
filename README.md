@@ -44,7 +44,7 @@
 - [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
 - [License](#License)
-- [Resources Used](#Resources-Used)
+- [Resources & Tools Used](#Resources-&-Tools-Used)
 
 ---
 
@@ -463,7 +463,7 @@ All credit for architectural and ISA specification goes to RISC-V International
 
 ---
 
-## Resources Used
+## Resources & Tools Used
 
 Computer Organization and Design RISC-V Edition: The Hardware Software Interface - by David A Patterson and John L. Hennessy
 
@@ -477,5 +477,22 @@ Digital Design and Computer Architecture, RISC-V Edition - by David Harris and S
 
 [Interactive RISC-V Simulator](https://riscv-simulator-five.vercel.app/) - by Haoziwan
 
-[1.1 RV32I Base Integer Instruction Set, Version 2.1](https://docs.riscv.org/reference/isa/v20260120/unpriv/rv32.html) - by RISC-V International
+[1.1 RV32I Base Integer Instruction Set, Version 2.1 (Unprivileged)](https://docs.riscv.org/reference/isa/v20260120/unpriv/rv32.html) - by RISC-V International
 
+[Icarus Verilog](https://github.com/steveicarus/iverilog) - by Stephen Williams
+
+[GTKWave](https://gtkwave.sourceforge.net/)
+
+[cocotb](https://www.cocotb.org/)
+
+[Windows Subsystem for Linux (WSL)](https://github.com/microsoft/WSL)
+
+[Docker](https://www.docker.com/)
+
+[OpenLane2](https://github.com/chipfoundry/openlane2)
+
+[Tiny Tapeout GDS Viewer](https://gds-viewer.tinytapeout.com/) - by Tiny Tapeout ltd.
+
+[Skywater 130 nm PDK](https://github.com/google/skywater-pdk) - by Google & Skywater Technology
+
+[GCC](https://gcc.gnu.org/)
