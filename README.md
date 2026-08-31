@@ -15,6 +15,13 @@
 
 </div>
 
+---
+
+**TL;DR**
+
+Designed and taped out a 32-bit RV32I 5-stage pipelined CPU from scratch in Verilog. The processor implements all 40 RV32I base instructions, dynamic branch prediction using a 64-entry BTB with 2-bit saturating counters, three specialized forwarding paths, load-use hazard detection, branch flushing, and a real pipeline halt mechanism. Verified through staged SystemVerilog/RISC-V Assembly tests and compiled C programs using cocotb, then taken through RTL-to-GDSII using OpenLane2 and SKY130. Final implementation achieves 50 MHz with 0 DRC violations, passing LVS, and setup/hold timing closure at the 20 ns target.
+
+---
 
 **Entropic R32-P5** is a 5-stage pipelined **RISC-V** (RV32I) CPU, the successor to my single-cycle [Entropic R32-SC](https://github.com/Entropify/Entropic_R32-SC_RISC-V), that was:
 - **designed** and **built completely from scratch** in **Verilog**, converting the original single-cycle datapath into a 5-stage IF/ID/EX/MEM/WB pipeline
