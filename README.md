@@ -67,7 +67,7 @@ The chip features:
 
 Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) together with separate instruction (ROM) and data memory (RAM) modules, same top-level shape as the single-cycle design.
 
-### Microarchitecture diagram (zoom in if needed ik it's really small):
+### Microarchitecture diagram (zoom in if needed I know it's really small oof)
 
 *1. (diagram shows the entire of soc_top, with rv32i_core exposed to see its internal modules and logic, as well as data & instr mem)*
 
