@@ -73,7 +73,7 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 
 *2. (modules are represented with sharp cornered double line rectangles, complex combinational logic are represented with rounded cornered double line rectangles with the Verilog code directly inside as breaking them down into individual logic gates would make the already complex diagram more unreadable logically)*
 
-*3. (all modules added to create / optimize the pipeline are colored in blue, but combinational logic to make said modules work in rv32i_core are not colored)*
+*3. (all modules added to create / optimize the pipeline are colored in blue, but the wires / combinational logic to make said modules functional in rv32i_core are not colored)*
 
 
 <img width="11640" height="7500" alt="pipeline drawio" src="https://github.com/user-attachments/assets/8f911831-ee62-46fb-a8b0-9253110b2a24" />
