@@ -67,11 +67,11 @@ The chip features:
 
 Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) together with separate instruction (ROM) and data memory (RAM) modules, same top-level shape as the single-cycle design.
 
-**Microarchitecture diagram (zoom in if needed ik it's really small):**
+### Microarchitecture diagram (zoom in if needed ik it's really small):
 
-*(diagram shows the entire of soc_top, with rv32i_core exposed to see its internal modules and logic, as well as data & instr mem)*
+*1. (diagram shows the entire of soc_top, with rv32i_core exposed to see its internal modules and logic, as well as data & instr mem)*
 
-*(modules are represented with sharp cornered double line rectangles, complex combinational logic are represented with rounded cornered double line rectangles with the Verilog code directly inside as breaking them down into individual logic gates would make the already complex diagram more unreadable logically)*
+*2. (modules are represented with sharp cornered double line rectangles, complex combinational logic are represented with rounded cornered double line rectangles with the Verilog code directly inside as breaking them down into individual logic gates would make the already complex diagram more unreadable logically)*
 
 <img width="11640" height="7500" alt="pipeline drawio" src="https://github.com/user-attachments/assets/cd3e25d7-70b2-47b7-b846-8a260759fd4a" />
 
