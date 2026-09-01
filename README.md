@@ -19,7 +19,7 @@
 
 **TL;DR**
 
-Designed and taped out a 32-bit RV32I 5-stage pipelined CPU from scratch in Verilog. The processor implements all 40 RV32I base instructions, dynamic branch prediction using a 64-entry BTB with 2-bit saturating counters, three specialized forwarding paths, load-use hazard detection, branch flushing, and a real pipeline halt mechanism. Verified through staged SystemVerilog/RISC-V Assembly tests and compiled C programs using cocotb, then taken through RTL-to-GDSII using OpenLane2 and SKY130. Final implementation achieves 50 MHz with 0 DRC violations, passing LVS, and setup/hold timing closure at the 20 ns target.
+The processor implements all 40 RV32I base instructions, dynamic branch prediction using a 64-entry BTB with 2-bit saturating counters, three specialized forwarding paths, load-use hazard detection, branch flushing, and a real pipeline halt mechanism. Verified through staged SystemVerilog/RISC-V Assembly tests codriven with cocotb and  performance tested with compiled C programs, then taken through RTL-to-GDSII using OpenLane2 and SKY130. Final implementation achieves 50 MHz with 0 DRC violations, passing LVS, and setup/hold timing closure at the 20 ns target.
 
 ---
 
