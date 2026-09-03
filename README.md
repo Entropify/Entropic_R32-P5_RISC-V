@@ -66,6 +66,8 @@ Like my single cycle RV32I, `soc_top` wraps the pipelined core (`rv32i_core`) to
 
 *3. (all modules added to create / optimize the pipeline are colored in blue, but the wires / combinational logic to make said modules functional in rv32i_core are not colored)*
 
+*4. (all single bit wires are labeled with [0] / all vectors labeled with [width-1:0] for vectors used in their entirety; for sliced vectors it is labeled with the appropriate slicing syntax relative to the source, e.g. [15:7])*
+
 
 <img width="11640" height="7498" alt="pipeline drawio" src="https://github.com/user-attachments/assets/da7e49e8-0efc-4dfd-9b19-ddcb3b6df09d" />
 
