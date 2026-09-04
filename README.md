@@ -260,6 +260,8 @@ A few of the more substantial bugs I found and fixed during this project, worth 
 
 - **A one-cycle race between `halt_d` and the sticky `halted` latch.** Since `halted` only updates on a clock edge, the exact cycle `ecall` is first decoded still has `halted == 0`, briefly allowing one more wrong-path fetch through before the freeze engages. I resolved this by including `halt_d` itself (the immediate, same-cycle signal) directly in `if_id_reg`'s/`pc`'s freeze and flush conditions, not just the one-cycle-delayed `halted`.
 
+- - **A redundant `mem_to_reg` resolution, discovered via post-route STA.** The pipeline originally carried `alu_result`, `pc_plus_4`, and `imm_gen_out` as three separate raw values through `ex_mem_reg` and `mem_wb_reg`, re-deriving "which one is the real answer" via a 4-way `mem_to_reg` mux at every consumer that needed it: the EX/MEM forwarding candidate, the MEM-stage actual-result mux, and the final WB writeback mux each independently re-solved the identical question. Static timing analysis traced the design's critical path directly to this chain, starting at `ex_mem_reg`'s `mem_to_reg_out`. Fixed by resolving the value exactly once, in EX (`ex_actual_result`), and latching the *resolved* result into `ex_mem_reg` instead of the raw ALU output — collapsing both downstream muxes from 4-way down to 2-way, since only the genuinely-can't-resolve-early case (loads, whose data doesn't exist until MEM completes) still needs a real decision. Verified to produce identical final values for every instruction type before and after the change, and confirmed via a full ASIC re-run that the reported critical path shifted elsewhere entirely.
+
 ---
 
 ## ASIC Implementation
