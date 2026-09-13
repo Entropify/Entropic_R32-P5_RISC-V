@@ -16,7 +16,7 @@ module tb_basys3;
     wire [15:0] led;
 
     basys3_top #(
-        .INSTR_MEM_FILE("/mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex")
+        .INSTR_MEM_FILE("/mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex")
     ) dut (
         .clk(clk),
         .rst_btn(rst_btn),

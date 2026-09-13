@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc rfile:../../../../basys3.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc rfile:../../../../basys3.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:6 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5  [get_ports clk]
 set_property src_info {type:XDC file:1 line:15 export:INPUT save:INPUT read:READ} [current_design]
@@ -35,3 +35,5 @@ set_property src_info {type:XDC file:1 line:48 export:INPUT save:INPUT read:READ
 set_property PACKAGE_PIN P1  [get_ports {led[14]}]
 set_property src_info {type:XDC file:1 line:50 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN L1  [get_ports {led[15]}]
+set_property src_info {type:XDC file:1 line:55 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN A18 [get_ports uart_tx]

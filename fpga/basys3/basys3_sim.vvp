@@ -18,7 +18,7 @@ S_0x5d5f38cb5620 .scope module, "dut" "basys3_top" 2 15, 3 21 0, S_0x5d5f38cc55f
     .port_info 0 /INPUT 1 "clk";
     .port_info 1 /INPUT 1 "rst_btn";
     .port_info 2 /OUTPUT 16 "led";
-P_0x5d5f38c17c90 .param/str "INSTR_MEM_FILE" 0 3 22, "/mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex";
+P_0x5d5f38c17c90 .param/str "INSTR_MEM_FILE" 0 3 22, "/mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex";
 L_0x74dcbd091600 .functor BUFT 1, C4<0000000>, C4<0>, C4<0>, C4<0>;
 v0x5d5f38d338a0_0 .net/2u *"_ivl_2", 6 0, L_0x74dcbd091600;  1 drivers
 v0x5d5f38d339a0_0 .net *"_ivl_5", 7 0, L_0x5d5f38d49c80;  1 drivers
@@ -49,7 +49,7 @@ S_0x5d5f38cb7700 .scope module, "cpu_soc" "soc_top" 3 55, 5 8 0, S_0x5d5f38cb562
     .port_info 1 /INPUT 1 "rst_n";
     .port_info 2 /OUTPUT 1 "halt";
     .port_info 3 /OUTPUT 32 "x10_debug";
-P_0x5d5f38d17770 .param/str "INSTR_MEM_FILE" 0 5 9, "/mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex";
+P_0x5d5f38d17770 .param/str "INSTR_MEM_FILE" 0 5 9, "/mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex";
 v0x5d5f38d32de0_0 .net "clk", 0 0, L_0x5d5f38cdb5f0;  alias, 1 drivers
 v0x5d5f38d32e80_0 .net "data_address", 31 0, L_0x5d5f38d48b20;  1 drivers
 v0x5d5f38d32f90_0 .net "data_read", 31 0, L_0x5d5f38d49ac0;  1 drivers
@@ -851,7 +851,7 @@ S_0x5d5f38d32640 .scope module, "rom" "instruction_mem" 5 57, 27 9 0, S_0x5d5f38
  .timescale 0 0;
     .port_info 0 /INPUT 32 "address";
     .port_info 1 /OUTPUT 32 "instruction";
-P_0x5d5f38d32820 .param/str "INIT_FILE" 0 27 10, "/mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex";
+P_0x5d5f38d32820 .param/str "INIT_FILE" 0 27 10, "/mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex";
 L_0x5d5f38d497f0 .functor BUFZ 32, L_0x5d5f38d495d0, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
 v0x5d5f38d32900_0 .net *"_ivl_0", 31 0, L_0x5d5f38d495d0;  1 drivers
 v0x5d5f38d32a00_0 .net *"_ivl_3", 29 0, L_0x5d5f38d49670;  1 drivers
@@ -3158,26 +3158,26 @@ T_40 ;
     "tb_basys3.v";
     "basys3_top.v";
     "sim_bfm.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/soc_top.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/alu.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/alu_control.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/branch_comp.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/branch_predictor.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/control_unit.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/ex_mem_reg.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/forwarding_unit.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/halt_latch.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/hazard_unit.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/id_ex_reg.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/id_forwarding_unit.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/if_id_reg.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/imm_gen.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/load_filter.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/mem_forwarding_unit.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/mem_wb_reg.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/pc.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/reg_file.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/store_mask.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/data_mem.v";
-    "/mnt/x/Entropic_R32-P5_RISC-V/rtl/instruction_mem.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/soc_top.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/alu.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/alu_control.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/branch_comp.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/branch_predictor.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/control_unit.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/ex_mem_reg.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/forwarding_unit.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/halt_latch.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/hazard_unit.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/id_ex_reg.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/id_forwarding_unit.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/if_id_reg.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/imm_gen.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/load_filter.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/mem_forwarding_unit.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/mem_wb_reg.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/pc.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/reg_file.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/store_mask.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/data_mem.v";
+    "/mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/instruction_mem.v";

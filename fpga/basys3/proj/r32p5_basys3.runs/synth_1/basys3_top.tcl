@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.tcl"
+  variable script "X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.tcl"
   variable category "vivado_synth"
 }
 
@@ -63,39 +63,40 @@ create_project -in_memory -part xc7a35tcpg236-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.cache/wt [current_project]
-set_property parent.project_path X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.xpr [current_project]
+set_property webtalk.parent_dir X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.cache/wt [current_project]
+set_property parent.project_path X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo x:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.cache/ip [current_project]
+set_property ip_output_repo x:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  X:/Entropic_R32-P5_RISC-V/rtl/alu.v
-  X:/Entropic_R32-P5_RISC-V/rtl/alu_control.v
-  X:/Entropic_R32-P5_RISC-V/rtl/branch_comp.v
-  X:/Entropic_R32-P5_RISC-V/rtl/branch_predictor.v
-  X:/Entropic_R32-P5_RISC-V/rtl/control_unit.v
-  X:/Entropic_R32-P5_RISC-V/rtl/data_mem.v
-  X:/Entropic_R32-P5_RISC-V/rtl/ex_mem_reg.v
-  X:/Entropic_R32-P5_RISC-V/rtl/forwarding_unit.v
-  X:/Entropic_R32-P5_RISC-V/rtl/halt_latch.v
-  X:/Entropic_R32-P5_RISC-V/rtl/hazard_unit.v
-  X:/Entropic_R32-P5_RISC-V/rtl/id_ex_reg.v
-  X:/Entropic_R32-P5_RISC-V/rtl/id_forwarding_unit.v
-  X:/Entropic_R32-P5_RISC-V/rtl/if_id_reg.v
-  X:/Entropic_R32-P5_RISC-V/rtl/imm_gen.v
-  X:/Entropic_R32-P5_RISC-V/rtl/instruction_mem.v
-  X:/Entropic_R32-P5_RISC-V/rtl/load_filter.v
-  X:/Entropic_R32-P5_RISC-V/rtl/mem_forwarding_unit.v
-  X:/Entropic_R32-P5_RISC-V/rtl/mem_wb_reg.v
-  X:/Entropic_R32-P5_RISC-V/rtl/pc.v
-  X:/Entropic_R32-P5_RISC-V/rtl/reg_file.v
-  X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v
-  X:/Entropic_R32-P5_RISC-V/rtl/soc_top.v
-  X:/Entropic_R32-P5_RISC-V/rtl/store_mask.v
-  X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3_top.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/alu.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/alu_control.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_comp.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_predictor.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/control_unit.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/data_mem.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/ex_mem_reg.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/forwarding_unit.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/halt_latch.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/hazard_unit.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/id_ex_reg.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/id_forwarding_unit.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/if_id_reg.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/imm_gen.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/instruction_mem.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/load_filter.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_forwarding_unit.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_wb_reg.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/pc.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/reg_file.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/soc_top.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/store_mask.v
+  X:/Entropic_R32-P5_RISC-V_UART/rtl/uart_tx.v
+  X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3_top.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -106,8 +107,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc
-set_property used_in_implementation false [get_files X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc]
+read_xdc X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc
+set_property used_in_implementation false [get_files X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

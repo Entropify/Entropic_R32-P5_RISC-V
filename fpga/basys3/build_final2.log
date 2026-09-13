@@ -1,0 +1,27 @@
+INFO: [Common 17-3922] A valid Vivado Design Suite BASIC license has been detected. Your current license is active and will expire on 03-sep-2027.
+
+****** Vivado v2026.1 (64-bit)
+  **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
+  **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
+  **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
+  **** Start of session at: Sat Sep 12 17:56:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source build.tcl
+# set proj_dir  "X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3"
+# set rtl_dir   "X:/Entropic_R32-P5_RISC-V_UART/rtl"
+# set part      "xc7a35tcpg236-1"
+# set proj_file "$proj_dir/proj/r32p5_basys3.xpr"
+# if {[file exists "$proj_dir/proj"]} {
+#     file delete -force "$proj_dir/proj"
+# }
+error deleting "X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj\r32p5_basys3.runs\impl_1\init_design.pb": permission denied
+    while executing
+"file delete -force "$proj_dir/proj""
+    invoked from within
+"if {[file exists "$proj_dir/proj"]} {
+    file delete -force "$proj_dir/proj"
+}"
+    (file "build.tcl" line 12)
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 12 17:56:29 2026...

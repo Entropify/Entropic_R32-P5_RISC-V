@@ -3,8 +3,8 @@
 #   vivado -mode batch -source build.tcl
 # Produces: r32p5_basys3.bit plus synthesis/implementation reports.
 
-set proj_dir  "X:/Entropic_R32-P5_RISC-V/fpga/basys3"
-set rtl_dir   "X:/Entropic_R32-P5_RISC-V/rtl"
+set proj_dir  "X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3"
+set rtl_dir   "X:/Entropic_R32-P5_RISC-V_UART/rtl"
 set part      "xc7a35tcpg236-1"
 
 # --- clean any previous project ---

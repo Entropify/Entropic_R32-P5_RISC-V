@@ -49,3 +49,8 @@ set_property PACKAGE_PIN P1  [get_ports {led[14]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {led[14]}]
 set_property PACKAGE_PIN L1  [get_ports {led[15]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {led[15]}]
+
+## UART: FPGA TX -> FT2232HQ RXD (the PC receives). Sch name = RsTx.
+## 115200 baud, 8N1 (see uart_tx.v CLKS_PER_BIT).
+set_property PACKAGE_PIN A18 [get_ports uart_tx]
+set_property IOSTANDARD LVCMOS33 [get_ports uart_tx]

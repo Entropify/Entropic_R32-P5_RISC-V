@@ -9,12 +9,12 @@ INFO: [Common 17-3922] A valid Vivado Design Suite BASIC license has been detect
 # SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
 # IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
 # SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
-# Start of session at: Sun Sep  6 01:15:51 2026
-# Process ID         : 9012
-# Current directory  : X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/synth_1
+# Start of session at: Sat Sep 12 17:06:30 2026
+# Process ID         : 18620
+# Current directory  : X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/synth_1
 # Command line       : vivado.exe -log basys3_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source basys3_top.tcl
-# Log file           : X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.vds
-# Journal file       : X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/synth_1\vivado.jou
+# Log file           : X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.vds
+# Journal file       : X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/synth_1\vivado.jou
 # Running On         : AORUS15XE4
 # Platform           : Windows 11
 # Operating System   : 26200
@@ -25,19 +25,19 @@ INFO: [Common 17-3922] A valid Vivado Design Suite BASIC license has been detect
 # Host memory        : 34008 MB
 # Swap memory        : 5905 MB
 # Total Virtual      : 39914 MB
-# Available Virtual  : 16498 MB
+# Available Virtual  : 25612 MB
 #-----------------------------------------------------------
 
 ****** Vivado v2026.1 (64-bit)
   **** SW Build 6511674 on Tue Jun 16 11:02:23 MDT 2026
   **** IP Build 6504888 on Tue Jun 09 09:05:25 MDT 2026
   **** SharedData Build 6501428 on Mon Jun 08 17:34:18 MDT 2026
-  **** Start of session at: Sun Sep  6 01:15:51 2026
+  **** Start of session at: Sat Sep 12 17:06:30 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source basys3_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 584.973 ; gain = 268.750
+create_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 584.285 ; gain = 267.375
 Command: synth_design -top basys3_top -part xc7a35tcpg236-1
 Starting synth_design
 Attempting to get a license for feature 'Vivado_Synthesis' and/or device 'xc7a35t'
@@ -46,78 +46,82 @@ INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Designutils 20-5008] Incremental synthesis strategy default
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 22268
+INFO: [Synth 8-7075] Helper process launched with PID 15340
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1346.832 ; gain = 577.691
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1344.965 ; gain = 577.180
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-6901] identifier 'ex_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:198]
-WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:199]
-WARNING: [Synth 8-6901] identifier 'ex_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:212]
-WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:213]
-WARNING: [Synth 8-6901] identifier 'jalr_target_full' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:228]
-WARNING: [Synth 8-6901] identifier 'pc_branch_target' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:228]
-WARNING: [Synth 8-6901] identifier 'take_branch' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:229]
-WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:369]
-WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:391]
+WARNING: [Synth 8-6901] identifier 'ex_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:200]
+WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:201]
+WARNING: [Synth 8-6901] identifier 'ex_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:214]
+WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:215]
+WARNING: [Synth 8-6901] identifier 'jalr_target_full' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:230]
+WARNING: [Synth 8-6901] identifier 'pc_branch_target' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:230]
+WARNING: [Synth 8-6901] identifier 'take_branch' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:231]
+WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:371]
+WARNING: [Synth 8-6901] identifier 'ex_mem_actual_result' is used before its declaration [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:393]
 Linter Recording Failure, recording already started!
 Linter Recording Failure, recording already started!
 Linter Recording Failure, recording already started!
 Linter Recording Failure, recording already started!
 Linter Recording Failure, recording already started!
-INFO: [Synth 8-6157] synthesizing module 'basys3_top' [X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3_top.v:21]
+INFO: [Synth 8-6157] synthesizing module 'basys3_top' [X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3_top.v:22]
 INFO: [Synth 8-6157] synthesizing module 'BUFG' [X:/AMDDesignTools/2026.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
 INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [X:/AMDDesignTools/2026.1/Vivado/scripts/rt/data/unisim_comp.v:2678]
-INFO: [Synth 8-6157] synthesizing module 'soc_top' [X:/Entropic_R32-P5_RISC-V/rtl/soc_top.v:8]
-	Parameter INSTR_MEM_FILE bound to: X:/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex - type: string 
-INFO: [Synth 8-6157] synthesizing module 'rv32i_core' [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:8]
-INFO: [Synth 8-6157] synthesizing module 'pc' [X:/Entropic_R32-P5_RISC-V/rtl/pc.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'pc' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/pc.v:8]
-INFO: [Synth 8-6157] synthesizing module 'branch_predictor' [X:/Entropic_R32-P5_RISC-V/rtl/branch_predictor.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'branch_predictor' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/branch_predictor.v:9]
-INFO: [Synth 8-6157] synthesizing module 'if_id_reg' [X:/Entropic_R32-P5_RISC-V/rtl/if_id_reg.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'if_id_reg' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/if_id_reg.v:8]
-INFO: [Synth 8-6157] synthesizing module 'control_unit' [X:/Entropic_R32-P5_RISC-V/rtl/control_unit.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'control_unit' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/control_unit.v:8]
-INFO: [Synth 8-6157] synthesizing module 'halt_latch' [X:/Entropic_R32-P5_RISC-V/rtl/halt_latch.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'halt_latch' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/halt_latch.v:8]
-INFO: [Synth 8-6157] synthesizing module 'imm_gen' [X:/Entropic_R32-P5_RISC-V/rtl/imm_gen.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'imm_gen' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/imm_gen.v:8]
-INFO: [Synth 8-6157] synthesizing module 'reg_file' [X:/Entropic_R32-P5_RISC-V/rtl/reg_file.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'reg_file' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/reg_file.v:8]
-INFO: [Synth 8-6157] synthesizing module 'id_forwarding_unit' [X:/Entropic_R32-P5_RISC-V/rtl/id_forwarding_unit.v:11]
-INFO: [Synth 8-6155] done synthesizing module 'id_forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/id_forwarding_unit.v:11]
-INFO: [Synth 8-6157] synthesizing module 'branch_comp' [X:/Entropic_R32-P5_RISC-V/rtl/branch_comp.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'branch_comp' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/branch_comp.v:8]
-INFO: [Synth 8-6157] synthesizing module 'id_ex_reg' [X:/Entropic_R32-P5_RISC-V/rtl/id_ex_reg.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'id_ex_reg' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/id_ex_reg.v:8]
-INFO: [Synth 8-6157] synthesizing module 'hazard_unit' [X:/Entropic_R32-P5_RISC-V/rtl/hazard_unit.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'hazard_unit' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/hazard_unit.v:9]
-INFO: [Synth 8-6157] synthesizing module 'forwarding_unit' [X:/Entropic_R32-P5_RISC-V/rtl/forwarding_unit.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/forwarding_unit.v:8]
-INFO: [Synth 8-6157] synthesizing module 'alu_control' [X:/Entropic_R32-P5_RISC-V/rtl/alu_control.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'alu_control' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/alu_control.v:8]
-INFO: [Synth 8-6157] synthesizing module 'alu' [X:/Entropic_R32-P5_RISC-V/rtl/alu.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/alu.v:8]
-INFO: [Synth 8-6157] synthesizing module 'ex_mem_reg' [X:/Entropic_R32-P5_RISC-V/rtl/ex_mem_reg.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'ex_mem_reg' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/ex_mem_reg.v:9]
-INFO: [Synth 8-6157] synthesizing module 'mem_forwarding_unit' [X:/Entropic_R32-P5_RISC-V/rtl/mem_forwarding_unit.v:11]
-INFO: [Synth 8-6155] done synthesizing module 'mem_forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/mem_forwarding_unit.v:11]
-INFO: [Synth 8-6157] synthesizing module 'load_filter' [X:/Entropic_R32-P5_RISC-V/rtl/load_filter.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'load_filter' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/load_filter.v:9]
-INFO: [Synth 8-6157] synthesizing module 'store_mask' [X:/Entropic_R32-P5_RISC-V/rtl/store_mask.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'store_mask' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/store_mask.v:9]
-INFO: [Synth 8-6157] synthesizing module 'mem_wb_reg' [X:/Entropic_R32-P5_RISC-V/rtl/mem_wb_reg.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'mem_wb_reg' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/mem_wb_reg.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/rv32i_core.v:8]
-INFO: [Synth 8-6157] synthesizing module 'instruction_mem' [X:/Entropic_R32-P5_RISC-V/rtl/instruction_mem.v:9]
-	Parameter INIT_FILE bound to: X:/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex - type: string 
-INFO: [Synth 8-3876] $readmem data file 'X:/Entropic_R32-P5_RISC-V/fpga/basys3/fpga_prog.hex' is read successfully [X:/Entropic_R32-P5_RISC-V/rtl/instruction_mem.v:21]
-INFO: [Synth 8-6155] done synthesizing module 'instruction_mem' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/instruction_mem.v:9]
-INFO: [Synth 8-6157] synthesizing module 'data_mem' [X:/Entropic_R32-P5_RISC-V/rtl/data_mem.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'data_mem' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/data_mem.v:9]
-INFO: [Synth 8-6155] done synthesizing module 'soc_top' (0#1) [X:/Entropic_R32-P5_RISC-V/rtl/soc_top.v:8]
-INFO: [Synth 8-6155] done synthesizing module 'basys3_top' (0#1) [X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3_top.v:21]
-WARNING: [Synth 8-3936] Found unconnected internal register 'shifted_data_reg' and it is trimmed from '32' to '16' bits. [X:/Entropic_R32-P5_RISC-V/rtl/load_filter.v:21]
+INFO: [Synth 8-6157] synthesizing module 'soc_top' [X:/Entropic_R32-P5_RISC-V_UART/rtl/soc_top.v:8]
+	Parameter INSTR_MEM_FILE bound to: X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex - type: string 
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [X:/Entropic_R32-P5_RISC-V_UART/rtl/uart_tx.v:18]
+	Parameter CLKS_PER_BIT bound to: 434 - type: integer 
+INFO: [Synth 8-226] default block is never used [X:/Entropic_R32-P5_RISC-V_UART/rtl/uart_tx.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/uart_tx.v:18]
+INFO: [Synth 8-6157] synthesizing module 'rv32i_core' [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:8]
+INFO: [Synth 8-6157] synthesizing module 'pc' [X:/Entropic_R32-P5_RISC-V_UART/rtl/pc.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'pc' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/pc.v:8]
+INFO: [Synth 8-6157] synthesizing module 'branch_predictor' [X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_predictor.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'branch_predictor' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_predictor.v:9]
+INFO: [Synth 8-6157] synthesizing module 'if_id_reg' [X:/Entropic_R32-P5_RISC-V_UART/rtl/if_id_reg.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'if_id_reg' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/if_id_reg.v:8]
+INFO: [Synth 8-6157] synthesizing module 'control_unit' [X:/Entropic_R32-P5_RISC-V_UART/rtl/control_unit.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'control_unit' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/control_unit.v:8]
+INFO: [Synth 8-6157] synthesizing module 'halt_latch' [X:/Entropic_R32-P5_RISC-V_UART/rtl/halt_latch.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'halt_latch' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/halt_latch.v:8]
+INFO: [Synth 8-6157] synthesizing module 'imm_gen' [X:/Entropic_R32-P5_RISC-V_UART/rtl/imm_gen.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'imm_gen' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/imm_gen.v:8]
+INFO: [Synth 8-6157] synthesizing module 'reg_file' [X:/Entropic_R32-P5_RISC-V_UART/rtl/reg_file.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'reg_file' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/reg_file.v:8]
+INFO: [Synth 8-6157] synthesizing module 'id_forwarding_unit' [X:/Entropic_R32-P5_RISC-V_UART/rtl/id_forwarding_unit.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'id_forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/id_forwarding_unit.v:11]
+INFO: [Synth 8-6157] synthesizing module 'branch_comp' [X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_comp.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'branch_comp' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/branch_comp.v:8]
+INFO: [Synth 8-6157] synthesizing module 'id_ex_reg' [X:/Entropic_R32-P5_RISC-V_UART/rtl/id_ex_reg.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'id_ex_reg' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/id_ex_reg.v:8]
+INFO: [Synth 8-6157] synthesizing module 'hazard_unit' [X:/Entropic_R32-P5_RISC-V_UART/rtl/hazard_unit.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'hazard_unit' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/hazard_unit.v:9]
+INFO: [Synth 8-6157] synthesizing module 'forwarding_unit' [X:/Entropic_R32-P5_RISC-V_UART/rtl/forwarding_unit.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/forwarding_unit.v:8]
+INFO: [Synth 8-6157] synthesizing module 'alu_control' [X:/Entropic_R32-P5_RISC-V_UART/rtl/alu_control.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'alu_control' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/alu_control.v:8]
+INFO: [Synth 8-6157] synthesizing module 'alu' [X:/Entropic_R32-P5_RISC-V_UART/rtl/alu.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/alu.v:8]
+INFO: [Synth 8-6157] synthesizing module 'ex_mem_reg' [X:/Entropic_R32-P5_RISC-V_UART/rtl/ex_mem_reg.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'ex_mem_reg' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/ex_mem_reg.v:9]
+INFO: [Synth 8-6157] synthesizing module 'mem_forwarding_unit' [X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_forwarding_unit.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'mem_forwarding_unit' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_forwarding_unit.v:11]
+INFO: [Synth 8-6157] synthesizing module 'load_filter' [X:/Entropic_R32-P5_RISC-V_UART/rtl/load_filter.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'load_filter' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/load_filter.v:9]
+INFO: [Synth 8-6157] synthesizing module 'store_mask' [X:/Entropic_R32-P5_RISC-V_UART/rtl/store_mask.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'store_mask' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/store_mask.v:9]
+INFO: [Synth 8-6157] synthesizing module 'mem_wb_reg' [X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_wb_reg.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'mem_wb_reg' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/mem_wb_reg.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'rv32i_core' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/rv32i_core.v:8]
+INFO: [Synth 8-6157] synthesizing module 'instruction_mem' [X:/Entropic_R32-P5_RISC-V_UART/rtl/instruction_mem.v:9]
+	Parameter INIT_FILE bound to: X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex - type: string 
+INFO: [Synth 8-3876] $readmem data file 'X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/fpga_prog.hex' is read successfully [X:/Entropic_R32-P5_RISC-V_UART/rtl/instruction_mem.v:21]
+INFO: [Synth 8-6155] done synthesizing module 'instruction_mem' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/instruction_mem.v:9]
+INFO: [Synth 8-6157] synthesizing module 'data_mem' [X:/Entropic_R32-P5_RISC-V_UART/rtl/data_mem.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'data_mem' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/data_mem.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'soc_top' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/rtl/soc_top.v:8]
+INFO: [Synth 8-6155] done synthesizing module 'basys3_top' (0#1) [X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3_top.v:22]
+WARNING: [Synth 8-3936] Found unconnected internal register 'shifted_data_reg' and it is trimmed from '32' to '16' bits. [X:/Entropic_R32-P5_RISC-V_UART/rtl/load_filter.v:21]
 WARNING: [Synth 8-3917] design basys3_top has port led[14] driven by constant 0
 WARNING: [Synth 8-3917] design basys3_top has port led[13] driven by constant 0
 WARNING: [Synth 8-3917] design basys3_top has port led[12] driven by constant 0
@@ -125,28 +129,10 @@ WARNING: [Synth 8-3917] design basys3_top has port led[11] driven by constant 0
 WARNING: [Synth 8-3917] design basys3_top has port led[10] driven by constant 0
 WARNING: [Synth 8-3917] design basys3_top has port led[9] driven by constant 0
 WARNING: [Synth 8-3917] design basys3_top has port led[8] driven by constant 0
-WARNING: [Synth 8-7129] Port address[31] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[30] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[29] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[28] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[27] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[26] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[25] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[24] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[23] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[22] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[21] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[20] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[19] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[18] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[17] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[16] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[15] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[14] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[13] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[12] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[1] in module data_mem is either unconnected or has no load
-WARNING: [Synth 8-7129] Port address[0] in module data_mem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port read_address[1] in module data_mem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port read_address[0] in module data_mem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port write_address[1] in module data_mem is either unconnected or has no load
+WARNING: [Synth 8-7129] Port write_address[0] in module data_mem is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[1] in module instruction_mem is either unconnected or has no load
 WARNING: [Synth 8-7129] Port address[0] in module instruction_mem is either unconnected or has no load
 WARNING: [Synth 8-7129] Port fetch_pc[1] in module branch_predictor is either unconnected or has no load
@@ -154,51 +140,61 @@ WARNING: [Synth 8-7129] Port fetch_pc[0] in module branch_predictor is either un
 WARNING: [Synth 8-7129] Port update_pc[1] in module branch_predictor is either unconnected or has no load
 WARNING: [Synth 8-7129] Port update_pc[0] in module branch_predictor is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1481.980 ; gain = 712.840
+Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1480.836 ; gain = 713.051
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1481.980 ; gain = 712.840
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1480.836 ; gain = 713.051
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1481.980 ; gain = 712.840
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1480.836 ; gain = 713.051
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.060 . Memory (MB): peak = 1481.980 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.053 . Memory (MB): peak = 1480.836 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc]
-Finished Parsing XDC File [X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [X:/Entropic_R32-P5_RISC-V/fpga/basys3/basys3.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/basys3_top_propImpl.xdc].
+Parsing XDC File [X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc]
+Finished Parsing XDC File [X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/basys3.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/basys3_top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/basys3_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1549.910 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1557.797 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 1552.680 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.057 . Memory (MB): peak = 1557.844 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1552.680 ; gain = 783.539
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1557.844 ; gain = 790.059
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1552.680 ; gain = 783.539
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1557.844 ; gain = 790.059
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1552.680 ; gain = 783.539
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 1557.844 ; gain = 790.059
 ---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                               00 |                               00
+                   START |                               01 |                               01
+                    DATA |                               10 |                               10
+                    STOP |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_tx'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1552.680 ; gain = 783.539
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 1557.844 ; gain = 790.059
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -207,6 +203,8 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input   32 Bit       Adders := 4     
 	   3 Input   32 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 1     
 	   2 Input    2 Bit       Adders := 2     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
@@ -215,11 +213,13 @@ Detailed RTL Component Info :
 	             1536 Bit    Registers := 1     
 	              128 Bit    Registers := 1     
 	               64 Bit    Registers := 1     
-	               32 Bit    Registers := 50    
+	               32 Bit    Registers := 51    
+	               16 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
 	                5 Bit    Registers := 6     
-	                3 Bit    Registers := 3     
+	                3 Bit    Registers := 4     
 	                2 Bit    Registers := 5     
-	                1 Bit    Registers := 18    
+	                1 Bit    Registers := 20    
 +---RAMs : 
 	              32K Bit	(1024 X 32 bit)          RAMs := 1     
 +---Muxes : 
@@ -227,18 +227,22 @@ Detailed RTL Component Info :
 	   2 Input 1536 Bit        Muxes := 1     
 	   2 Input  128 Bit        Muxes := 1     
 	   2 Input   64 Bit        Muxes := 1     
-	   2 Input   32 Bit        Muxes := 41    
+	   2 Input   32 Bit        Muxes := 42    
 	   4 Input   32 Bit        Muxes := 5     
-	  21 Input   32 Bit        Muxes := 1     
-	   2 Input    8 Bit        Muxes := 2     
+	   4 Input   16 Bit        Muxes := 1     
+	   4 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 6     
 	   2 Input    5 Bit        Muxes := 3     
 	   2 Input    4 Bit        Muxes := 5     
 	   9 Input    4 Bit        Muxes := 1     
 	   4 Input    4 Bit        Muxes := 1     
-	   2 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 3     
+	   4 Input    3 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 12    
 	   3 Input    2 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 35    
+	   2 Input    1 Bit        Muxes := 36    
+	   4 Input    1 Bit        Muxes := 6     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -265,19 +269,27 @@ WARNING: [Synth 8-7129] Port fetch_pc[1] in module branch_predictor is either un
 WARNING: [Synth 8-7129] Port fetch_pc[0] in module branch_predictor is either unconnected or has no load
 WARNING: [Synth 8-7129] Port update_pc[1] in module branch_predictor is either unconnected or has no load
 WARNING: [Synth 8-7129] Port update_pc[0] in module branch_predictor is either unconnected or has no load
-INFO: [Synth 8-6851] RAM (cpu_soc/ram/mem_array_reg) has partial Byte Wide Write Enable pattern, however no output register found in fanout of RAM. Recommended to use supported Byte Wide Write Enable template. 
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:42 ; elapsed = 00:00:45 . Memory (MB): peak = 1724.504 ; gain = 955.363
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:35 ; elapsed = 00:01:41 . Memory (MB): peak = 1750.738 ; gain = 982.953
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
+ROM: Preliminary Mapping Report
++----------------+------------+---------------+----------------+
+|Module Name     | RTL Object | Depth x Width | Implemented As | 
++----------------+------------+---------------+----------------+
+|instruction_mem | rom        | 256x31        | LUT            | 
+|basys3_top      | p_0_out    | 256x31        | LUT            | 
++----------------+------------+---------------+----------------+
+
+
 Distributed RAM: Preliminary Mapping Report (see note below)
 +------------+---------------------------+-----------+----------------------+------------------+
 |Module Name | RTL Object                | Inference | Size (Depth x Width) | Primitives       | 
 +------------+---------------------------+-----------+----------------------+------------------+
-|basys3_top  | cpu_soc/ram/mem_array_reg | Implied   | 1 K x 32             | RAM256X1S x 128  | 
+|basys3_top  | cpu_soc/ram/mem_array_reg | Implied   | 1 K x 32             | RAM128X1D x 256  | 
 +------------+---------------------------+-----------+----------------------+------------------+
 
 Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
@@ -288,13 +300,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:00:49 . Memory (MB): peak = 1731.426 ; gain = 962.285
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:39 ; elapsed = 00:01:45 . Memory (MB): peak = 1750.738 ; gain = 982.953
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:00:52 . Memory (MB): peak = 1755.516 ; gain = 986.375
+Finished Timing Optimization : Time (s): cpu = 00:01:44 ; elapsed = 00:01:51 . Memory (MB): peak = 1806.066 ; gain = 1038.281
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -304,7 +316,7 @@ Distributed RAM: Final Mapping Report
 +------------+---------------------------+-----------+----------------------+------------------+
 |Module Name | RTL Object                | Inference | Size (Depth x Width) | Primitives       | 
 +------------+---------------------------+-----------+----------------------+------------------+
-|basys3_top  | cpu_soc/ram/mem_array_reg | Implied   | 1 K x 32             | RAM256X1S x 128  | 
+|basys3_top  | cpu_soc/ram/mem_array_reg | Implied   | 1 K x 32             | RAM128X1D x 256  | 
 +------------+---------------------------+-----------+----------------------+------------------+
 
 ---------------------------------------------------------------------------------
@@ -314,7 +326,7 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:57 ; elapsed = 00:01:00 . Memory (MB): peak = 1850.379 ; gain = 1081.238
+Finished Technology Mapping : Time (s): cpu = 00:01:47 ; elapsed = 00:01:54 . Memory (MB): peak = 1895.512 ; gain = 1127.727
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -332,37 +344,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:05 ; elapsed = 00:01:09 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished IO Insertion : Time (s): cpu = 00:01:51 ; elapsed = 00:01:58 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:06 ; elapsed = 00:01:09 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:51 ; elapsed = 00:01:58 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:07 ; elapsed = 00:01:11 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:07 ; elapsed = 00:01:11 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -393,45 +405,46 @@ Report Cell Usage:
 |      |Cell      |Count |
 +------+----------+------+
 |1     |BUFG      |     2|
-|2     |CARRY4    |    55|
-|3     |LUT1      |    31|
-|4     |LUT2      |   474|
-|5     |LUT3      |   463|
-|6     |LUT4      |   512|
-|7     |LUT5      |   821|
-|8     |LUT6      |  2730|
-|9     |MUXF7     |   778|
-|10    |MUXF8     |   351|
-|11    |RAM256X1S |   128|
+|2     |CARRY4    |    82|
+|3     |LUT1      |    17|
+|4     |LUT2      |   411|
+|5     |LUT3      |   499|
+|6     |LUT4      |   752|
+|7     |LUT5      |  1029|
+|8     |LUT6      |  3302|
+|9     |MUXF7     |  1002|
+|10    |MUXF8     |   464|
+|11    |RAM128X1D |   256|
 |12    |SRL16E    |     1|
-|13    |FDCE      |  4716|
-|14    |FDRE      |     2|
-|15    |IBUF      |     2|
-|16    |OBUF      |    16|
+|13    |FDCE      |  5416|
+|14    |FDPE      |     1|
+|15    |FDRE      |    34|
+|16    |IBUF      |     2|
+|17    |OBUF      |    17|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 2021.633 ; gain = 1252.492
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2049.805 ; gain = 1282.020
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 11 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 2021.633 ; gain = 1181.793
-Synthesis Optimization Complete : Time (s): cpu = 00:01:08 ; elapsed = 00:01:12 . Memory (MB): peak = 2026.496 ; gain = 1252.492
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:36 ; elapsed = 00:01:56 . Memory (MB): peak = 2049.805 ; gain = 1205.012
+Synthesis Optimization Complete : Time (s): cpu = 00:01:52 ; elapsed = 00:01:59 . Memory (MB): peak = 2053.234 ; gain = 1282.020
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.109 . Memory (MB): peak = 2034.559 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 1312 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.054 . Memory (MB): peak = 2061.320 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1804 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 1 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 2042.238 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 2068.992 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 128 instances were transformed.
-  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 128 instances
+  A total of 256 instances were transformed.
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 256 instances
 
-Synth Design complete | Checksum: bb0c34ef
+Synth Design complete | Checksum: a2a44632
 INFO: [Common 17-83] Releasing license: Vivado_Synthesis
-68 Infos, 56 Warnings, 0 Critical Warnings and 0 Errors encountered.
+72 Infos, 38 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:18 ; elapsed = 00:01:24 . Memory (MB): peak = 2042.238 ; gain = 1457.266
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 2042.238 ; gain = 0.000
-INFO: [Common 17-1381] The checkpoint 'X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.dcp' has been generated.
+synth_design: Time (s): cpu = 00:01:58 ; elapsed = 00:02:29 . Memory (MB): peak = 2068.992 ; gain = 1484.707
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 2068.992 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/synth_1/basys3_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file basys3_top_utilization_synth.rpt -pb basys3_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Sep  6 01:17:25 2026...
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 12 17:09:37 2026...

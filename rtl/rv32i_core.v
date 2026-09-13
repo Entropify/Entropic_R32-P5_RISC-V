@@ -13,6 +13,8 @@
     input wire [31:0] instruction,
 
     output wire [31:0] data_address,  // data mem i/o
+    output wire [31:0] data_read_address, // EX-stage address for the sync data-mem read
+    output wire data_read_enable,         // EX-stage mem_read: read only for loads
     output wire [31:0] data_write,
     input wire [31:0] data_read,
     output wire [3:0] write_mask,
@@ -22,7 +24,8 @@
 
     output wire halt,
 
-    output wire [31:0] x10_debug  // FPGA bring-up diagnostic: x10 return code
+    output wire [31:0] x10_debug, // FPGA bring-up diagnostic: x10 return code
+    output wire [31:0] pc_debug   // FPGA bring-up diagnostic: current fetch PC
   );
 
 
@@ -36,6 +39,7 @@
   wire [31:0] pc_plus_4;
 
   assign instr_address = pc_out;
+  assign pc_debug = pc_out;         // expose the fetch PC for on-board debugging
   assign pc_plus_4 = pc_out + 32'd4;
 
   pc cpu_pc(
@@ -478,6 +482,10 @@ wire [31:0] predict_target;
   wire mem_forward_sel;
 
   assign data_address = ex_mem_alu_result;
+  // synchronous data-mem read: present the EX-stage ALU result to the memory so
+  // the word is captured on the clock edge and arrives in the MEM stage.
+  assign data_read_address = alu_result;
+  assign data_read_enable = id_ex_mem_read;
   assign mem_read = ex_mem_mem_read;
   assign mem_write = ex_mem_mem_write;
 

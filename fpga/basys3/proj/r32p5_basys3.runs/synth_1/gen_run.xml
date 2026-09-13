@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1788671749">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1789247185">
   <File Type="PA-TCL" Name="basys3_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="basys3_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="basys3_top_reports.tcl"/>
@@ -172,6 +172,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../../../rtl/uart_tx.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../basys3_top.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -203,9 +210,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2026">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2026"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

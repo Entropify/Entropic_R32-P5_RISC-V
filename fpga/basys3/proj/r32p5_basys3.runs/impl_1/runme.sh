@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='X:/Entropic_R32-P5_RISC-V/fpga/basys3/proj/r32p5_basys3.runs/impl_1'
+HD_PWD='X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/proj/r32p5_basys3.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -42,7 +42,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .init_design.begin.rst
+/bin/touch .write_bitstream.begin.rst
 EAStep vivado -log basys3_top.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source basys3_top.tcl -notrace
 
 

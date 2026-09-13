@@ -1,9 +1,9 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
-| Date         : Sun Sep  6 00:50:49 2026
+| Date         : Sat Sep 12 16:27:58 2026
 | Host         : AORUS15XE4 running 64-bit major release  (build 9200)
-| Command      : report_timing_summary -file X:/Entropic_R32-P5_RISC-V/fpga/basys3/report_timing_synth.rpt
+| Command      : report_timing_summary -file X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/report_timing_synth.rpt
 | Design       : basys3_top
 | Device       : 7a35t-cpg236
 | Speed File   : -1  PRODUCTION 1.23 2018-06-13
@@ -54,7 +54,7 @@ Table of Contents
 3. checking pulse_width_clock (0)
 4. checking unconstrained_internal_endpoints (0)
 5. checking no_input_delay (1)
-6. checking no_output_delay (9)
+6. checking no_output_delay (10)
 7. checking multiple_clock (0)
 8. checking generated_clocks (0)
 9. checking loops (0)
@@ -91,9 +91,9 @@ Table of Contents
  There are 0 input ports with no input delay but user has a false path constraint.
 
 
-6. checking no_output_delay (9)
--------------------------------
- There are 9 ports with no output delay specified. (HIGH)
+6. checking no_output_delay (10)
+--------------------------------
+ There are 10 ports with no output delay specified. (HIGH)
 
  There are 0 ports with no output delay but user has a false path constraint
 
@@ -138,7 +138,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      3.769        0.000                      0                18958       -0.289    -1363.225                   4716                18958        4.020        0.000                       0                  5232  
+      2.035        0.000                      0                25051       -0.289    -1565.859                   5417                25051        4.020        0.000                       0                  6477  
 
 
 Timing constraints are not met.
@@ -163,7 +163,7 @@ sys_clk_pin  {0.000 5.000}      10.000          100.000
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 sys_clk_pin         8.288        0.000                      0                    2        0.139        0.000                      0                    2        4.020        0.000                       0                     4  
-  cpu_clk           3.769        0.000                      0                14240        0.125        0.000                      0                14240        8.750        0.000                       0                  5228  
+  cpu_clk           2.035        0.000                      0                19632        0.116        0.000                      0                19632        8.750        0.000                       0                  6473  
 
 
 ------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS
 
 Path Group         From Clock         To Clock               WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
 ----------         ----------         --------               -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
-**async_default**  sys_clk_pin        cpu_clk                  9.248        0.000                      0                 4716       -0.289    -1363.225                   4716                 4716  
+**async_default**  sys_clk_pin        cpu_clk                  9.248        0.000                      0                 5417       -0.289    -1565.859                   5417                 5417  
 
 
 ------------------------------------------------------------------------------------------------
@@ -338,24 +338,24 @@ High Pulse Width  Slow    SRL16E/CLK  n/a            0.980         5.000       4
 From Clock:  cpu_clk
   To Clock:  cpu_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack        3.769ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.125ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack        2.035ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.116ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        8.750ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             3.769ns  (required time - arrival time)
-  Source:                 cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[2]/C
+Slack (MET) :             2.035ns  (required time - arrival time)
+  Source:                 cpu_soc/cpu/cpu_mem_wb/reg_write_out_reg/C
                             (rising edge-triggered cell FDCE clocked by cpu_clk  {rise@0.000ns fall@10.000ns period=20.000ns})
   Destination:            cpu_soc/cpu/cpu_if_id/if_id_pc_plus_four_out_reg[10]/CE
                             (rising edge-triggered cell FDCE clocked by cpu_clk  {rise@0.000ns fall@10.000ns period=20.000ns})
   Path Group:             cpu_clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            20.000ns  (cpu_clk rise@20.000ns - cpu_clk rise@0.000ns)
-  Data Path Delay:        15.849ns  (logic 4.079ns (25.737%)  route 11.770ns (74.263%))
-  Logic Levels:           19  (CARRY4=2 LUT4=1 LUT5=2 LUT6=11 MUXF7=1 MUXF8=1 RAMS64E=1)
+  Data Path Delay:        17.583ns  (logic 5.300ns (30.143%)  route 12.283ns (69.857%))
+  Logic Levels:           24  (CARRY4=6 LUT2=1 LUT3=3 LUT5=2 LUT6=11 MUXF7=1)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
     Destination Clock Delay (DCD):    4.475ns = ( 24.475 - 20.000 ) 
     Source Clock Delay      (SCD):    5.049ns
@@ -378,52 +378,65 @@ Slack (MET) :             3.769ns  (required time - arrival time)
                          FDRE (Prop_fdre_C_Q)         0.456     3.394 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.800     4.194    clk_div
                          BUFG (Prop_bufg_I_O)         0.271     4.465 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.584     5.049    cpu_soc/cpu/cpu_ex_mem/cpu_clk
-                         FDCE                                         r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[2]/C
+                         net (fo=6473, unplaced)      0.584     5.049    cpu_soc/cpu/cpu_mem_wb/cpu_clk
+                         FDCE                                         r  cpu_soc/cpu/cpu_mem_wb/reg_write_out_reg/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.456     5.505 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[2]/Q
-                         net (fo=515, unplaced)       1.024     6.529    cpu_soc/ram/mem_array_reg_768_1023_7_7/A0
-                         RAMS64E (Prop_rams64e_ADR0_O)
-                                                      0.376     6.905 r  cpu_soc/ram/mem_array_reg_768_1023_7_7/RAMS64E_C/O
-                         net (fo=1, unplaced)         0.000     6.905    cpu_soc/ram/mem_array_reg_768_1023_7_7/OC
-                         MUXF7 (Prop_muxf7_I1_O)      0.247     7.152 r  cpu_soc/ram/mem_array_reg_768_1023_7_7/F7.B/O
-                         net (fo=1, unplaced)         0.000     7.152    cpu_soc/ram/mem_array_reg_768_1023_7_7/O0
-                         MUXF8 (Prop_muxf8_I0_O)      0.098     7.250 r  cpu_soc/ram/mem_array_reg_768_1023_7_7/F8/O
-                         net (fo=1, unplaced)         0.717     7.967    cpu_soc/ram/mem_array_reg_768_1023_7_7_n_0
-                         LUT6 (Prop_lut6_I0_O)        0.319     8.286 r  cpu_soc/ram/filtered_data_out[7]_i_5/O
-                         net (fo=3, unplaced)         0.467     8.753    cpu_soc/ram/read_data0[7]
-                         LUT4 (Prop_lut4_I3_O)        0.124     8.877 r  cpu_soc/ram/filtered_data_out[31]_i_5/O
-                         net (fo=8, unplaced)         0.940     9.817    cpu_soc/cpu/cpu_ex_mem/filtered_data_out_reg[15]
-                         LUT6 (Prop_lut6_I1_O)        0.124     9.941 r  cpu_soc/cpu/cpu_ex_mem/filtered_data_out[31]_i_3/O
-                         net (fo=34, unplaced)        0.522    10.463    cpu_soc/cpu/cpu_ex_mem/filtered_data_out[31]_i_3_n_0
-                         LUT6 (Prop_lut6_I3_O)        0.124    10.587 r  cpu_soc/cpu/cpu_ex_mem/read_data2_out[25]_i_2__0/O
-                         net (fo=4, unplaced)         0.473    11.060    cpu_soc/cpu/cpu_ex_mem/read_data2_out[25]_i_2__0_n_0
-                         LUT6 (Prop_lut6_I1_O)        0.124    11.184 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out[25]_i_4/O
-                         net (fo=16, unplaced)        1.165    12.349    cpu_soc/cpu/cpu_ex_mem/alu_actual_in1[25]
-                         LUT5 (Prop_lut5_I0_O)        0.124    12.473 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out[17]_i_12/O
-                         net (fo=4, unplaced)         0.926    13.399    cpu_soc/cpu/cpu_ex_mem/read_data1_out_reg[25]_1
-                         LUT6 (Prop_lut6_I1_O)        0.124    13.523 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out[15]_i_16/O
-                         net (fo=2, unplaced)         0.913    14.436    cpu_soc/cpu/cpu_ex_mem/alu_result_out[15]_i_16_n_0
-                         LUT6 (Prop_lut6_I1_O)        0.124    14.560 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out[15]_i_8/O
-                         net (fo=2, unplaced)         0.913    15.473    cpu_soc/cpu/cpu_ex_mem/func3_out_reg[1]_13
-                         LUT6 (Prop_lut6_I1_O)        0.124    15.597 r  cpu_soc/cpu/cpu_ex_mem/pc_out[31]_i_192/O
-                         net (fo=2, unplaced)         0.460    16.057    cpu_soc/cpu/cpu_id_ex/pc_out[31]_i_32_5
-                         LUT6 (Prop_lut6_I2_O)        0.124    16.181 r  cpu_soc/cpu/cpu_id_ex/pc_out[31]_i_76/O
-                         net (fo=2, unplaced)         1.122    17.303    cpu_soc/cpu/cpu_id_ex/branch_comp_1[15]
-                         LUT6 (Prop_lut6_I3_O)        0.124    17.427 r  cpu_soc/cpu/cpu_id_ex/pc_out[31]_i_55/O
-                         net (fo=1, unplaced)         0.000    17.427    cpu_soc/cpu/cpu_id_ex/pc_out[31]_i_55_n_0
+                         FDCE (Prop_fdce_C_Q)         0.456     5.505 f  cpu_soc/cpu/cpu_mem_wb/reg_write_out_reg/Q
+                         net (fo=35, unplaced)        1.038     6.543    cpu_soc/cpu/cpu_mem_wb/mem_wb_reg_write
+                         LUT6 (Prop_lut6_I0_O)        0.295     6.838 f  cpu_soc/cpu/cpu_mem_wb/read_data2_out[31]_i_14__0/O
+                         net (fo=4, unplaced)         1.135     7.973    cpu_soc/cpu/cpu_id_ex/p_4_in
+                         LUT6 (Prop_lut6_I1_O)        0.124     8.097 f  cpu_soc/cpu/cpu_id_ex/read_data2_out[31]_i_6__0/O
+                         net (fo=1, unplaced)         0.419     8.516    cpu_soc/cpu/cpu_id_ex/forward_src2[0]
+                         LUT2 (Prop_lut2_I0_O)        0.124     8.640 f  cpu_soc/cpu/cpu_id_ex/read_data2_out[31]_i_2__0/O
+                         net (fo=34, unplaced)        0.975     9.615    cpu_soc/cpu/cpu_ex_mem/read_data2_out_reg[0]_1
+                         LUT6 (Prop_lut6_I0_O)        0.124     9.739 r  cpu_soc/cpu/cpu_ex_mem/read_data2_out[0]_i_1__0/O
+                         net (fo=2, unplaced)         0.460    10.199    cpu_soc/cpu/cpu_id_ex/alu_result_out[31]_i_7_0[0]
+                         LUT3 (Prop_lut3_I2_O)        0.124    10.323 r  cpu_soc/cpu/cpu_id_ex/alu_result_out[0]_i_8/O
+                         net (fo=91, unplaced)        0.516    10.839    cpu_soc/cpu/cpu_id_ex/imm_gen_out_out_reg[7]_0[0]
+                         LUT6 (Prop_lut6_I4_O)        0.124    10.963 r  cpu_soc/cpu/cpu_id_ex/alu_result_out[17]_i_13/O
+                         net (fo=9, unplaced)         0.706    11.669    cpu_soc/cpu/cpu_id_ex/alu_result_out[17]_i_13_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    11.793 r  cpu_soc/cpu/cpu_id_ex/mem_array_reg_0_127_0_0_i_119/O
+                         net (fo=2, unplaced)         0.913    12.706    cpu_soc/cpu/cpu_id_ex/mem_array_reg_0_127_0_0_i_119_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    12.830 r  cpu_soc/cpu/cpu_id_ex/alu_result_out[9]_i_6/O
+                         net (fo=1, unplaced)         0.902    13.732    cpu_soc/cpu/cpu_id_ex/alu_result_out[9]_i_6_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    13.856 r  cpu_soc/cpu/cpu_id_ex/alu_result_out[9]_i_3/O
+                         net (fo=1, unplaced)         0.000    13.856    cpu_soc/cpu/cpu_id_ex/alu_result_out[9]_i_3_n_0
+                         MUXF7 (Prop_muxf7_I0_O)      0.241    14.097 r  cpu_soc/cpu/cpu_id_ex/alu_result_out_reg[9]_i_2/O
+                         net (fo=66, unplaced)        0.541    14.638    cpu_soc/cpu/cpu_id_ex/func3_out_reg[0]_8[0]
+                         LUT5 (Prop_lut5_I4_O)        0.298    14.936 r  cpu_soc/cpu/cpu_id_ex/alu_result_out[9]_i_1/O
+                         net (fo=3, unplaced)         0.467    15.403    cpu_soc/cpu/cpu_ex_mem/D[9]
+                         LUT6 (Prop_lut6_I1_O)        0.124    15.527 r  cpu_soc/cpu/cpu_ex_mem/target_flat[2027]_i_18/O
+                         net (fo=9, unplaced)         0.490    16.017    cpu_soc/cpu/cpu_if_id/branch_comp_1[9]
+                         LUT5 (Prop_lut5_I0_O)        0.124    16.141 r  cpu_soc/cpu/cpu_if_id/target_flat[2027]_i_10/O
+                         net (fo=1, unplaced)         0.000    16.141    cpu_soc/cpu/cpu_if_id/target_flat[2027]_i_10_n_0
                          CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.533    17.960 r  cpu_soc/cpu/cpu_id_ex/pc_out_reg[31]_i_21/CO[3]
-                         net (fo=1, unplaced)         0.000    17.960    cpu_soc/cpu/cpu_id_ex/pc_out_reg[31]_i_21_n_0
-                         CARRY4 (Prop_carry4_CI_CO[2])
-                                                      0.252    18.212 r  cpu_soc/cpu/cpu_id_ex/pc_out_reg[31]_i_11/CO[2]
-                         net (fo=1, unplaced)         0.452    18.664    cpu_soc/cpu/cpu_if_id/CO[0]
-                         LUT5 (Prop_lut5_I4_O)        0.310    18.974 r  cpu_soc/cpu/cpu_if_id/pc_out[31]_i_4/O
-                         net (fo=60, unplaced)        0.536    19.510    cpu_soc/cpu/cpu_if_id/real_taken
-                         LUT6 (Prop_lut6_I2_O)        0.124    19.634 r  cpu_soc/cpu/cpu_if_id/instruction_out[27]_i_3/O
-                         net (fo=148, unplaced)       0.558    20.192    cpu_soc/cpu/cpu_if_id/flush0
-                         LUT6 (Prop_lut6_I0_O)        0.124    20.316 r  cpu_soc/cpu/cpu_if_id/instruction_out[27]_i_1/O
-                         net (fo=147, unplaced)       0.582    20.898    cpu_soc/cpu/cpu_if_id/instruction_out[27]_i_1_n_0
+                                                      0.533    16.674 r  cpu_soc/cpu/cpu_if_id/target_flat_reg[2027]_i_3/CO[3]
+                         net (fo=1, unplaced)         0.000    16.674    cpu_soc/cpu/cpu_if_id/target_flat_reg[2027]_i_3_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    16.791 r  cpu_soc/cpu/cpu_if_id/target_flat_reg[2031]_i_3/CO[3]
+                         net (fo=1, unplaced)         0.000    16.791    cpu_soc/cpu/cpu_if_id/target_flat_reg[2031]_i_3_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    16.908 r  cpu_soc/cpu/cpu_if_id/target_flat_reg[2035]_i_3/CO[3]
+                         net (fo=1, unplaced)         0.000    16.908    cpu_soc/cpu/cpu_if_id/target_flat_reg[2035]_i_3_n_0
+                         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    17.025 r  cpu_soc/cpu/cpu_if_id/target_flat_reg[2039]_i_3/CO[3]
+                         net (fo=1, unplaced)         0.000    17.025    cpu_soc/cpu/cpu_if_id/target_flat_reg[2039]_i_3_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    17.356 r  cpu_soc/cpu/cpu_if_id/target_flat_reg[2043]_i_3/O[3]
+                         net (fo=2, unplaced)         0.629    17.985    cpu_soc/cpu/cpu_if_id/jalr_target_full[27]
+                         LUT3 (Prop_lut3_I0_O)        0.299    18.284 r  cpu_soc/cpu/cpu_if_id/target_flat[2043]_i_2/O
+                         net (fo=17, unplaced)        0.958    19.242    cpu_soc/cpu/cpu_if_id/real_target[27]
+                         LUT6 (Prop_lut6_I3_O)        0.124    19.366 r  cpu_soc/cpu/cpu_if_id/pc_out[31]_i_8/O
+                         net (fo=1, unplaced)         0.000    19.366    cpu_soc/cpu/cpu_if_id/pc_out[31]_i_8_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.574    19.940 r  cpu_soc/cpu/cpu_if_id/pc_out_reg[31]_i_5/CO[2]
+                         net (fo=1, unplaced)         0.452    20.392    cpu_soc/cpu/cpu_if_id/mispredicted1
+                         LUT3 (Prop_lut3_I1_O)        0.310    20.702 f  cpu_soc/cpu/cpu_if_id/pc_out[31]_i_3/O
+                         net (fo=56, unplaced)        0.534    21.236    cpu_soc/cpu/cpu_ex_mem/if_id_pc_plus_four_out_reg[1]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    21.360 r  cpu_soc/cpu/cpu_ex_mem/instruction_out[31]_i_6/O
+                         net (fo=169, unplaced)       0.562    21.922    cpu_soc/cpu/cpu_ex_mem/flush0
+                         LUT6 (Prop_lut6_I5_O)        0.124    22.046 r  cpu_soc/cpu/cpu_ex_mem/instruction_out[31]_i_1/O
+                         net (fo=168, unplaced)       0.586    22.632    cpu_soc/cpu/cpu_if_id/if_id_pc_plus_four_out_reg[1]_1
                          FDCE                                         r  cpu_soc/cpu/cpu_if_id/if_id_pc_plus_four_out_reg[10]/CE
   -------------------------------------------------------------------    -------------------
 
@@ -437,16 +450,16 @@ Slack (MET) :             3.769ns  (required time - arrival time)
                          FDRE (Prop_fdre_C_Q)         0.367    23.045 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.760    23.804    clk_div
                          BUFG (Prop_bufg_I_O)         0.232    24.036 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.439    24.475    cpu_soc/cpu/cpu_if_id/cpu_clk
+                         net (fo=6473, unplaced)      0.439    24.475    cpu_soc/cpu/cpu_if_id/cpu_clk
                          FDCE                                         r  cpu_soc/cpu/cpu_if_id/if_id_pc_plus_four_out_reg[10]/C
                          clock pessimism              0.428    24.904    <hidden>
                          clock uncertainty           -0.035    24.868    <hidden>
                          FDCE (Setup_fdce_C_CE)      -0.202    24.666    cpu_soc/cpu/cpu_if_id/if_id_pc_plus_four_out_reg[10]
   -------------------------------------------------------------------
                          required time                         24.666    <hidden>
-                         arrival time                         -20.898    <hidden>
+                         arrival time                         -22.632    <hidden>
   -------------------------------------------------------------------
-                         slack                                  3.769    <hidden>
+                         slack                                  2.035    <hidden>
 
 
 
@@ -454,15 +467,15 @@ Slack (MET) :             3.769ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.125ns  (arrival time - required time)
-  Source:                 cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[9]/C
+Slack (MET) :             0.116ns  (arrival time - required time)
+  Source:                 cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[5]/C
                             (rising edge-triggered cell FDCE clocked by cpu_clk  {rise@0.000ns fall@10.000ns period=20.000ns})
-  Destination:            cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A/WADR7
-                            (rising edge-triggered cell RAMS64E clocked by cpu_clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH/WADR3
+                            (rising edge-triggered cell RAMD64E clocked by cpu_clk  {rise@0.000ns fall@10.000ns period=20.000ns})
   Path Group:             cpu_clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (cpu_clk rise@0.000ns - cpu_clk rise@0.000ns)
-  Data Path Delay:        0.341ns  (logic 0.141ns (41.373%)  route 0.200ns (58.627%))
+  Data Path Delay:        0.448ns  (logic 0.141ns (31.483%)  route 0.307ns (68.517%))
   Logic Levels:           0  
   Clock Path Skew:        0.145ns (DCD - SCD - CPR)
     Destination Clock Delay (DCD):    1.943ns
@@ -481,12 +494,12 @@ Slack (MET) :             0.125ns  (arrival time - required time)
                          FDRE (Prop_fdre_C_Q)         0.141     0.845 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.337     1.182    clk_div
                          BUFG (Prop_bufg_I_O)         0.080     1.262 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.114     1.376    cpu_soc/cpu/cpu_ex_mem/cpu_clk
-                         FDCE                                         r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[9]/C
+                         net (fo=6473, unplaced)      0.114     1.376    cpu_soc/cpu/cpu_ex_mem/cpu_clk
+                         FDCE                                         r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[5]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.141     1.517 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[9]/Q
-                         net (fo=642, unplaced)       0.200     1.716    cpu_soc/ram/mem_array_reg_0_255_0_0/A7
-                         RAMS64E                                      r  cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A/WADR7
+                         FDCE (Prop_fdce_C_Q)         0.141     1.517 r  cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[5]/Q
+                         net (fo=193, unplaced)       0.307     1.823    cpu_soc/ram/mem_array_reg_0_127_0_0/A3
+                         RAMD64E                                      r  cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH/WADR3
   -------------------------------------------------------------------    -------------------
 
                          (clock cpu_clk rise edge)    0.000     0.000 r  <hidden>
@@ -499,16 +512,16 @@ Slack (MET) :             0.125ns  (arrival time - required time)
                          FDRE (Prop_fdre_C_Q)         0.175     1.232 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.355     1.587    clk_div
                          BUFG (Prop_bufg_I_O)         0.097     1.684 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.259     1.943    cpu_soc/ram/mem_array_reg_0_255_0_0/WCLK
-                         RAMS64E                                      r  cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A/CLK
+                         net (fo=6473, unplaced)      0.259     1.943    cpu_soc/ram/mem_array_reg_0_127_0_0/WCLK
+                         RAMD64E                                      r  cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH/CLK
                          clock pessimism             -0.422     1.521    <hidden>
-                         RAMS64E (Hold_rams64e_CLK_WADR7)
-                                                      0.071     1.592    cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A
+                         RAMD64E (Hold_ramd64e_CLK_WADR3)
+                                                      0.187     1.708    cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH
   -------------------------------------------------------------------
-                         required time                         -1.592    <hidden>
-                         arrival time                           1.716    <hidden>
+                         required time                         -1.708    <hidden>
+                         arrival time                           1.823    <hidden>
   -------------------------------------------------------------------
-                         slack                                  0.125    <hidden>
+                         slack                                  0.116    <hidden>
 
 
 
@@ -523,8 +536,8 @@ Sources:            { bufg_cpu/O }
 
 Check Type        Corner  Lib Pin      Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location  Pin
 Min Period        n/a     FDCE/C       n/a            1.000         20.000      19.000               cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]/C
-Low Pulse Width   Slow    RAMS64E/CLK  n/a            1.250         10.000      8.750                cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A/CLK
-High Pulse Width  Slow    RAMS64E/CLK  n/a            1.250         10.000      8.750                cpu_soc/ram/mem_array_reg_0_255_0_0/RAMS64E_A/CLK
+Low Pulse Width   Slow    RAMD64E/CLK  n/a            1.250         10.000      8.750                cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH/CLK
+High Pulse Width  Slow    RAMD64E/CLK  n/a            1.250         10.000      8.750                cpu_soc/ram/mem_array_reg_0_127_0_0/DP.HIGH/CLK
 
 
 
@@ -534,7 +547,7 @@ From Clock:  sys_clk_pin
   To Clock:  cpu_clk
 
 Setup :            0  Failing Endpoints,  Worst Slack        9.248ns,  Total Violation        0.000ns
-Hold  :         4716  Failing Endpoints,  Worst Slack       -0.289ns,  Total Violation    -1363.225ns
+Hold  :         5417  Failing Endpoints,  Worst Slack       -0.289ns,  Total Violation    -1565.859ns
 ---------------------------------------------------------------------------------------------------
 
 
@@ -574,8 +587,8 @@ Slack (MET) :             9.248ns  (required time - arrival time)
   -------------------------------------------------------------------    -------------------
                          FDRE (Prop_fdre_C_Q)         0.438    13.376 r  rst_n_sync_reg[2]/Q
                          net (fo=1, unplaced)         0.311    13.687    cpu_soc/cpu/cpu_branch_predictor/rst_n
-                         LUT1 (Prop_lut1_I0_O)        0.295    13.982 f  cpu_soc/cpu/cpu_branch_predictor/counter_flat[127]_i_3/O
-                         net (fo=4716, unplaced)      0.916    14.898    cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2]
+                         LUT1 (Prop_lut1_I0_O)        0.295    13.982 f  cpu_soc/cpu/cpu_branch_predictor/FSM_sequential_state[1]_i_2/O
+                         net (fo=5417, unplaced)      0.916    14.898    cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2]
                          FDCE                                         f  cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]/CLR
   -------------------------------------------------------------------    -------------------
 
@@ -589,7 +602,7 @@ Slack (MET) :             9.248ns  (required time - arrival time)
                          FDRE (Prop_fdre_C_Q)         0.367    23.045 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.760    23.804    clk_div
                          BUFG (Prop_bufg_I_O)         0.232    24.036 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.439    24.475    cpu_soc/cpu/cpu_branch_predictor/cpu_clk
+                         net (fo=6473, unplaced)      0.439    24.475    cpu_soc/cpu/cpu_branch_predictor/cpu_clk
                          FDCE                                         r  cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]/C
                          clock pessimism              0.115    24.591    <hidden>
                          clock uncertainty           -0.035    24.555    <hidden>
@@ -635,8 +648,8 @@ Slack (VIOLATED) :        -0.289ns  (arrival time - required time)
   -------------------------------------------------------------------    -------------------
                          FDRE (Prop_fdre_C_Q)         0.352     3.030 r  rst_n_sync_reg[2]/Q
                          net (fo=1, unplaced)         0.295     3.325    cpu_soc/cpu/cpu_branch_predictor/rst_n
-                         LUT1 (Prop_lut1_I0_O)        0.238     3.563 f  cpu_soc/cpu/cpu_branch_predictor/counter_flat[127]_i_3/O
-                         net (fo=4716, unplaced)      0.870     4.433    cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2]
+                         LUT1 (Prop_lut1_I0_O)        0.238     3.563 f  cpu_soc/cpu/cpu_branch_predictor/FSM_sequential_state[1]_i_2/O
+                         net (fo=5417, unplaced)      0.870     4.433    cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2]
                          FDCE                                         f  cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]/CLR
   -------------------------------------------------------------------    -------------------
 
@@ -650,7 +663,7 @@ Slack (VIOLATED) :        -0.289ns  (arrival time - required time)
                          FDRE (Prop_fdre_C_Q)         0.456     3.394 r  clk_div_reg/Q
                          net (fo=2, unplaced)         0.800     4.194    clk_div
                          BUFG (Prop_bufg_I_O)         0.271     4.465 r  bufg_cpu/O
-                         net (fo=5228, unplaced)      0.584     5.049    cpu_soc/cpu/cpu_branch_predictor/cpu_clk
+                         net (fo=6473, unplaced)      0.584     5.049    cpu_soc/cpu/cpu_branch_predictor/cpu_clk
                          FDCE                                         r  cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]/C
                          clock pessimism             -0.115     4.933    <hidden>
                          FDCE (Remov_fdce_C_CLR)     -0.211     4.722    cpu_soc/cpu/cpu_branch_predictor/counter_flat_reg[0]

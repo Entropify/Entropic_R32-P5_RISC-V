@@ -62,7 +62,7 @@ The generated bitstream is `r32p5_basys3.bit`. Either:
 open_hw_manager
 connect_hw_server
 open_hw_target
-set_property PROGRAM.FILE {X:/Entropic_R32-P5_RISC-V/fpga/basys3/r32p5_basys3.bit} [current_hw_device]
+set_property PROGRAM.FILE {X:/Entropic_R32-P5_RISC-V_UART/fpga/basys3/r32p5_basys3.bit} [current_hw_device]
 program_hw_devices [current_hw_device]
 ```
 
@@ -97,7 +97,7 @@ X:/AMDDesignTools/2026.1/Vivado/bin/vivado.bat -mode batch -source build_synth.t
 1. Edit `prog.s`. (RISC-V GNU tools live in WSL.)
 2. Reassemble:
    ```bash
-   wsl -e bash -c "cd /mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3 && \
+   wsl -e bash -c "cd /mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3 && \
      riscv64-unknown-elf-as -march=rv32i -mabi=ilp32 -o prog.o prog.s && \
      riscv64-unknown-elf-ld -m elf32lriscv -Ttext 0x00000000 -o prog.elf prog.o && \
      riscv64-unknown-elf-objcopy -O verilog --verilog-data-width=4 prog.elf fpga_prog.hex"
@@ -115,8 +115,8 @@ via the `INSTR_MEM_FILE` parameter (default points at `fpga_prog.hex`).
 halts with `x10 = 1`:
 
 ```bash
-wsl -e bash -c "cd /mnt/x/Entropic_R32-P5_RISC-V/fpga/basys3 && \
-  iverilog -o basys3_sim.vvp -s tb_basys3 /mnt/x/Entropic_R32-P5_RISC-V/rtl/*.v \
+wsl -e bash -c "cd /mnt/x/Entropic_R32-P5_RISC-V_UART/fpga/basys3 && \
+  iverilog -o basys3_sim.vvp -s tb_basys3 /mnt/x/Entropic_R32-P5_RISC-V_UART/rtl/*.v \
     basys3_top.v tb_basys3.v sim_bfm.v && vvp basys3_sim.vvp"
 ```
 Expected output: `CPU HALTED ... x10 (led[7:0]) = 1 ... PASS`.
