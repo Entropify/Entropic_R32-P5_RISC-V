@@ -1,0 +1,19 @@
+# Quick synthesis-only validation + resource/utilization report
+set proj_dir  "X:/Entropic_R32-P5_RISC-V/fpga/basys3"
+set rtl_dir   "X:/Entropic_R32-P5_RISC-V/rtl"
+set part      "xc7a35tcpg236-1"
+
+if {[file exists "$proj_dir/proj_synth"]} {
+    file delete -force "$proj_dir/proj_synth"
+}
+create_project r32p5_basys3_synth "$proj_dir/proj_synth" -part $part -force
+add_files -norecurse [glob "$rtl_dir/*.v"]
+add_files -norecurse [glob "$proj_dir/basys3_top.v"]
+add_files -fileset constrs_1 -norecurse "$proj_dir/basys3.xdc"
+set_property top basys3_top [current_fileset]
+update_compile_order -fileset sources_1
+
+synth_design -top basys3_top -part $part
+report_utilization -file "$proj_dir/report_utilization_synth.rpt"
+report_timing_summary -file "$proj_dir/report_timing_synth.rpt"
+puts "=== SYNTH DONE ==="

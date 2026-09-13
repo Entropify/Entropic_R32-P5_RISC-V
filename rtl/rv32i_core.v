@@ -20,8 +20,9 @@
     output wire mem_write,       // control signals
     output wire mem_read,
 
-    output wire halt
+    output wire halt,
 
+    output wire [31:0] x10_debug  // FPGA bring-up diagnostic: x10 return code
   );
 
 
@@ -159,7 +160,8 @@ wire [31:0] predict_target;
     .write_data(writeback_data),
     .reg_write(mem_wb_reg_write),
     .rs1_data(read_data1_d),
-    .rs2_data(read_data2_d)
+    .rs2_data(read_data2_d),
+    .x10_debug(x10_debug)
   );
 
   wire [1:0] id_src1, id_src2;

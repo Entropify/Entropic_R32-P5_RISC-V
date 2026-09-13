@@ -1,0 +1,370 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Sun Sep  6 01:34:59 2026
+| Host         : AORUS15XE4 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file basys3_top_control_sets_placed.rpt
+| Design       : basys3_top
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |   292 |
+|    Minimum number of control sets                        |   292 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   402 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |   292 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |   193 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    98 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |             312 |          135 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |            4404 |         2369 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+-----------------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+|  Clock Signal  |                    Enable Signal                    |                  Set/Reset Signal                  | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------+-----------------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG |                                                     |                                                    |                2 |              3 |         1.50 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[7]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[114] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[123] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[119] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[126] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[78]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[102] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[127] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[112] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[109] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[129] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[130] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[131] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[152] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[185] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[158] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[170] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[166] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[173] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[140] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[154] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[144] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[187] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[189] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[191] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[169] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[145] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[139] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[162] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[143] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[164] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[175] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[155] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[186] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[167] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[163] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[89]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[181] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[141] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[184] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[188] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[149] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[157] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[161] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[147] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[159] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[151] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[150] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[156] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[160] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[148] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[165] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[172] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[177] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[178] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[146] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[153] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                1 |              8 |         8.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[176] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[142] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[179] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[180] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[171] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[183] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[174] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[168] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/reg_write_out_reg_0[0]       | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[182] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[1]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[2]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[5]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[9]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[6]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[8]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[10]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[0]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[3]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[4]   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[66]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[65]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[15]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[53]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[61]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[17]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[28]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[12]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[32]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[51]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[67]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[68]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[69]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[70]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[71]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[20]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[72]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[36]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[73]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[74]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[13]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[16]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[31]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[21]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[29]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[57]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[25]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[19]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[41]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[40]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[47]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[33]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[37]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[48]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[58]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[59]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[62]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[22]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[18]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[23]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[27]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[26]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[30]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[24]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[34]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[35]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[14]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[42]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[43]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[44]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[45]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[38]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[46]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[11]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[52]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[49]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[54]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[55]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[56]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[60]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[39]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[64]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[50]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[63]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[133] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[88]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[91]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                8 |              8 |         1.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[93]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[190] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[83]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[76]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[92]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[84]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                8 |              8 |         1.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[113] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[120] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[116] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[82]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[99]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[96]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[81]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[100] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[121] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[134] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[136] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[75]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[137] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[138] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[135] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[132] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[85]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[98]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[105] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                2 |              8 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[111] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[110] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[124] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                8 |              8 |         1.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[77]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[90]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[101] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                7 |              8 |         1.14 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[118] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[95]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[117] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[107] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[103] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[122] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                8 |              8 |         1.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[125] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[106] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[128] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[104] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[97]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                3 |              8 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[79]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[115] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[80]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[94]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                8 |              8 |         1.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[87]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                6 |              8 |         1.33 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[86]  | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                4 |              8 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[4]_0[108] | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |                5 |              8 |         1.60 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/E[0]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             32 |         1.88 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[0]_2[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             32 |         1.78 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_5     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_0[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               11 |             32 |         2.91 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_3[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             32 |         1.88 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_4[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               25 |             32 |         1.28 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[4]_1[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               14 |             32 |         2.29 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_8[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             32 |         1.88 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_7[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               14 |             32 |         2.29 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[1]_3[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             32 |         2.13 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_6[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             32 |         2.46 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_5[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               12 |             32 |         2.67 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_1[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             32 |         1.88 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[1]_2[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             32 |         2.46 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[2]_2[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             32 |         2.46 |
+|  cpu_clk       | cpu_soc/cpu/cpu_mem_wb/rd_addr_out_reg[1]_1[0]      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             32 |         1.68 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_2     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_3     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[11]_1     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_4     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[11]_0     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[11]_2     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_0     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[11]_3     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/alu_result_out_reg[10]_1     |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_1          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_0          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_2          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_3          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_4          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_ex_mem/mem_write_out_reg_5          |                                                    |                8 |             32 |         4.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[52]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[3]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[42]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               16 |             34 |         2.12 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[53]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[47]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[12]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[59]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[11]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[31]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[32]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[35]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               16 |             34 |         2.12 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[37]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             34 |         2.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[38]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               16 |             34 |         2.12 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[27]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[28]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[0]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[2]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[44]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[19]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[4]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[24]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[45]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[36]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             34 |         2.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[48]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[6]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               21 |             34 |         1.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[10]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[26]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               16 |             34 |         2.12 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[51]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               14 |             34 |         2.43 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[54]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[34]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[55]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[58]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[29]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               21 |             34 |         1.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[63]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[57]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[39]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               21 |             34 |         1.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[1]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               21 |             34 |         1.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[33]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[41]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[7]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[15]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[5]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[16]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[21]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[56]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[9]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               14 |             34 |         2.43 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[60]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[22]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[62]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[49]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             34 |         2.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[20]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               18 |             34 |         1.89 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[23]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[50]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[30]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               20 |             34 |         1.70 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[43]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               24 |             34 |         1.42 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[25]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               16 |             34 |         2.12 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[13]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               19 |             34 |         1.79 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[46]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[40]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               15 |             34 |         2.27 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[61]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               22 |             34 |         1.55 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[17]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             34 |         2.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[8]                          | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               13 |             34 |         2.62 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[18]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               14 |             34 |         2.43 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/E[14]                         | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               17 |             34 |         2.00 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out_reg[5]_0      | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               21 |             57 |         2.71 |
+|  cpu_clk       | cpu_soc/cpu/cpu_if_id/instruction_out[27]_i_1_n_0   | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |               39 |            147 |         3.77 |
+|  cpu_clk       |                                                     | cpu_soc/cpu/cpu_branch_predictor/rst_n_sync_reg[2] |              135 |            312 |         2.31 |
++----------------+-----------------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+
+

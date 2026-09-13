@@ -6,7 +6,9 @@
 `default_nettype none
  
 
-module instruction_mem (
+module instruction_mem #(
+    parameter INIT_FILE = "../../tb/programs/tb_program.hex"
+)(
     input wire [31:0] address,
     output wire [31:0] instruction
 );
@@ -16,7 +18,7 @@ reg [31:0] rom [0:1023];
 
 
 initial begin
-    $readmemh("../../tb/programs/tb_program.hex", rom); 
+    $readmemh(INIT_FILE, rom); 
 end
 
 

@@ -14,7 +14,8 @@
     input wire [31:0] write_data,
     input wire reg_write,
     output wire [31:0] rs1_data,
-    output wire [31:0] rs2_data
+    output wire [31:0] rs2_data,
+    output wire [31:0] x10_debug   // FPGA bring-up diagnostic: exposes x10 for LED readout
  );
 
  reg [31:0] internal_reg [0:31];
@@ -28,6 +29,9 @@ assign rs1_data = (rs1_address == 0) ? 32'h0000_0000 :
 assign rs2_data = (rs2_address == 0) ? 32'h0000_0000 :
                    (reg_write && rd_address == rs2_address) ? write_data :
                    internal_reg[rs2_address];
+
+// FPGA bring-up diagnostic readout of x10 (return code convention)
+assign x10_debug = internal_reg[10];
 
  integer i;
 

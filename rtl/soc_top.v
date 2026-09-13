@@ -5,10 +5,13 @@
 
 `default_nettype none
 
-module soc_top (
+module soc_top #(
+    parameter INSTR_MEM_FILE = "../../tb/programs/tb_program.hex"
+)(
     input wire clk,
     input wire rst_n,
-    output wire halt
+    output wire halt,
+    output wire [31:0] x10_debug
 );
 
 
@@ -42,13 +45,16 @@ rv32i_core cpu (
     .mem_write(mem_write),
     .mem_read(mem_read),
     .write_mask(write_mask),
-    .halt(halt)
+    .halt(halt),
+    .x10_debug(x10_debug)
     );
 
 
 // instr mem
 
-instruction_mem rom (
+instruction_mem #(
+    .INIT_FILE(INSTR_MEM_FILE)
+) rom (
         .address(instr_address),
         .instruction(instruction)
     );
