@@ -46,6 +46,7 @@ The processor implements all 40 RV32I base instructions, dynamic branch predicti
 - [Performance Benchmarks](#Performance-Benchmarks)
 - [Major Debugging Findings](#Major-Debugging-Findings)
 - [ASIC Implementation](#ASIC-Implementation)
+- [FPGA Implementation](#FPGA-Implementation)
 - [Repository Structure](#Repository-Structure)
 - [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
@@ -377,6 +378,101 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 - Max slew / max cap violations remain in the `ss` (slow-slow) process corner, similar in category to the single-cycle core's residual signal-integrity findings. Thgis does not block DRC/LVS/timing signoff, but a real consideration for an actual fabricated chip.
 - Core utilization (~30%) is lower than the single-cycle design's 47.3%, which is the cost of choosing `AREA 3` for its timing win. Revisiting this would mean either accepting a larger die or finding a synthesis-strategy/RTL combination that gets `AREA 3`-level timing without `AREA 3`-level gate count. Or alternatively, more ASIC flow iterations for more fine tuned and optimized OpenLane2 configuration flags.
+
+---
+
+## FPGA Implementation
+
+Ported the same core to a **physical FPGA board** — an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3) — using **Vivado 2026.1**. Unlike the ASIC flow, which only ever had to satisfy a static timing report, the board target is a real system: it needs a clock the core can actually run at, a reset it can trust, and some way to *see* the CPU doing work outside of a waveform viewer.
+
+The RTL is the **same `rtl/` tree** the ASIC run used, with only additive changes (below), so every cocotb phase test and the OpenLane2 flow still run against it unmodified. `R32-P5` on the board is the same microarchitecture as `R32-P5` on SKY130 — a different *target*, not a different design.
+
+### RTL changes for the board target
+
+- **`x10_debug` output port:** exposes the core's return code straight to the board LEDs — `led[15]` = halted, `led[7:0]` = `x10`. Every test program's existing error-code convention carries over from cocotb to hardware unchanged, so a passing program lights exactly two LEDs.
+- **`INSTR_MEM_FILE` parameter:** threaded from the board top level through `soc_top` into `instruction_mem`, so the instruction image path is absolute at synthesis time and relative in simulation. It has to be a parameter, because `$readmemh` resolves its path against the *Vivado process* working directory rather than the source file — a subtlety that cost me a full debug cycle (see [Board bring-up findings](#Board-bring-up-findings)).
+- **`pc_debug` output port:** the fetch PC, added specifically so a wedged core could be located by eye during bring-up (a ~3 Hz sampled copy of it onto `led[15:0]`).
+- **Nothing else.** No pipeline stage, hazard unit, forwarding path, or predictor logic was touched for the board.
+
+### Clocking & reset
+
+- **50 MHz CPU clock.** The Basys3's onboard oscillator runs at 100 MHz (pin `W5`), which this design cannot close at: a 100 MHz attempt reports **-8.938 ns** worst setup slack on an 18.556 ns critical path, putting the core's real ceiling around **51 MHz**. The CPU instead runs on a divided clock — a register toggle plus a `BUFG` — constrained with `create_generated_clock -divide_by 2` on the `BUFG` output, so `cpu_clk` is a genuinely timed constraint rather than an inferred one.
+- **Reset, async-assert / sync-de-assert.** The first board build synchronised `btnC` on the 100 MHz input clock while the CPU ran on the divided 50 MHz clock, which means the CPU's flops were being released from reset **asynchronously to their own clock** — a classic clock-domain mistake that can leave a pipeline in an inconsistent state at start-up. Rewritten so the button asserts reset immediately but de-asserts only after two `cpu_clk` edges, i.e. in the domain it actually resets. Simulation never caught this, because a testbench drives reset cleanly.
+
+### Board-level I/O: a memory-mapped UART
+
+The board target needed an output, so I added a peripheral — following the SoC's existing shape: a new module under `rtl/`, instantiated in `soc_top`, never inside the memories.
+
+| Piece | Detail |
+|---|---|
+| Transmitter | `rtl/uart_tx.v` — 8N1, LSB-first, `CLKS_PER_BIT = 434` (= 50 MHz / 115200) |
+| MMIO decode | `0x1000_0000`, decoded in `soc_top` off the same data bus the CPU already uses |
+| Register map | store → transmit the low 8 bits; load → `{31'b0, tx_busy}` for polling |
+| Physical pin | `A18` (`RsTx`) → the board's FT2232HQ USB-UART bridge → a virtual COM port on the PC |
+
+The address decode **gates the RAM strobes** (`ram_write = mem_write && !uart_sel`) and muxes the read path, so a UART access can never corrupt memory and the peripheral looks exactly like memory from the CPU's point of view — just `lw`/`sw` at a magic address. `data_mem` and `instruction_mem` were not modified for this at all.
+
+### Results
+
+| Metric | Value |
+|---|---|
+| Device | `xc7a35tcpg236-1` (AMD Xilinx Artix-7 35T) |
+| Tool | Vivado 2026.1 |
+| CPU clock period | 20 ns |
+| CPU clock speed | **50 MHz** (100 MHz board oscillator ÷ 2) |
+| Worst setup slack (WNS) | **+0.143 ns** *(best run: +0.732 ns)* |
+| Worst hold slack (WHS) | +0.035 ns |
+| Failing endpoints | **0** |
+| Slice LUTs | 7,288 / 20,800 (35.04%) |
+| Slice registers | 5,484 / 41,600 (13.18%) |
+| Block RAM tiles | **0** / 50 (0.00%) |
+| DSPs | 0 / 90 |
+| Bonded IOB | 19 / 106 (17.92%) |
+| BUFGCTRL | 2 / 32 (6.25%) |
+
+**Run-to-run slack variance.** At 50 MHz this design has only a few hundred picoseconds of margin, and place-and-route is a heuristic — so the *same sources* land differently on each run, and the default flow twice came back with a genuine timing failure:
+
+| Place/route strategy | WNS (ns) | Failing endpoints |
+|---|---|---|
+| Default (`place_design` / `route_design`) | -0.341 | 33 |
+| Default | +0.025 | 0 |
+| Default | +0.279 | 0 |
+| Default | +0.392 | 0 |
+| **`ExtraTimingOpt` + `AggressiveExplore`** | **+0.732** | **0** |
+| `ExtraTimingOpt` + `AggressiveExplore` | +0.143 | 0 |
+
+Rather than re-roll the default flow until it happened to pass, I moved to a **timing-directed place & route with an escalating retry loop** (`place_design -directive ExtraTimingOpt`, `phys_opt_design -directive AggressiveExplore`, `route_design -directive AggressiveExplore`, escalating to `NoTimingRelaxation`/`Explore` if the first pass misses), restarting each attempt from a checkpoint taken *before* placement. That is the same instinct as the ASIC flow's `SYNTH_STRATEGY` sweep — don't assume the default is best, measure.
+
+### Critical path optimization: synchronous data memory
+
+The data memory was purely combinational — an asynchronous read through a 1024-deep array, which on an FPGA becomes a deep, high-fanout distributed-RAM mux tree. That tree was the design's bottleneck, so I converted the data memory to a **synchronous read**, sampled one stage early:
+
+- the read address is now the **EX-stage ALU result**, so the addressed word is captured on the clock edge and available in **MEM** — exactly when the asynchronous version used to produce it. That keeps all load timing, forwarding, and hazard behaviour identical, which is what made the change safe to do without any pipeline restructuring.
+- two companion changes turned out to be mandatory: a **`read_enable`** gate (without it, a non-load instruction's arbitrary ALU result gets used as an address) and a **write-first/read-second bypass** (without it, a store in MEM and a load in EX of the same word returns the stale value).
+
+Measured in a separate 100 MHz-targeted experiment on the same RTL, this moved the critical path from **18.5 ns to 16.0 ns**. In the final 50 MHz board build the critical path no longer passes through either memory at all.
+
+### Compiled C on hardware
+
+The same `riscv64-unknown-elf-gcc` → `objcopy -O verilog` → `$readmemh` path used by the benchmark suite now targets the board, with the image baked into the instruction ROM at synthesis — compiler-generated code for all 40 instructions, including libgcc's software divide.
+
+To have something real to run, the board program is **Conway's Game of Life on a 20x20 field**, rendered as ASCII and redrawn in place over the UART (ANSI cursor-home, so it animates rather than scrolls) at roughly **25 frames per second** — a rate set by the UART itself (a frame is ~430 characters at 115200 baud ≈ 39 ms), not by the CPU.
+
+It is **verified against a native build**: the identical `life.c` compiled for x86 and run on the host produces output **byte-for-byte identical** to what the RISC-V core streams off the board (1,813 bytes compared). That is a much stronger claim than "it prints something plausible" — it says the core executed the compiled C correctly, division and all.
+
+### Board bring-up findings
+
+- **A wrong `$readmemh` path does not fail the build — it silently produces an empty ROM.** The CPU then executes `0x00000000` forever: no halt, dark LEDs, nothing on the UART. It looks exactly like a broken CPU, and I spent a long time debugging the core itself before finding the path string pointed at a folder that didn't exist. The synthesis log *does* report it (`INFO: [Synth 8-3876] $readmem data file '<path>' is read successfully`) — now the first thing I check on any board build.
+- **The instruction ROM and the data RAM are two separate 4 KB memories that both live at address `0x0`.** The CPU fetches from the ROM but reads data — `.rodata` string literals included — over the data bus, which lands in the RAM. With the RAM uninitialised, every string literal read garbage. Fixed by preloading `data_mem` with the same image the ROM uses, so `.rodata` genuinely exists in RAM at run time.
+- **A diagnostic build is easy to leave in.** I added the sampled-PC-on-LEDs readout while debugging the empty-ROM problem, and a later attempt to restore the normal LED mapping silently didn't take — so two subsequent bitstreams shipped displaying a program counter on the LEDs instead of the pass/fail code. Now I grep for the debug signal names before every release build.
+
+### Known limitations
+
+- **Both memories infer as distributed LUTRAM, not Block RAM** (0 of 50 BRAM tiles used). That is what makes the LUT count 35% rather than a few percent, and it is the direct motivation for the planned BRAM/writable-memory conversion.
+- **The FPGA timing margin is placement-dependent** at 50 MHz, as the run-to-run table shows. The honest reading is that this core "closes at 50 MHz" only just, and the root cause is the same branch-resolve loop described in the ASIC section — raising the ceiling needs a pipeline change, not more flow tuning.
+- **UART is transmit-only.** The CPU can print but not receive; there is no RX path, no interrupt, and no input of any kind yet.
+- **The program is frozen into the bitstream at synthesis.** Changing the C means recompiling the hex *and* re-running synthesis/implementation (~5 minutes), then reprogramming — there is no runtime loader yet. A UART bootloader into writable memory is the planned fix.
+- **The FPGA configuration is volatile** (SRAM-based, unlike the ASIC's permanent GDS), so the board must be reprogrammed after every power cycle.
 
 ---
 
