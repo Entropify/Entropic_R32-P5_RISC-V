@@ -381,7 +381,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ---
 
-## FPGA Implementation
+## FPGA Implementation (in `fpga` branch)
 
 Ported the same core to a **physical FPGA board**, an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3), using **Vivado 2026.1**.
 
