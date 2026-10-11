@@ -15,10 +15,11 @@
 
 </div>
 
-**Oct. 11th 2026**
 
-**Contributed and listed on the official RISC-V International Learn GitHub Repository!! 🙀🙀**
-- Entropic R32-P5 under [🧩 Open RISC-V Implementations](https://github.com/riscv/learn?tab=readme-ov-file#-Open-RISC-V-Implementations)
+>[!IMPORTANT]
+>**Oct. 11th 2026**
+>**Contributed and listed on the official RISC-V International Learn GitHub Repository!! 🙀🙀**
+>- Entropic R32-P5 under [🧩 Open RISC-V Implementations](https://github.com/riscv/learn?tab=readme-ov-file#-Open-RISC-V-Implementations)
 ---
 
 **TL;DR**
