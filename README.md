@@ -383,9 +383,9 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ## FPGA Implementation
 
-Ported the same core to a **physical FPGA board** — an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3) — using **Vivado 2026.1**. Unlike the ASIC flow, which only ever had to satisfy a static timing report, the board target is a real system: it needs a clock the core can actually run at, a reset it can trust, and some way to *see* the CPU doing work outside of a waveform viewer.
+Ported the same core to a **physical FPGA board**, an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3), using **Vivado 2026.1**.
 
-The RTL is the **same `rtl/` tree** the ASIC run used, with only additive changes (below), so every cocotb phase test and the OpenLane2 flow still run against it unmodified. `R32-P5` on the board is the same microarchitecture as `R32-P5` on SKY130 — a different *target*, not a different design.
+The RTL is the **same `rtl/` tree** the ASIC run used, with only additive changes (below), so every cocotb phase test and the OpenLane2 flow still run against it unmodified. `R32-P5` on the board is the same microarchitecture as `R32-P5` on SKY130.
 
 ### RTL changes for the board target
 
@@ -401,7 +401,7 @@ The RTL is the **same `rtl/` tree** the ASIC run used, with only additive change
 
 ### Board-level I/O: a memory-mapped UART
 
-The board target needed an output, so I added a peripheral — following the SoC's existing shape: a new module under `rtl/`, instantiated in `soc_top`, never inside the memories.
+The board target needed an output, so I added a peripheral following the SoC's existing shape: a new module under `rtl/`, instantiated in `soc_top`, never inside the memories.
 
 | Piece | Detail |
 |---|---|
@@ -410,7 +410,7 @@ The board target needed an output, so I added a peripheral — following the SoC
 | Register map | store → transmit the low 8 bits; load → `{31'b0, tx_busy}` for polling |
 | Physical pin | `A18` (`RsTx`) → the board's FT2232HQ USB-UART bridge → a virtual COM port on the PC |
 
-The address decode **gates the RAM strobes** (`ram_write = mem_write && !uart_sel`) and muxes the read path, so a UART access can never corrupt memory and the peripheral looks exactly like memory from the CPU's point of view — just `lw`/`sw` at a magic address. `data_mem` and `instruction_mem` were not modified for this at all.
+The address decode **gates the RAM strobes** (`ram_write = mem_write && !uart_sel`) and muxes the read path, so a UART access can never corrupt memory and the peripheral looks exactly like memory from the CPU's point of view, just `lw`/`sw` at a special address. `data_mem` and `instruction_mem` were not modified for this at all.
 
 ### Results
 
