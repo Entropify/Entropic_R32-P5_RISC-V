@@ -11,7 +11,7 @@
 
 ![RISC-V](https://img.shields.io/badge/riscv-%23283272.svg?style=for-the-badge&logo=riscv&logoColor=white) ![Static Badge](https://img.shields.io/badge/V-Verilog-blue?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/SV-SystemVerilog-darkblue?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/C-cocotb-yellow?style=for-the-badge)
  ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![AssemblyScript](https://img.shields.io/badge/assembly-%23000000.svg?style=for-the-badge&logo=assemblyscript&logoColor=white) ![Static Badge](https://img.shields.io/badge/IV-Icarus%20Verilog-lightblue?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/OP2-OpenLane2-black?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/M-Makefile-orange?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/SKY-SKY130-blue?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/GCC-RISCV--GNU--Toolchain-red?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/OP2-OpenLane2-black?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/M-Makefile-orange?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/SKY-SKY130-blue?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/GCC-RISCV--GNU-red?style=for-the-badge)
 
 </div>
 
