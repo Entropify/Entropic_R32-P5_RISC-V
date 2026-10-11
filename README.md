@@ -389,15 +389,15 @@ The RTL is the **same `rtl/` tree** the ASIC run used, with only additive change
 
 ### RTL changes for the board target
 
-- **`x10_debug` output port:** exposes the core's return code straight to the board LEDs — `led[15]` = halted, `led[7:0]` = `x10`. Every test program's existing error-code convention carries over from cocotb to hardware unchanged, so a passing program lights exactly two LEDs.
-- **`INSTR_MEM_FILE` parameter:** threaded from the board top level through `soc_top` into `instruction_mem`, so the instruction image path is absolute at synthesis time and relative in simulation. It has to be a parameter, because `$readmemh` resolves its path against the *Vivado process* working directory rather than the source file — a subtlety that cost me a full debug cycle (see [Board bring-up findings](#Board-bring-up-findings)).
+- **`x10_debug` output port:** exposes the core's return code straight to the board LEDs. `led[15]` = halted, `led[7:0]` = `x10`. Every test program's existing error-code convention carries over from cocotb to hardware unchanged, so a passing program lights exactly two LEDs.
+- **`INSTR_MEM_FILE` parameter:** threaded from the board top level through `soc_top` into `instruction_mem`, so the instruction image path is absolute at synthesis time and relative in simulation. It has to be a parameter, because `$readmemh` resolves its path against the *Vivado process* working directory rather than the source file.
 - **`pc_debug` output port:** the fetch PC, added specifically so a wedged core could be located by eye during bring-up (a ~3 Hz sampled copy of it onto `led[15:0]`).
 - **Nothing else.** No pipeline stage, hazard unit, forwarding path, or predictor logic was touched for the board.
 
 ### Clocking & reset
 
-- **50 MHz CPU clock.** The Basys3's onboard oscillator runs at 100 MHz (pin `W5`), which this design cannot close at: a 100 MHz attempt reports **-8.938 ns** worst setup slack on an 18.556 ns critical path, putting the core's real ceiling around **51 MHz**. The CPU instead runs on a divided clock — a register toggle plus a `BUFG` — constrained with `create_generated_clock -divide_by 2` on the `BUFG` output, so `cpu_clk` is a genuinely timed constraint rather than an inferred one.
-- **Reset, async-assert / sync-de-assert.** The first board build synchronised `btnC` on the 100 MHz input clock while the CPU ran on the divided 50 MHz clock, which means the CPU's flops were being released from reset **asynchronously to their own clock** — a classic clock-domain mistake that can leave a pipeline in an inconsistent state at start-up. Rewritten so the button asserts reset immediately but de-asserts only after two `cpu_clk` edges, i.e. in the domain it actually resets. Simulation never caught this, because a testbench drives reset cleanly.
+- **50 MHz CPU clock.** The Basys3's onboard oscillator runs at 100 MHz (pin `W5`), which this design cannot close at: a 100 MHz attempt reports **-8.938 ns** worst setup slack on an 18.556 ns critical path, putting the core's real ceiling around **51 MHz**. The CPU instead runs on a divided clock. A register toggle plus a `BUFG`, constrained with `create_generated_clock -divide_by 2` on the `BUFG` output, so `cpu_clk` is a timed constraint rather than an inferred one.
+- **Reset, async-assert / sync-de-assert.** The first board build synchronised `btnC` on the 100 MHz input clock while the CPU ran on the divided 50 MHz clock, which means the CPU's flops were being released from reset **asynchronously to their own clock**. Rewritten so the button asserts reset immediately but de-asserts only after two `cpu_clk` edges, i.e. in the domain it actually resets. Simulation never caught this, because a testbench drives reset cleanly.
 
 ### Board-level I/O: a memory-mapped UART
 
@@ -405,7 +405,7 @@ The board target needed an output, so I added a peripheral following the SoC's e
 
 | Piece | Detail |
 |---|---|
-| Transmitter | `rtl/uart_tx.v` — 8N1, LSB-first, `CLKS_PER_BIT = 434` (= 50 MHz / 115200) |
+| Transmitter | `rtl/uart_tx.v` 8N1, LSB-first, `CLKS_PER_BIT = 434` (= 50 MHz / 115200) |
 | MMIO decode | `0x1000_0000`, decoded in `soc_top` off the same data bus the CPU already uses |
 | Register map | store → transmit the low 8 bits; load → `{31'b0, tx_busy}` for polling |
 | Physical pin | `A18` (`RsTx`) → the board's FT2232HQ USB-UART bridge → a virtual COM port on the PC |
@@ -430,22 +430,9 @@ The address decode **gates the RAM strobes** (`ram_write = mem_write && !uart_se
 | Bonded IOB | 19 / 106 (17.92%) |
 | BUFGCTRL | 2 / 32 (6.25%) |
 
-**Run-to-run slack variance.** At 50 MHz this design has only a few hundred picoseconds of margin, and place-and-route is a heuristic — so the *same sources* land differently on each run, and the default flow twice came back with a genuine timing failure:
-
-| Place/route strategy | WNS (ns) | Failing endpoints |
-|---|---|---|
-| Default (`place_design` / `route_design`) | -0.341 | 33 |
-| Default | +0.025 | 0 |
-| Default | +0.279 | 0 |
-| Default | +0.392 | 0 |
-| **`ExtraTimingOpt` + `AggressiveExplore`** | **+0.732** | **0** |
-| `ExtraTimingOpt` + `AggressiveExplore` | +0.143 | 0 |
-
-Rather than re-roll the default flow until it happened to pass, I moved to a **timing-directed place & route with an escalating retry loop** (`place_design -directive ExtraTimingOpt`, `phys_opt_design -directive AggressiveExplore`, `route_design -directive AggressiveExplore`, escalating to `NoTimingRelaxation`/`Explore` if the first pass misses), restarting each attempt from a checkpoint taken *before* placement. That is the same instinct as the ASIC flow's `SYNTH_STRATEGY` sweep — don't assume the default is best, measure.
-
 ### Critical path optimization: synchronous data memory
 
-The data memory was purely combinational — an asynchronous read through a 1024-deep array, which on an FPGA becomes a deep, high-fanout distributed-RAM mux tree. That tree was the design's bottleneck, so I converted the data memory to a **synchronous read**, sampled one stage early:
+The data memory was purely combinational asynchronous read through a 1024-deep array, which on an FPGA becomes a deep, high-fanout distributed-RAM mux tree. That tree was the design's bottleneck, so I converted the data memory to a **synchronous read**, sampled one stage early:
 
 - the read address is now the **EX-stage ALU result**, so the addressed word is captured on the clock edge and available in **MEM** — exactly when the asynchronous version used to produce it. That keeps all load timing, forwarding, and hazard behaviour identical, which is what made the change safe to do without any pipeline restructuring.
 - two companion changes turned out to be mandatory: a **`read_enable`** gate (without it, a non-load instruction's arbitrary ALU result gets used as an address) and a **write-first/read-second bypass** (without it, a store in MEM and a load in EX of the same word returns the stale value).
@@ -539,7 +526,7 @@ Unlike the single-cycle core, `ECALL`/`EBREAK` now trigger a **real, permanent h
 - [ ] Optimize RTL to hopefully achieve 100 Mhz+ clock speed
 - [ ] Find a synthesis-strategy/RTL combination achieving `AREA 3`-level timing without its full gate-count/utilization cost
 - [ ] Dedicated BTB-aliasing stress test and local/global (tournament) branch prediction as a stretch goal
-- [ ] FPGA implementation on an AMD Xilinx Artix-7, eventually building toward a VGA-driven SoC
+- [x] FPGA implementation on an AMD Xilinx Artix-7, eventually building toward a VGA-driven SoC
 - [ ] Superscalar or out-of-order successor core
 
 ---
