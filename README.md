@@ -55,7 +55,7 @@ The processor implements all 40 RV32I base instructions, dynamic branch predicti
 - [Performance Benchmarks](#Performance-Benchmarks)
 - [Major Debugging Findings](#Major-Debugging-Findings)
 - [ASIC Implementation](#ASIC-Implementation)
-- [FPGA Implementation](#FPGA-Implementation)
+- [FPGA Implementation](#FPGA-Implementation-(in-`fpga`-branch))
 - [Repository Structure](#Repository-Structure)
 - [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
