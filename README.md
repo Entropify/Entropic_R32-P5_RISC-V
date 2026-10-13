@@ -21,6 +21,9 @@
 >
 >**Contributed to, approved and listed on the official RISC-V International Learn GitHub Repository!! 🙀🙀**
 >- ***Entropic R32-P5*** under [🧩 Open RISC-V Implementations](https://github.com/riscv/learn?tab=readme-ov-file#-Open-RISC-V-Implementations)
+>
+>Sept. 1st 2026
+>- Posted to **r/RISCV** as seen [here](https://www.reddit.com/r/RISCV/comments/1w3x7w8/a_high_schoolers_attempt_at_a_cpu_5_stage_rv32i/)
 ---
 
 **TL;DR**
