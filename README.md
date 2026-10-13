@@ -55,7 +55,7 @@ The processor implements all 40 RV32I base instructions, dynamic branch predicti
 - [Performance Benchmarks](#Performance-Benchmarks)
 - [Major Debugging Findings](#Major-Debugging-Findings)
 - [ASIC Implementation](#ASIC-Implementation)
-- [FPGA Implementation](#FPGA-Implementation-(in-`fpga`-branch))
+- [FPGA Implementation](#FPGA-Implementation)
 - [Repository Structure](#Repository-Structure)
 - [Instruction Set Coverage](#Instruction-Set-Coverage)
 - [Future Plans](#Future-Plans)
@@ -390,7 +390,9 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 
 ---
 
-## FPGA Implementation (in `fpga` branch)
+## FPGA Implementation
+
+*(in `fpga` branch)*
 
 Ported the same core to a **physical FPGA board**, an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3), using **Vivado 2026.1**.
 
