@@ -30,6 +30,9 @@
 
 The processor implements all 40 RV32I base instructions, dynamic branch prediction using a 64-entry BTB with 2-bit saturating counters, three specialized forwarding paths, load-use hazard detection, branch flushing, and a real pipeline halt mechanism. Verified through staged SystemVerilog/RISC-V Assembly tests codriven with cocotb and  performance tested with compiled C programs, then taken through RTL-to-GDSII using OpenLane2 and SKY130. Final implementation achieves 50 MHz with 0 DRC violations, passing LVS, and setup/hold timing closure at the 20 ns target.
 
+
+https://github.com/user-attachments/assets/82e3cad4-d9f4-4d6c-8f3e-a465b03f5491
+
 ---
 
 **Entropic R32-P5** is a 5-stage pipelined **RISC-V** (RV32I) CPU, the successor to my single-cycle [Entropic R32-SC](https://github.com/Entropify/Entropic_R32-SC_RISC-V), that was:
@@ -393,6 +396,7 @@ A second, distinct critical path was subsequently identified through `mem_wb_rd_
 ## FPGA Implementation
 
 *(in `fpga` branch)*
+
 
 Ported the same core to a **physical FPGA board**, an **AMD Xilinx Artix-7** (`xc7a35tcpg236-1`, Digilent Basys3), using **Vivado 2026.1**.
 
