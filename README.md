@@ -31,7 +31,7 @@
 The processor implements all 40 RV32I base instructions, dynamic branch prediction using a 64-entry BTB with 2-bit saturating counters, three specialized forwarding paths, load-use hazard detection, branch flushing, and a real pipeline halt mechanism. Verified through staged SystemVerilog/RISC-V Assembly tests codriven with cocotb and  performance tested with compiled C programs, then taken through RTL-to-GDSII using OpenLane2 and SKY130. Final implementation achieves 50 MHz with 0 DRC violations, passing LVS, and setup/hold timing closure at the 20 ns target.
 
 
-**Conway's Game of Life running on the core on an FPGA**
+**20x20 ASCII Conway's Game of Life running on the core on an FPGA:**
 
 <img width="372" height="210" alt="Adobe Express - 677475066-82e3cad4-d9f4-4d6c-8f3e-a465b03f5491" src="https://github.com/user-attachments/assets/db6ee53e-a812-4a3d-986b-b9dc772a6b5f" />
 
@@ -462,7 +462,7 @@ Measured in a separate 100 MHz-targeted experiment on the same RTL, this moved t
 
 The same `riscv64-unknown-elf-gcc` → `objcopy -O verilog` → `$readmemh` path used by the benchmark suite now targets the board, with the image baked into the instruction ROM at synthesis — compiler-generated code for all 40 instructions, including libgcc's software divide.
 
-To have something real to run, the board program is **Conway's Game of Life on a 20x20 field**, rendered as ASCII and redrawn in place over the UART (ANSI cursor-home, so it animates rather than scrolls) at roughly **25 frames per second** — a rate set by the UART itself (a frame is ~430 characters at 115200 baud ≈ 39 ms), not by the CPU.
+To have something real to run, the board program is **'s Game of Life on a 20x20 field**, rendered as ASCII and redrawn in place over the UART (ANSI cursor-home, so it animates rather than scrolls) at roughly **25 frames per second** — a rate set by the UART itself (a frame is ~430 characters at 115200 baud ≈ 39 ms), not by the CPU.
 
 It is **verified against a native build**: the identical `life.c` compiled for x86 and run on the host produces output **byte-for-byte identical** to what the RISC-V core streams off the board (1,813 bytes compared). That is a much stronger claim than "it prints something plausible" — it says the core executed the compiled C correctly, division and all.
 
