@@ -3,4 +3,4 @@
 # *.S linguist-documentation=false linguist-vendored
 
 #*.s linguist-language=Verilog
-#*.py linguist-language=Verilog
+*.py    linguist-language=Verilog
